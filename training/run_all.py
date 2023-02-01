@@ -22,7 +22,7 @@ from training.submit import submit_one_job
 
 def main(n_splits=5):
     dataset_splitter = load_dataset_splitter(n_clips=None, n_splits=n_splits)
-    clip_names_test = get_test_recording_ids()
+    clip_names_test = ["2023-01-27_15-59-54-49a115d5"]
 
     use_pretrained_classifier = False
     use_cluster = False
