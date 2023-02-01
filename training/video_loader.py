@@ -17,8 +17,12 @@ from src.event_array import Samples
 from src.helper import OfParams, PPParams
 from training.helper import get_experiment_name_new
 
-video_path = Path("/home/tom/experiments/neon_blink_detection/datasets/test_data")
-of_path = Path("/home/tom/experiments/neon_blink_detection/datasets/optical_flow")
+video_path = Path(
+    "/cluster/users/tom/experiments/neon_blink_detection/datasets/test_data"
+)
+of_path = Path(
+    "/cluster/users/tom/experiments/neon_blink_detection/datasets/test_data/optical_flow"
+)
 
 
 class video_loader:
@@ -114,9 +118,8 @@ class video_loader:
         return timestamps, eye_left_images, eye_right_images
 
     def _get_timestamps(self, clip_name: str):
-
         file = self.rec_folder / clip_name / "Neon Sensor Module v1 ps1.time"
-        timestamps = np.array(np.fromfile(file, dtype="int64"))
+        timestamps = np.array(np.fromfile(str(file), dtype="int64"))
         return timestamps
 
     def _load_gt_labels(self, clip_name):
@@ -189,7 +192,7 @@ class video_loader:
         blink_indices = blink_labels["blink_indices"]
 
         bg_indices = self._get_background_indices(blink_indices, n_frames, bg_ratio)
-        pulse_indices = np.where(np.abs(np.mean(feature_array, axis=1)[:, 1]) > 0.05)[0]
+        pulse_indices = np.where(np.abs(np.mean(feature_array, axis=1)[:, 1]) > 0.1)[0]
         all_indices = np.hstack([blink_indices, bg_indices, pulse_indices])
         all_indices = np.unique(all_indices)
         all_indices = all_indices.astype(np.int64)

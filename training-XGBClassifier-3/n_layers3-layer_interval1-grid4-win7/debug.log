@@ -1,6 +1,0 @@
-2023/02/01 15:51:56 [INFO]	Classifier: ClassifierParams(name='XGBClassifier-3', algorithm=<class 'xgboost.sklearn.XGBClassifier'>, kwargs={'max_depth': 3, 'use_label_encoder': False, 'eval_metric': 'mlogloss', 'tree_method': 'approx'})
-2023/02/01 15:51:56 [INFO]	OfParams(n_layers=3, layer_interval=1, average=False, img_shape=(64, 64), grid_size=4, step_size=7, window_size=7, stop_steps=3)
-2023/02/01 15:51:56 [INFO]	Post processing parameters: max_gap_duration_s=0.03, short_event_min_len_s=0.10, smooth_window=11, proba_onset_threshold=0.25, proba_offset_threshold=0.25
-2023/02/01 15:51:56 [INFO]	
-=== 5-fold cross validation - 0 ===
-2023/02/01 15:51:56 [INFO]	Collect training data
