@@ -4,7 +4,7 @@ from pathlib import Path
 
 import numpy as np
 
-from blink_labelling.preprocessing import load_processed_blink_indices
+# from blink_labelling.preprocessing import load_processed_blink_indices
 from functions.features_loader import load_features
 from functions.utils import random_sample
 from functions.video_loader import load_timestamps

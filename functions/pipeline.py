@@ -2,7 +2,8 @@ import typing as T
 from pathlib import Path
 
 import numpy as np
-from blink_labelling.preprocessing import load_processed_blink_indices
+
+# from blink_labelling.preprocessing import load_processed_blink_indices
 from pikit import Recording
 from src.event_array import EventArray, Samples
 from src.features_calculator import calculate_optical_flow, concatenate_features

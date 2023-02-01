@@ -12,6 +12,7 @@ from src.event_array import Samples
 from src.helper import OfParams, PPParams
 from src.metrics import Scores, ScoresList
 from training.dataset_splitter import DatasetSplitter
+from video_loader import video_loader
 from training.datasets_loader import (
     Datasets,
     concatenate,
@@ -132,7 +133,7 @@ def collect_samples_and_predict(
 ):
     if not use_pretrained_classifier:
         logger.info("Collect training data")
-        datasets = Datasets(of_params)
+        datasets = video_loader(of_params)
         datasets.collect(clip_names_train, bg_ratio=3)
 
         logger.info("Start training")
@@ -161,7 +162,7 @@ def collect_samples_and_predict(
 
 
 def train_classifier(
-    datasets: Datasets,
+    datasets: video_loader,
     clip_names: T.List[str],
     classifier_params: ClassifierParams,
     export_path: Path,

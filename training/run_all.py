@@ -25,7 +25,7 @@ def main(n_splits=5):
     clip_names_test = get_test_recording_ids()
 
     use_pretrained_classifier = False
-    use_cluster = True
+    use_cluster = False
 
     classifier_params = get_classifier_params()
     of_params, pp_params = get_params()
