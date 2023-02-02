@@ -18,10 +18,10 @@ from src.helper import OfParams, PPParams
 from training.helper import get_experiment_name_new
 
 video_path = Path(
-    "/cluster/users/tom/experiments/neon_blink_detection/datasets/test_data"
+    "/cluster/users/tom/experiments/neon_blink_detection/datasets/train_data"
 )
 of_path = Path(
-    "/cluster/users/tom/experiments/neon_blink_detection/datasets/test_data/optical_flow"
+    "/cluster/users/tom/experiments/neon_blink_detection/datasets/train_data/optical_flow"
 )
 
 
@@ -40,14 +40,13 @@ class video_loader:
 
     def _load(self, clip_name: str, bg_ratio: int) -> None:
 
-        all_timestamps = self._get_timestamps(clip_name)
+        # LOAD FEATURES OR COMPUTE THEM
+        feature_array, all_timestamps = self._load_features(clip_name, self._of_params)
+
         n_frames = len(all_timestamps)
 
-        # LOAD FEATURES OR COMPUTE THEM
-        feature_array = self._load_features(clip_name, self._of_params)
-
         onset_indices, offset_indices, all_indices = self._find_indices(
-            feature_array, clip_name, n_frames, bg_ratio, half=True
+            feature_array, clip_name, all_timestamps, n_frames, bg_ratio, half=True
         )
 
         gt_labels = np.full(n_frames, 0)
@@ -85,35 +84,53 @@ class video_loader:
         path = self._of_path / dir_name / f"{clip_name}.npz"
 
         try:
-            feature_array = np.load(path)["arr_0"]
+            tmp = np.load(path)
+            feature_array = tmp["feature_array"]
+            timestamps = tmp["timestamps"]
         except FileNotFoundError:
             print(f"cannot load from {path}")
-            _, left_images, right_images = self._get_frames(
+            timestamps, left_images, right_images = self._get_frames(
                 clip_name, convert_to_gray=True
             )
             feature_array = self._compute_optical_flow(
                 of_params, left_images, right_images
             )
             path.parent.mkdir(parents=True, exist_ok=True)
-            np.savez_compressed(path, feature_array)
+            np.savez_compressed(
+                path, feature_array=feature_array, timestamps=timestamps
+            )
             print(f"saved optical flow ({feature_array.shape}) to {path}")
 
-        return feature_array
+        return feature_array, timestamps
 
     def _get_frames(self, clip_name, convert_to_gray=True):
 
-        gen = self._make_video_generator_mp4(clip_name, convert_to_gray)
+        timestamps = self._get_timestamps(clip_name)
+
+        clip_onsets, clip_offsets = self._get_clip_trigger(clip_name, timestamps)
+
+        gen = self._make_video_generator_mp4(clip_name, convert_to_gray=True)
 
         frames = []
-        for i, x in enumerate(gen):
-            frames.append(x)
+        ts_idc = []
+        for i_frame, x in enumerate(gen):
+
+            if i_frame > max(clip_offsets):
+                break
+
+            sign_onset = np.sign(i_frame - clip_onsets)
+            sign_offset = np.sign(i_frame - clip_offsets)
+
+            if any((sign_onset != sign_offset)):
+                print("adding frame %d" % i_frame)
+                frames.append(x)
+                ts_idc.append(i_frame)
 
         all_frames = np.array(frames)
+        timestamps = timestamps[ts_idc]
 
         eye_left_images = all_frames[:, :, 0:192, :]
         eye_right_images = all_frames[:, :, 192:, :]
-
-        timestamps = self._get_timestamps(clip_name)
 
         return timestamps, eye_left_images, eye_right_images
 
@@ -125,37 +142,76 @@ class video_loader:
     def _load_gt_labels(self, clip_name):
 
         blink_df = pd.read_json(
-            self.rec_folder / clip_name / "annotations.json"
+            self.rec_folder / clip_name / ("annotations-%s.json" % clip_name)
         ).transpose()
+
+        # C/D: on/offset half blinks
+        # E: clip onset and offset
         blink_df["label"].replace(
-            {"A": "onset", "B": "offset", "C": "onset", "D": "offset"},
+            {
+                "A": "onset",
+                "B": "offset",
+                "C": "onset",
+                "D": "offset",
+                "E": "clip_trigger",
+                "F": "frame_trigger",
+            },
             inplace=True,
         )
 
         return blink_df
 
-    def get_blink_labels(self, clip_name):
+    def _get_clip_trigger(self, clip_name, timestamps):
 
         blink_df = self._load_gt_labels(clip_name)
 
-        ts = self._get_timestamps(clip_name)
-        n_frames = ts.shape[0]
+        clip_trigger = blink_df[blink_df["label"] == "clip_trigger"]["start_ts"]
+
+        clip_start = []
+        clip_end = []
+
+        for i_clips in range(0, len(clip_trigger)):
+            if i_clips % 2 == 0:
+                clip_start.append(
+                    int(np.where(np.isin(timestamps, clip_trigger.iloc[i_clips]))[0])
+                )
+
+            else:
+                clip_end.append(
+                    int(np.where(np.isin(timestamps, clip_trigger.iloc[i_clips]))[0])
+                )
+
+        clip_start = np.array(clip_start)
+        clip_end = np.array(clip_end)
+
+        if not all(clip_start < clip_end):
+            raise ValueError(
+                "Some 'clip end' triggers precede the 'clip start' triggers."
+            )
+
+        return clip_start, clip_end
+
+    def _get_blink_labels(self, clip_name, timestamps):
+
+        blink_df = self._load_gt_labels(clip_name)
+
+        n_frames = timestamps.shape[0]
 
         n_blink_events = np.sum(blink_df["label"].str.startswith("onset"))
 
         on_start = blink_df[blink_df["label"] == "onset"]["start_ts"]
-        on_start_idc = np.where(np.isin(ts, on_start))[0]
+        on_start_idc = np.where(np.isin(timestamps, on_start))[0]
 
         on_end = blink_df[blink_df["label"] == "onset"]["end_ts"]
-        on_end_idc = np.where(np.isin(ts, on_end))[0]
+        on_end_idc = np.where(np.isin(timestamps, on_end))[0]
 
         off_start = blink_df[blink_df["label"] == "offset"]["start_ts"]
-        off_start_idc = np.where(np.isin(ts, off_start))[0]
+        off_start_idc = np.where(np.isin(timestamps, off_start))[0]
 
         off_end = blink_df[blink_df["label"] == "offset"]["end_ts"]
-        off_end_idc = np.where(np.isin(ts, off_end))[0]
+        off_end_idc = np.where(np.isin(timestamps, off_end))[0]
 
-        blink_vec = np.zeros(ts.shape[0])
+        blink_vec = np.zeros(timestamps.shape[0])
 
         for iblink in range(0, n_blink_events):
 
@@ -182,10 +238,16 @@ class video_loader:
         return feature_array
 
     def _find_indices(
-        self, feature_array, clip_name: str, n_frames: int, bg_ratio, half: bool
+        self,
+        feature_array,
+        clip_name: str,
+        timestamps: np.ndarray,
+        n_frames: int,
+        bg_ratio: int,
+        half: bool,
     ) -> T.Tuple[np.ndarray, np.ndarray, np.ndarray]:
 
-        blink_labels = self.get_blink_labels(clip_name)
+        blink_labels = self._get_blink_labels(clip_name, timestamps)
 
         onset_indices = blink_labels["onset_indices"]
         offset_indices = blink_labels["offset_indices"]
@@ -206,3 +268,15 @@ class video_loader:
             n_bg = len(on_indices) * bg_ratio if len(on_indices) else 300
             bg_indices = random_sample(bg_indices, n_bg)
         return bg_indices
+
+
+# clip_names = ["1004-2022-12-14-13-14-14-c8a509b9"]
+
+# from src.helper import OfParams
+# from video_loader import video_loader
+
+# of_params = OfParams()
+# rec = video_loader(of_params)
+# timestamps = rec._get_timestamps(clip_names[0])
+# clip_onsets, clip_offsets = rec._get_clip_trigger(clip_names[0], timestamps)
+# rec.collect(clip_names, bg_ratio=3)

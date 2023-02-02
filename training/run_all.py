@@ -8,7 +8,7 @@ sys.path.append(str(base_dir / "src"))
 sys.path.append(str(base_dir / "functions"))
 
 from functions.pipeline import get_classifier_params
-from src.blink_detector import get_params
+from src.neon_blink_detector import get_params
 from training.dataset_splitter import load_dataset_splitter
 from training.helper import (
     get_experiment_name_new,
@@ -23,22 +23,15 @@ from video_loader import video_loader
 
 def main(n_splits=5):
     dataset_splitter = load_dataset_splitter(n_clips=None, n_splits=n_splits)
-    clip_names_test = ["2023-01-27_15-59-54-49a115d5"]
+    clip_names_test = ["1000-2022-12-14-09-43-56-0fcac6d3"]
 
     use_pretrained_classifier = False
-    use_cluster = True
+    use_cluster = False
 
     classifier_params = get_classifier_params()
     of_params, pp_params = get_params()
     of_params_options = get_of_params_options()
 
-    # clip_names = [
-    #     "2023-01-27_15-59-54-49a115d5",
-    #     "2023-01-27_16-10-14-a2a8cbe1",
-    #     "2023-01-27_16-15-26-57802f75",
-    #     "2023-01-27_16-31-52-5f743ed0",
-    #     "2023-01-27_16-24-04-eb4305b1",
-    # ]
     training_dir = get_training_dir(classifier_params.name, use_pretrained_classifier)
     export_dir = get_export_dir(classifier_params.name, use_pretrained_classifier)
     for of_params in of_params_options:
