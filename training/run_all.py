@@ -32,13 +32,13 @@ def main(n_splits=5):
     of_params, pp_params = get_params()
     of_params_options = get_of_params_options()
 
-    clip_names = [
-        "2023-01-27_15-59-54-49a115d5",
-        "2023-01-27_16-10-14-a2a8cbe1",
-        "2023-01-27_16-15-26-57802f75",
-        "2023-01-27_16-31-52-5f743ed0",
-        "2023-01-27_16-24-04-eb4305b1",
-    ]
+    # clip_names = [
+    #     "2023-01-27_15-59-54-49a115d5",
+    #     "2023-01-27_16-10-14-a2a8cbe1",
+    #     "2023-01-27_16-15-26-57802f75",
+    #     "2023-01-27_16-31-52-5f743ed0",
+    #     "2023-01-27_16-24-04-eb4305b1",
+    # ]
     training_dir = get_training_dir(classifier_params.name, use_pretrained_classifier)
     export_dir = get_export_dir(classifier_params.name, use_pretrained_classifier)
     for of_params in of_params_options:
@@ -51,20 +51,21 @@ def main(n_splits=5):
         #     continue
         print(f"save_path={save_path}")
 
-        # submit_one_job(
-        #     dataset_splitter,
-        #     clip_names_test,
-        #     classifier_params,
-        #     of_params,
-        #     pp_params,
-        #     export_path=export_path,
-        #     save_path=save_path,
-        #     use_pretrained_classifier=use_pretrained_classifier,
-        #     use_cluster=use_cluster,
-        # )
-        for clip_name in clip_names:
-            datasets = video_loader(of_params)
-            datasets._load_features(clip_name, of_params)
+        submit_one_job(
+            dataset_splitter,
+            clip_names_test,
+            classifier_params,
+            of_params,
+            pp_params,
+            export_path=export_path,
+            save_path=save_path,
+            use_pretrained_classifier=use_pretrained_classifier,
+            use_cluster=use_cluster,
+        )
+        print("Sth")
+        # for clip_name in clip_names:
+        #     datasets = video_loader(of_params)
+        #     datasets._load_features(clip_name, of_params)
 
 
 if __name__ == "__main__":

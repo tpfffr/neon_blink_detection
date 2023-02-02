@@ -3,4 +3,6 @@ __pycache__
 .venv
 .idea
 .vscode
+export-XGBClassifier-3*
+training-XGBClassifier-3*
 *.npz
