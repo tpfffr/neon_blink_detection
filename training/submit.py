@@ -43,7 +43,7 @@ def submit_one_job(
         if use_pretrained_classifier:
             ram_gb = 0.5
         else:
-            ram_gb = 5
+            ram_gb = 3
             print(f"estimate ram_gb={ram_gb}")
 
         submit_job_to_gridengine(

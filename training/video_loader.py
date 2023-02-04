@@ -195,10 +195,6 @@ class video_loader:
 
         blink_df = self._load_gt_labels(clip_name)
 
-        n_frames = timestamps.shape[0]
-
-        n_blink_events = np.sum(blink_df["label"].str.startswith("onset"))
-
         on_start = blink_df[blink_df["label"] == "onset"]["start_ts"]
         on_start_idc = np.where(np.isin(timestamps, on_start))[0]
 
@@ -213,10 +209,11 @@ class video_loader:
 
         blink_vec = np.zeros(timestamps.shape[0])
 
-        for iblink in range(0, n_blink_events):
+        for onset, offset in zip(on_start_idc, on_end_idc):
+            blink_vec[onset:offset] = 1
 
-            blink_vec[on_start_idc[iblink] : on_end_idc[iblink]] = 1
-            blink_vec[off_start_idc[iblink] : off_end_idc[iblink]] = 2
+        for onset, offset in zip(off_start_idc, off_end_idc):
+            blink_vec[onset:offset] = 2
 
         blink_labels = dict()
         blink_labels["onset_indices"] = np.where(blink_vec == 1)[0]

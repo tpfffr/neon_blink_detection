@@ -19,14 +19,18 @@ from training.helper import (
 )
 from training.submit import submit_one_job
 from video_loader import video_loader
+import numpy as np
+
+
+clip_names_test = ["1000-2022-12-14-09-43-56-0fcac6d3"]
 
 
 def main(n_splits=5):
     dataset_splitter = load_dataset_splitter(n_clips=None, n_splits=n_splits)
-    clip_names_test = ["1000-2022-12-14-09-43-56-0fcac6d3"]
 
     use_pretrained_classifier = False
-    use_cluster = False
+    use_cluster = True
+    compute_of = False
 
     classifier_params = get_classifier_params()
     of_params, pp_params = get_params()
@@ -44,21 +48,26 @@ def main(n_splits=5):
         #     continue
         print(f"save_path={save_path}")
 
-        submit_one_job(
-            dataset_splitter,
-            clip_names_test,
-            classifier_params,
-            of_params,
-            pp_params,
-            export_path=export_path,
-            save_path=save_path,
-            use_pretrained_classifier=use_pretrained_classifier,
-            use_cluster=use_cluster,
-        )
-        print("Sth")
-        # for clip_name in clip_names:
-        #     datasets = video_loader(of_params)
-        #     datasets._load_features(clip_name, of_params)
+        if not compute_of:
+            submit_one_job(
+                dataset_splitter,
+                clip_names_test,
+                classifier_params,
+                of_params,
+                pp_params,
+                export_path=export_path,
+                save_path=save_path,
+                use_pretrained_classifier=use_pretrained_classifier,
+                use_cluster=use_cluster,
+            )
+
+        else:
+            clip_names = np.load(
+                "/cluster/users/tom/git/neon_blink_detection/clip_list.npy"
+            )
+            for clip_name in clip_names:
+                datasets = video_loader(of_params)
+                datasets._load_features(clip_name, of_params)
 
 
 if __name__ == "__main__":
