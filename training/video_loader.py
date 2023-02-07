@@ -41,23 +41,51 @@ class video_loader:
     def _load(self, clip_name: str, bg_ratio: int) -> None:
 
         # LOAD FEATURES OR COMPUTE THEM
-        feature_array, all_timestamps = self._load_features(clip_name, self._of_params)
-
-        n_frames = len(all_timestamps)
-
-        onset_indices, offset_indices, all_indices = self._find_indices(
-            feature_array, clip_name, all_timestamps, n_frames, bg_ratio, half=True
+        feature_array, all_timestamps, clip_transitions = self._load_features(
+            clip_name, self._of_params
         )
 
-        gt_labels = np.full(n_frames, 0)
-        if len(offset_indices):
-            gt_labels[offset_indices] = 2
-        if len(onset_indices):
-            gt_labels[onset_indices] = 1
-        gt_labels = gt_labels[all_indices]
+        n_clips = clip_transitions.shape[0] + 1
+        clip_feature_array = np.split(feature_array, clip_transitions + 1, axis=0)
+        clip_timestamps = np.split(all_timestamps, clip_transitions + 1, axis=0)
 
-        timestamps = all_timestamps[all_indices]
-        features = concatenate_features(feature_array, self._of_params, all_indices)
+        features = []
+        all_gt_labels = []
+        all_timestamps = []
+
+        for iclip in range(0, n_clips):
+            n_frames = len(clip_timestamps[iclip])
+
+            onset_indices, offset_indices, all_indices = self._find_indices(
+                clip_feature_array[iclip],
+                clip_name,
+                clip_timestamps[iclip],
+                n_frames,
+                bg_ratio,
+                half=True,
+            )
+
+            gt_labels = np.full(n_frames, 0)
+            if len(offset_indices):
+                gt_labels[offset_indices] = 2
+            if len(onset_indices):
+                gt_labels[onset_indices] = 1
+            gt_labels = gt_labels[all_indices]
+
+            timestamps = clip_timestamps[iclip][all_indices]
+
+            features.append(
+                concatenate_features(
+                    clip_feature_array[iclip], self._of_params, all_indices
+                )
+            )
+
+            all_gt_labels.append(gt_labels)
+            all_timestamps.append(timestamps)
+
+        timestamps = np.hstack(all_timestamps)
+        gt_labels = np.hstack(all_gt_labels)
+        features = np.vstack(features)
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
@@ -86,22 +114,44 @@ class video_loader:
         try:
             tmp = np.load(path)
             feature_array = tmp["feature_array"]
+            clip_transitions = tmp["clip_transitions"]
             timestamps = tmp["timestamps"]
+
         except FileNotFoundError:
             print(f"cannot load from {path}")
             timestamps, left_images, right_images = self._get_frames(
                 clip_name, convert_to_gray=True
             )
-            feature_array = self._compute_optical_flow(
-                of_params, left_images, right_images
-            )
+
+            # where difference in frames is larger than 100 ms
+            clip_transitions = np.where(np.diff(timestamps) > 1e8)[0]
+
+            n_clips = clip_transitions.shape[0] + 1
+            clip_left_images = np.split(left_images, clip_transitions + 1)
+            clip_right_images = np.split(left_images, clip_transitions + 1)
+
+            feature_array = []
+
+            for iclip in range(0, n_clips):
+
+                clip_feature_array, grid = self._compute_optical_flow(
+                    of_params, clip_left_images[iclip], clip_right_images[iclip]
+                )
+
+                feature_array.append(clip_feature_array)
+
+            feature_array = np.vstack(feature_array)
+
             path.parent.mkdir(parents=True, exist_ok=True)
             np.savez_compressed(
-                path, feature_array=feature_array, timestamps=timestamps
+                path,
+                feature_array=feature_array,
+                clip_transitions=clip_transitions,
+                timestamps=timestamps,
             )
             print(f"saved optical flow ({feature_array.shape}) to {path}")
 
-        return feature_array, timestamps
+        return feature_array, timestamps, clip_transitions
 
     def _get_frames(self, clip_name, convert_to_gray=True):
 
