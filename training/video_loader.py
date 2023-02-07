@@ -230,9 +230,11 @@ class video_loader:
             left_images, right_images, img_shape=(64, 64)
         )
 
-        feature_array = calculate_optical_flow(of_params, left_images, right_images)
+        feature_array, grid = calculate_optical_flow(
+            of_params, left_images, right_images
+        )
 
-        return feature_array
+        return feature_array, grid
 
     def _find_indices(
         self,

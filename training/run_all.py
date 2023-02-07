@@ -22,7 +22,13 @@ from video_loader import video_loader
 import numpy as np
 
 
-clip_names_test = ["1000-2022-12-14-09-43-56-0fcac6d3"]
+clip_names_test = [
+    "2023-01-27_15-59-54-49a115d5",
+    "2023-01-27_16-10-14-a2a8cbe1",
+    "2023-01-27_16-15-26-57802f75",
+    "2023-01-27_16-24-04-eb4305b1",
+    "2023-01-27_16-31-52-5f743ed0",
+]
 
 
 def main(n_splits=5):

@@ -38,7 +38,7 @@ def calculate_optical_flow(
         for idx in indices
     ]
     feature_array = np.concatenate([feature_left, feature_right], axis=1)
-    return feature_array
+    return feature_array, grids
 
 
 def create_grids(img_shape: T.Tuple[int, int], grid_size: int) -> np.ndarray:
