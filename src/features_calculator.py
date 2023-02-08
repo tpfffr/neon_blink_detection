@@ -2,7 +2,6 @@ import typing as T
 
 import cv2
 import numpy as np
-
 from helper import OfParams
 
 
@@ -41,9 +40,14 @@ def calculate_optical_flow(
     return feature_array, grids
 
 
+# def feature_augmentation(
+#     feature_array: np.ndarray, of_params: OfParams, indices: np.ndarray = None
+# ) -> np.ndarray:
+
+# CHANGES MADE HERE!!!
 def create_grids(img_shape: T.Tuple[int, int], grid_size: int) -> np.ndarray:
-    x = np.linspace(0, img_shape[1], grid_size + 2, dtype=np.float32)[1:-1]
-    y = np.linspace(0, img_shape[0], grid_size + 2, dtype=np.float32)[1:-1]
+    x = np.linspace(0, img_shape[1], grid_size, dtype=np.float32)
+    y = np.linspace(0, img_shape[0], grid_size, dtype=np.float32)
     xx, yy = np.meshgrid(x, y)
     p_grid = np.concatenate((xx.reshape(-1, 1), yy.reshape(-1, 1)), axis=1)
     return p_grid

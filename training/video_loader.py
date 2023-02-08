@@ -8,8 +8,15 @@ from pathlib import Path
 import typing as T
 import av
 import numpy as np
+import scipy
+import cv2
 
-from src.features_calculator import concatenate_features, calculate_optical_flow
+
+from src.features_calculator import (
+    concatenate_features,
+    calculate_optical_flow,
+    create_grids,
+)
 from src.utils import resize_images
 from functions.utils import random_sample
 from training.helper import get_feature_dir_name_new
@@ -87,8 +94,131 @@ class video_loader:
         gt_labels = np.hstack(all_gt_labels)
         features = np.vstack(features)
 
+        indices = np.arange(features.shape[0])
+
+        on_idc = random_sample(list(indices[gt_labels == 1]), sum(gt_labels == 1) // 4)
+        off_idc = random_sample(list(indices[gt_labels == 2]), sum(gt_labels == 2) // 4)
+        bg_idc = random_sample(list(indices[gt_labels == 0]), sum(gt_labels == 0) // 4)
+
+        idc = on_idc + off_idc + bg_idc
+
+        augmented_features = []
+        for count, isample in enumerate(idc):
+
+            print("Augmenting sample %d / %d \r" % (count, len(idc)), end="")
+
+            left, right = self._interpolate_feature_array(features[isample, :])
+
+            xshift = [-25, 0, 25][np.random.randint(3)]
+            yshift = [-25, 0, 25][np.random.randint(3)]
+
+            left_zoom = self._zoom_and_shift(
+                left, zoom_factor=1.2, shift=[xshift, yshift]
+            )
+
+            right_zoom = self._zoom_and_shift(
+                right, zoom_factor=1.2, shift=[xshift, yshift]
+            )
+
+            p_grid = self._create_image_grid(self._of_params.img_shape)
+            grid = create_grids(self._of_params.img_shape, self._of_params.grid_size)
+
+            augmented_features.append(
+                np.concatenate(
+                    [
+                        np.concatenate(
+                            [
+                                scipy.interpolate.griddata(
+                                    p_grid,
+                                    left_zoom[:, :, ilay].flatten(),
+                                    grid,
+                                    method="nearest",
+                                ),
+                                scipy.interpolate.griddata(
+                                    p_grid,
+                                    right_zoom[:, :, ilay].flatten(),
+                                    grid,
+                                    method="nearest",
+                                ),
+                            ]
+                        )
+                        for ilay in range(0, left_zoom.shape[-1])
+                    ]
+                )
+            )
+
+            gt_labels = np.append(gt_labels, gt_labels[isample])
+            timestamps = np.append(timestamps, timestamps[isample])
+
+        features = np.append(features, augmented_features, axis=0)
+
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
+
+    def _interpolate_feature_array(self, features: np.ndarray):
+
+        img_dim = self._of_params.img_shape
+
+        p_grid = self._create_image_grid(img_dim)
+        grid = create_grids(img_dim, self._of_params.grid_size)
+
+        n_grid_points = self._of_params.grid_size**2
+        idc = np.arange(1, self._of_params.n_layers) * n_grid_points * 2
+
+        features_per_layer = np.split(features, idc)
+
+        left = [
+            np.reshape(
+                scipy.interpolate.griddata(
+                    grid, feat[0:n_grid_points], p_grid, method="linear"
+                ),
+                img_dim,
+            )
+            for feat in features_per_layer
+        ]
+
+        right = [
+            np.reshape(
+                scipy.interpolate.griddata(
+                    grid, feat[n_grid_points:], p_grid, method="linear"
+                ),
+                img_dim,
+            )
+            for feat in features_per_layer
+        ]
+
+        return np.array(left).transpose(), np.array(right).transpose()
+
+    def _zoom_and_shift(
+        self, img: np.ndarray, zoom_factor: np.float32, shift: T.List[int]
+    ):
+
+        size = img.shape[0]
+
+        img = scipy.ndimage.shift(img, [shift[0], shift[1], 0], mode="nearest")
+
+        lim1 = int(0.5 * size * (1 - 1 / zoom_factor))
+        lim2 = int(size - 0.5 * size * (1 - 1 / zoom_factor))
+
+        img_cropped = img[lim1:lim2, lim1:lim2, :]
+        return cv2.resize(img_cropped, None, fx=zoom_factor, fy=zoom_factor)
+
+    # def _augment_rotate(self, image: np.ndarray, degree: np.float32):
+
+    #     return scipy.ndimage.rotate(image, degree, mode="nearest")
+
+    # def _augment_noise(self, image: np.ndarray, degree: np.float32):
+
+    #     return scipy.ndimage.rotate(image, degree, mode="nearest")
+
+    def _create_image_grid(self, img_shape: T.Tuple[int, int]):
+
+        x = np.linspace(0, img_shape[0] - 1, img_shape[0], dtype=np.float32)
+        y = np.linspace(0, img_shape[0] - 1, img_shape[0], dtype=np.float32)
+        xx, yy = np.meshgrid(x, y)
+        p_grid = np.concatenate((xx.reshape(-1, 1), yy.reshape(-1, 1)), axis=1)
+
+        return p_grid
 
     def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
 
@@ -172,7 +302,7 @@ class video_loader:
             sign_offset = np.sign(i_frame - clip_offsets)
 
             if any((sign_onset != sign_offset)):
-                print("adding frame %d" % i_frame)
+                print("Appending frame %d \r" % i_frame, end="")
                 frames.append(x)
                 ts_idc.append(i_frame)
 

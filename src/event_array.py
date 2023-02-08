@@ -378,7 +378,7 @@ class MatchedEventArray:
 class Samples:
     def __init__(self, timestamps: T.Sequence, labels: T.Sequence):
         assert len(timestamps) == len(labels)
-        assert is_sorted(timestamps)
+        # assert is_sorted(timestamps)
 
         self.timestamps = np.array(timestamps, copy=True)
         self.labels = np.array(labels, copy=True)
