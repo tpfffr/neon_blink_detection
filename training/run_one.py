@@ -134,6 +134,8 @@ def collect_samples_and_predict(
     if not use_pretrained_classifier:
         logger.info("Collect training data")
         datasets = video_loader(of_params)
+
+        # add information about dataset to be loaded here
         datasets.collect(clip_names_train, bg_ratio=3)
 
         logger.info("Start training")

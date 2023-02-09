@@ -10,6 +10,7 @@ import av
 import numpy as np
 import scipy
 import cv2
+from scipy.interpolate import griddata
 
 
 from src.features_calculator import (
@@ -102,106 +103,150 @@ class video_loader:
 
         idc = on_idc + off_idc + bg_idc
 
-        augmented_features = []
-        for count, isample in enumerate(idc):
+        xshift = [-25, 0, 25][np.random.randint(3)]
+        yshift = [-25, 0, 25][np.random.randint(3)]
 
-            print("Augmenting sample %d / %d \r" % (count, len(idc)), end="")
-
-            left, right = self._interpolate_feature_array(features[isample, :])
-
-            xshift = [-25, 0, 25][np.random.randint(3)]
-            yshift = [-25, 0, 25][np.random.randint(3)]
-
-            left_zoom = self._zoom_and_shift(
-                left, zoom_factor=1.2, shift=[xshift, yshift]
-            )
-
-            right_zoom = self._zoom_and_shift(
-                right, zoom_factor=1.2, shift=[xshift, yshift]
-            )
-
-            p_grid = self._create_image_grid(self._of_params.img_shape)
-            grid = create_grids(self._of_params.img_shape, self._of_params.grid_size)
-
-            augmented_features.append(
-                np.concatenate(
-                    [
-                        np.concatenate(
-                            [
-                                scipy.interpolate.griddata(
-                                    p_grid,
-                                    left_zoom[:, :, ilay].flatten(),
-                                    grid,
-                                    method="nearest",
-                                ),
-                                scipy.interpolate.griddata(
-                                    p_grid,
-                                    right_zoom[:, :, ilay].flatten(),
-                                    grid,
-                                    method="nearest",
-                                ),
-                            ]
-                        )
-                        for ilay in range(0, left_zoom.shape[-1])
-                    ]
-                )
-            )
-
-            gt_labels = np.append(gt_labels, gt_labels[isample])
-            timestamps = np.append(timestamps, timestamps[isample])
+        augmented_features = self._zoom_and_shift(
+            features[idc, :], zoom_factor=1.2, shift=[yshift, xshift]
+        )
 
         features = np.append(features, augmented_features, axis=0)
+
+        gt_labels = np.append(gt_labels, gt_labels[idc])
+        timestamps = np.append(timestamps, timestamps[idc])
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
 
     def _interpolate_feature_array(self, features: np.ndarray):
 
+        n_layers = self._of_params.n_layers
+        n_samples = features.shape[0]
         img_dim = self._of_params.img_shape
 
         p_grid = self._create_image_grid(img_dim)
         grid = create_grids(img_dim, self._of_params.grid_size)
 
         n_grid_points = self._of_params.grid_size**2
+
         idc = np.arange(1, self._of_params.n_layers) * n_grid_points * 2
+        features_per_layer = np.split(features.transpose(), idc)
 
-        features_per_layer = np.split(features, idc)
+        left = np.reshape(
+            [
+                griddata(grid, feat[0:n_grid_points, :], p_grid, method="linear")
+                for feat in features_per_layer
+            ],
+            (n_layers, img_dim[0], img_dim[1], n_samples),
+        )
 
-        left = [
-            np.reshape(
-                scipy.interpolate.griddata(
-                    grid, feat[0:n_grid_points], p_grid, method="linear"
-                ),
-                img_dim,
-            )
-            for feat in features_per_layer
-        ]
+        right = np.reshape(
+            [
+                griddata(grid, feat[n_grid_points:, :], p_grid, method="linear")
+                for feat in features_per_layer
+            ],
+            (n_layers, img_dim[0], img_dim[1], n_samples),
+        )
 
-        right = [
-            np.reshape(
-                scipy.interpolate.griddata(
-                    grid, feat[n_grid_points:], p_grid, method="linear"
-                ),
-                img_dim,
-            )
-            for feat in features_per_layer
-        ]
+        left = np.transpose(left, (1, 2, 0, 3))
+        right = np.transpose(right, (1, 2, 0, 3))
 
-        return np.array(left).transpose(), np.array(right).transpose()
+        return left, right
 
     def _zoom_and_shift(
-        self, img: np.ndarray, zoom_factor: np.float32, shift: T.List[int]
+        self, feature_array: np.ndarray, zoom_factor: np.float32, shift: T.List[int]
     ):
 
-        size = img.shape[0]
+        feat_arr_left, feat_arr_right = self._interpolate_feature_array(feature_array)
+        size = feat_arr_left.shape
 
-        img = scipy.ndimage.shift(img, [shift[0], shift[1], 0], mode="nearest")
+        all_features = []
+        for features in [feat_arr_left, feat_arr_right]:
 
-        lim1 = int(0.5 * size * (1 - 1 / zoom_factor))
-        lim2 = int(size - 0.5 * size * (1 - 1 / zoom_factor))
+            shifted_features = self._shift_image(
+                features, y_shift=shift[0], x_shift=shift[1]
+            )
 
-        img_cropped = img[lim1:lim2, lim1:lim2, :]
-        return cv2.resize(img_cropped, None, fx=zoom_factor, fy=zoom_factor)
+            lim1 = int(0.5 * size[0] * (1 - 1 / zoom_factor))
+            lim2 = int(size[0] - 0.5 * size[0] * (1 - 1 / zoom_factor))
+
+            cropped_features = shifted_features[lim1:lim2, lim1:lim2, :, :]
+
+            cropped_features = cropped_features.reshape(
+                cropped_features.shape[0],
+                cropped_features.shape[1],
+                size[2] * size[3],
+            )
+
+            # Split in chunks as cv2 cannot seem to handle large images
+            split_idc = list(range(500, cropped_features.shape[-1], 500))
+            split_features = np.split(cropped_features, split_idc, axis=2)
+
+            features_list = [
+                cv2.resize(img, None, fx=zoom_factor, fy=zoom_factor)
+                for img in split_features
+            ]
+
+            features_resized = np.concatenate(features_list, axis=2)
+            features_resized = features_resized.reshape(size[0] ** 2, size[2], size[3])
+
+            p_grid = self._create_image_grid(size[0:2])
+            grid = create_grids(size[0:2], self._of_params.grid_size)
+            n_grid_points = self._of_params.grid_size**2
+
+            features_grid = griddata(p_grid, features_resized, grid, method="nearest")
+
+            all_features.append(features_grid)
+
+            #         features_grid = features_grid.reshape(
+            #     features_grid.shape[0] * features_grid.shape[1], features_grid.shape[2]
+            # )
+
+        all_features = np.concatenate(all_features, axis=0)
+        all_features = all_features.reshape(
+            all_features.shape[0] * all_features.shape[1], all_features.shape[2]
+        )
+
+        return np.transpose(all_features, (1, 0))
+
+    def _shift_image(self, img, y_shift=0, x_shift=0):
+        """Shift image by y_shift (positive: up, negative: down) and x_shift (positive: right, negative: left) pixels.
+        img: HxWxNxM array (where N and M are optional dimensions)
+        """
+
+        if np.sign(x_shift) == 1:
+            x_left = 0
+            x_right = x_shift
+        else:
+            x_left = -x_shift
+            x_right = 0
+
+        if np.sign(y_shift) == 1:
+            y_up = y_shift
+            y_down = 0
+        else:
+            y_up = 0
+            y_down = -y_shift
+
+        if img.ndim == 2:
+            return np.pad(img, ((y_down, y_up), (x_right, x_left)), mode="linear_ramp")[
+                y_up : y_up + img.shape[0], x_left : img.shape[0] + x_left
+            ]
+
+        elif img.ndim == 3:
+            return np.pad(
+                img, ((y_down, y_up), (x_right, x_left), (0, 0)), mode="linear_ramp"
+            )[y_up : y_up + img.shape[0], x_left : img.shape[0] + x_left, :]
+
+        elif img.ndim == 4:
+            return np.pad(
+                img,
+                ((y_down, y_up), (x_right, x_left), (0, 0), (0, 0)),
+                mode="linear_ramp",
+            )[y_up : y_up + img.shape[0], x_left : img.shape[0] + x_left, :, :]
+
+        else:
+            raise ValueError("Image must be 2D, 3D or 4D array")
 
     # def _augment_rotate(self, image: np.ndarray, degree: np.float32):
 
@@ -447,15 +492,3 @@ class video_loader:
             n_bg = len(on_indices) * bg_ratio if len(on_indices) else 300
             bg_indices = random_sample(bg_indices, n_bg)
         return bg_indices
-
-
-# clip_names = ["1004-2022-12-14-13-14-14-c8a509b9"]
-
-# from src.helper import OfParams
-# from video_loader import video_loader
-
-# of_params = OfParams()
-# rec = video_loader(of_params)
-# timestamps = rec._get_timestamps(clip_names[0])
-# clip_onsets, clip_offsets = rec._get_clip_trigger(clip_names[0], timestamps)
-# rec.collect(clip_names, bg_ratio=3)

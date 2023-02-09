@@ -40,11 +40,6 @@ def calculate_optical_flow(
     return feature_array, grids
 
 
-# def feature_augmentation(
-#     feature_array: np.ndarray, of_params: OfParams, indices: np.ndarray = None
-# ) -> np.ndarray:
-
-# CHANGES MADE HERE!!!
 def create_grids(img_shape: T.Tuple[int, int], grid_size: int) -> np.ndarray:
     x = np.linspace(0, img_shape[1], grid_size, dtype=np.float32)
     y = np.linspace(0, img_shape[0], grid_size, dtype=np.float32)
