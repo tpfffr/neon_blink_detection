@@ -136,7 +136,7 @@ def collect_samples_and_predict(
         datasets = video_loader(of_params)
 
         # add information about dataset to be loaded here
-        datasets.collect(clip_names_train, bg_ratio=3)
+        datasets.collect(clip_names_train, bg_ratio=3, augment=True)
 
         logger.info("Start training")
         classifier = train_classifier(

@@ -42,11 +42,11 @@ class video_loader:
         self.all_samples = {}
         self.all_features = {}
 
-    def collect(self, clip_names, bg_ratio=None) -> None:
+    def collect(self, clip_names, bg_ratio=None, augment=False) -> None:
         for clip_name in clip_names:
-            self._load(clip_name, bg_ratio)
+            self._load(clip_name, bg_ratio, augment)
 
-    def _load(self, clip_name: str, bg_ratio: int) -> None:
+    def _load(self, clip_name: str, bg_ratio: int, augment: bool) -> None:
 
         # LOAD FEATURES OR COMPUTE THEM
         feature_array, all_timestamps, clip_transitions = self._load_features(
@@ -95,25 +95,34 @@ class video_loader:
         gt_labels = np.hstack(all_gt_labels)
         features = np.vstack(features)
 
-        indices = np.arange(features.shape[0])
+        # perform data augmentation only for training data
+        if augment:
+            print("Performing data augmentation for clip {}".format(clip_name))
+            indices = np.arange(features.shape[0])
 
-        on_idc = random_sample(list(indices[gt_labels == 1]), sum(gt_labels == 1) // 4)
-        off_idc = random_sample(list(indices[gt_labels == 2]), sum(gt_labels == 2) // 4)
-        bg_idc = random_sample(list(indices[gt_labels == 0]), sum(gt_labels == 0) // 4)
+            on_idc = random_sample(
+                list(indices[gt_labels == 1]), sum(gt_labels == 1) // 4
+            )
+            off_idc = random_sample(
+                list(indices[gt_labels == 2]), sum(gt_labels == 2) // 4
+            )
+            bg_idc = random_sample(
+                list(indices[gt_labels == 0]), sum(gt_labels == 0) // 4
+            )
 
-        idc = on_idc + off_idc + bg_idc
+            idc = on_idc + off_idc + bg_idc
 
-        xshift = [-25, 0, 25][np.random.randint(3)]
-        yshift = [-25, 0, 25][np.random.randint(3)]
+            xshift = [-25, 0, 25][np.random.randint(3)]
+            yshift = [-25, 0, 25][np.random.randint(3)]
 
-        augmented_features = self._zoom_and_shift(
-            features[idc, :], zoom_factor=1.2, shift=[yshift, xshift]
-        )
+            augmented_features = self._zoom_and_shift(
+                features[idc, :], zoom_factor=1.2, shift=[yshift, xshift]
+            )
 
-        features = np.append(features, augmented_features, axis=0)
+            features = np.append(features, augmented_features, axis=0)
 
-        gt_labels = np.append(gt_labels, gt_labels[idc])
-        timestamps = np.append(timestamps, timestamps[idc])
+            gt_labels = np.append(gt_labels, gt_labels[idc])
+            timestamps = np.append(timestamps, timestamps[idc])
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
