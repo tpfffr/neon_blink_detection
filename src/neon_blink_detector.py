@@ -21,7 +21,7 @@ def detect_blinks(
     clf = get_classifier(clf_path=Path(__file__).parent.parent / "weights" / "xgb.sav")
     check_input(eye_left_images, eye_right_images, timestamps, of_params, clf)
 
-    eye_left_images, eye_right_images = rotate_images(eye_left_images, eye_right_images)
+    # eye_left_images, eye_right_images = rotate_images(eye_left_images, eye_right_images)
     feature_array = calculate_optical_flow(of_params, eye_left_images, eye_right_images)
     features = concatenate_features(feature_array, of_params)
 

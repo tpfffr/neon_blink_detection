@@ -14,7 +14,7 @@ from src.metrics import Scores, ScoresList
 from training.dataset_splitter import DatasetSplitter
 from video_loader import video_loader
 from training.datasets_loader import (
-    Datasets,
+    # Datasets,
     concatenate,
     concatenate_all_samples,
     load_samples,
@@ -138,6 +138,12 @@ def collect_samples_and_predict(
         # add information about dataset to be loaded here
         datasets.collect(clip_names_train, bg_ratio=3, augment=True)
 
+        n_augmented_features = sum(
+            [datasets.augmented_features[x].shape[0] for x in clip_names_train]
+        )
+
+        logger.info("augmented features = %d", n_augmented_features)
+
         logger.info("Start training")
         classifier = train_classifier(
             datasets, clip_names_train, classifier_params, export_path, idx
@@ -172,8 +178,19 @@ def train_classifier(
 ):
     features = concatenate(datasets.all_features, clip_names)
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
+    labels = samples_gt.labels
+
+    if datasets.augment:
+        augmented_features = concatenate(datasets.augmented_features, clip_names)
+        augmented_samples_gt = concatenate_all_samples(
+            datasets.augmented_samples, clip_names
+        )
+
+        features = np.concatenate([features, augmented_features])
+        labels = np.concatenate([labels, augmented_samples_gt.labels])
+
     classifier = Classifier(classifier_params, export_path)
-    classifier.on_fit(features, samples_gt.labels)
+    classifier.on_fit(features, labels)
     classifier.save_base_classifier(idx)
     return classifier
 

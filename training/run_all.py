@@ -23,7 +23,8 @@ import numpy as np
 
 
 clip_names_test = [
-    "2023-01-27_15-59-54-49a115d5",
+    # "2023-01-27_15-59-54-49a115d5",
+    "2023-02-01_11-45-11-7621531e",
     "2023-01-27_16-10-14-a2a8cbe1",
     "2023-01-27_16-15-26-57802f75",
     "2023-01-27_16-24-04-eb4305b1",
@@ -49,9 +50,6 @@ def main(n_splits=5):
         save_path = training_dir / experiment_name
         export_path = export_dir / experiment_name
 
-        # if is_trained(experiment_name, n_splits, export_dir):
-        #     print(f"{experiment_name} was done.")
-        #     continue
         print(f"save_path={save_path}")
 
         if not compute_of:

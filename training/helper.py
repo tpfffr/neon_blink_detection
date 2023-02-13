@@ -58,6 +58,35 @@ def get_of_params_options():
     return of_params_options
 
 
+def get_augmentation_options():
+    # x_shift = [-50, -25, 0, 25, 50]
+    # y_shift = [-50, -25, 0, 25, 50]  # used to be [3, 5, 7]
+
+    layer_interval_options = [5, 7]  # used to be [1, 3, 5, 7]
+    average_options = [False]
+    img_shape_options = [(64, 64)]
+    grid_size_options = [4, 7]  # used to be [4, 7, 10]
+    step_size_options = [7]
+    window_size_options = [7, 15]  # used to be [[7, 11, 15]]
+    stop_steps_options = [3]
+
+    options = itertools.product(
+        n_layers_options,
+        layer_interval_options,
+        average_options,
+        img_shape_options,
+        grid_size_options,
+        step_size_options,
+        window_size_options,
+        stop_steps_options,
+    )
+    options = list(options)
+    of_params_options = sorted(set(OfParams(*option) for option in options))
+
+    print(f"options {len(of_params_options)}")
+    return of_params_options
+
+
 def get_export_dir(classifier_name=None, use_pretrained_classifier=False):
     classifier_name = classifier_name or classifier_name_default
     export_dir = root_dir / f"export-{classifier_name}"

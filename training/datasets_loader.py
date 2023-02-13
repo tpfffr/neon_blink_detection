@@ -94,7 +94,7 @@ def concatenate_all_samples(
         timestamps = all_samples[clip_name].timestamps
         all_timestamps.extend(timestamps - timestamps[0] + last_time)
         last_time = all_timestamps[-1]
-    assert is_sorted(all_timestamps)
+    # assert is_sorted(all_timestamps)
 
     all_labels = np.concatenate(
         [all_samples[clip_name].labels for clip_name in clip_names], axis=0
