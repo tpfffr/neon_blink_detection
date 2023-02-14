@@ -243,7 +243,7 @@ def get_experiment_name_new(of_params: OfParams) -> str:
 
 def get_feature_dir_name_new(of_params: OfParams) -> str:
     return (
-        f"grid{of_params.grid_size}-"
+        # f"grid{of_params.grid_size}-"
         f"step{of_params.step_size}-"
         f"win{of_params.window_size}-"
         f"steps{of_params.stop_steps}-"

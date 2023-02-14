@@ -105,19 +105,19 @@ class video_loader:
             indices = np.arange(features.shape[0])
 
             on_idc = random_sample(
-                list(indices[gt_labels == 1]), sum(gt_labels == 1) // 2
+                list(indices[gt_labels == 1]), sum(gt_labels == 1) // 1
             )
             off_idc = random_sample(
-                list(indices[gt_labels == 2]), sum(gt_labels == 2) // 2
+                list(indices[gt_labels == 2]), sum(gt_labels == 2) // 1
             )
             bg_idc = random_sample(
-                list(indices[gt_labels == 0]), sum(gt_labels == 0) // 2
+                list(indices[gt_labels == 0]), sum(gt_labels == 0) // 1
             )
 
             idc = on_idc + off_idc + bg_idc
 
             augmented_features = self._zoom_and_shift(
-                features[idc, :], zoom_factor=[0.8, 1.3], shift=[0.3, 0.3]
+                features[idc, :], zoom_factor=[0.85, 1.25], shift=[0.2, 0.2]
             )
 
             self.augmented_samples[clip_name] = Samples(timestamps[idc], gt_labels[idc])
@@ -166,12 +166,15 @@ class video_loader:
         features_left = transf_features_left.reshape(size[0] ** 2, size[2], size[3])
         features_right = transf_features_right.reshape(size[0] ** 2, size[2], size[3])
 
-        p_grid = self._create_image_grid(size[0:2])
-        grid = create_grids(size[0:2], self._of_params.grid_size)
+        intp_grid = create_grids((size[0] - 1, size[1] - 1), size[0], full_grid=True)
+        grid = create_grids(size[0:2], self._of_params.grid_size, full_grid=False)
         n_grid_points = self._of_params.grid_size**2
 
-        features_grid_left = griddata(p_grid, features_left, grid, method="nearest")
-        features_grid_right = griddata(p_grid, features_right, grid, method="nearest")
+        features_grid_left = griddata(intp_grid, features_left, grid, method="nearest")
+
+        features_grid_right = griddata(
+            intp_grid, features_right, grid, method="nearest"
+        )
 
         all_features.append([features_grid_left, features_grid_right])
 
@@ -189,8 +192,11 @@ class video_loader:
         n_samples = features.shape[0]
         img_dim = self._of_params.img_shape
 
-        p_grid = self._create_image_grid(img_dim)
-        grid = create_grids(img_dim, self._of_params.grid_size)
+        # grid for interpolation
+        intp_grid = create_grids((img_dim[0] - 1, img_dim[1] - 1), img_dim[0], True)
+
+        # optical flow grid
+        grid = create_grids(img_dim, self._of_params.grid_size, full_grid=True)
 
         n_grid_points = self._of_params.grid_size**2
 
@@ -199,7 +205,7 @@ class video_loader:
 
         left = np.reshape(
             [
-                griddata(grid, feat[0:n_grid_points, :], p_grid, method="linear")
+                griddata(grid, feat[0:n_grid_points, :], intp_grid, method="linear")
                 for feat in features_per_layer
             ],
             (n_layers, img_dim[0], img_dim[1], n_samples),
@@ -207,7 +213,7 @@ class video_loader:
 
         right = np.reshape(
             [
-                griddata(grid, feat[n_grid_points:, :], p_grid, method="linear")
+                griddata(grid, feat[n_grid_points:, :], intp_grid, method="linear")
                 for feat in features_per_layer
             ],
             (n_layers, img_dim[0], img_dim[1], n_samples),
@@ -218,54 +224,14 @@ class video_loader:
 
         return left, right
 
-    # def _shift_image(self, img, y_shift=0, x_shift=0):
-    #     """Shift image by y_shift (positive: up, negative: down) and x_shift (positive: right, negative: left) pixels.
-    #     img: HxWxNxM array (where N and M are optional dimensions)
-    #     """
+    # def _create_image_grid(self, img_shape: T.Tuple[int, int]):
 
-    #     if np.sign(x_shift) == 1:
-    #         x_left = 0
-    #         x_right = x_shift
-    #     else:
-    #         x_left = -x_shift
-    #         x_right = 0
+    #     x = np.linspace(0, img_shape[0] - 1, img_shape[0], dtype=np.float32)
+    #     y = np.linspace(0, img_shape[0] - 1, img_shape[0], dtype=np.float32)
+    #     xx, yy = np.meshgrid(x, y)
+    #     p_grid = np.concatenate((xx.reshape(-1, 1), yy.reshape(-1, 1)), axis=1)
 
-    #     if np.sign(y_shift) == 1:
-    #         y_up = y_shift
-    #         y_down = 0
-    #     else:
-    #         y_up = 0
-    #         y_down = -y_shift
-
-    #     if img.ndim == 2:
-    #         return np.pad(img, ((y_down, y_up), (x_right, x_left)), mode="linear_ramp")[
-    #             y_up : y_up + img.shape[0], x_left : img.shape[0] + x_left
-    #         ]
-
-    #     elif img.ndim == 3:
-    #         return np.pad(
-    #             img, ((y_down, y_up), (x_right, x_left), (0, 0)), mode="linear_ramp"
-    #         )[y_up : y_up + img.shape[0], x_left : img.shape[0] + x_left, :]
-
-    #     elif img.ndim == 4:
-    #         for i in range(img.shape[3]):
-    #             np.pad(
-    #                 img,
-    #                 ((y_down, y_up), (x_right, x_left), (0, 0), (0, 0)),
-    #                 mode="linear_ramp",
-    #             )[y_up : y_up + img.shape[0], x_left : img.shape[0] + x_left, :, :]
-
-    #     else:
-    #         raise ValueError("Image must be 2D, 3D or 4D array")
-
-    def _create_image_grid(self, img_shape: T.Tuple[int, int]):
-
-        x = np.linspace(0, img_shape[0] - 1, img_shape[0], dtype=np.float32)
-        y = np.linspace(0, img_shape[0] - 1, img_shape[0], dtype=np.float32)
-        xx, yy = np.meshgrid(x, y)
-        p_grid = np.concatenate((xx.reshape(-1, 1), yy.reshape(-1, 1)), axis=1)
-
-        return p_grid
+    #     return p_grid
 
     def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
 

@@ -37,7 +37,7 @@ def main(n_splits=5):
 
     use_pretrained_classifier = False
     use_cluster = False
-    compute_of = False
+    compute_of = True
 
     classifier_params = get_classifier_params()
     of_params, pp_params = get_params()

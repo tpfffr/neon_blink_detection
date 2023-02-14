@@ -8982,3 +8982,28 @@ Traceback (most recent call last):
 ModuleNotFoundError: No module named 'plml'
 /cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
   from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 16
+save_path=/cluster/users/tom/git/neon_blink_detection/training-XGBClassifier-3-140220230653/n_layers5-layer_interval5-grid4-win7
+experiment_name=n_layers5-layer_interval5-grid4-win7
+Traceback (most recent call last):
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 79, in <module>
+    main()
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 56, in main
+    submit_one_job(
+  File "/cluster/users/tom/git/neon_blink_detection/training/submit.py", line 70, in submit_one_job
+    run_one.main(**kwargs)
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 65, in main
+    all_samples, predictions = collect_samples_and_predict(
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 142, in collect_samples_and_predict
+    [datasets.augmented_features[x].shape[0] for x in clip_names_train]
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 142, in <listcomp>
+    [datasets.augmented_features[x].shape[0] for x in clip_names_train]
+KeyError: '1000-2022-12-14-09-43-56-0fcac6d3'
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
