@@ -125,6 +125,27 @@ class video_loader:
         else:
             self.augment = False
 
+            grid_size = 20
+            large_grid = create_grids(
+                self._of_params.img_shape, grid_size, full_grid=True
+            )
+
+            n_rep = self._of_params.n_layers * 2
+
+            large_grid = np.concatenate(n_rep * [large_grid])
+
+            sub_grid = create_grids(
+                self._of_params.img_shape,
+                self._of_params.grid_size + 2,
+                full_grid=False,
+            )
+
+            sub_grid = np.concatenate(n_rep * [sub_grid])
+
+            features = np.transpose(
+                griddata(large_grid, features.transpose(), sub_grid, method="nearest")
+            )
+
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
 

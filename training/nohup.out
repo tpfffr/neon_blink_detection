@@ -9007,3 +9007,52 @@ Traceback (most recent call last):
 KeyError: '1000-2022-12-14-09-43-56-0fcac6d3'
 /cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
   from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 16
+save_path=/cluster/users/tom/git/neon_blink_detection/training-XGBClassifier-3-140220231304/n_layers5-layer_interval5-grid4-win7
+experiment_name=n_layers5-layer_interval5-grid4-win7
+Traceback (most recent call last):
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 79, in <module>
+    main()
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 56, in main
+    submit_one_job(
+  File "/cluster/users/tom/git/neon_blink_detection/training/submit.py", line 70, in submit_one_job
+    run_one.main(**kwargs)
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 65, in main
+    all_samples, predictions = collect_samples_and_predict(
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 139, in collect_samples_and_predict
+    datasets.collect(clip_names_train, bg_ratio=3, augment=False)
+  File "/cluster/users/tom/git/neon_blink_detection/training/video_loader.py", line 50, in collect
+    self._load(clip_name, bg_ratio, augment)
+  File "/cluster/users/tom/git/neon_blink_detection/training/video_loader.py", line 89, in _load
+    concatenate_features(
+  File "/cluster/users/tom/git/neon_blink_detection/src/features_calculator.py", line 91, in concatenate_features
+    feature_array.shape == right_shape
+AssertionError: feature shape should be (17897, 32, 2), but get (17897, 800, 2)
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 16
+save_path=/cluster/users/tom/git/neon_blink_detection/training-XGBClassifier-3-140220231422/n_layers5-layer_interval5-grid4-win7
+experiment_name=n_layers5-layer_interval5-grid4-win7
+Traceback (most recent call last):
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 79, in <module>
+    main()
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 56, in main
+    submit_one_job(
+  File "/cluster/users/tom/git/neon_blink_detection/training/submit.py", line 70, in submit_one_job
+    run_one.main(**kwargs)
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 65, in main
+    all_samples, predictions = collect_samples_and_predict(
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 151, in collect_samples_and_predict
+    classifier = train_classifier(
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 182, in train_classifier
+    features = concatenate(datasets.all_features, clip_names)
+  File "/cluster/users/tom/git/neon_blink_detection/training/datasets_loader.py", line 85, in concatenate
+    return np.concatenate([dictionary[clip_name] for clip_name in clip_names], axis=0)
+  File "<__array_function__ internals>", line 180, in concatenate
+ValueError: all the input array dimensions for the concatenation axis must match exactly, but along dimension 1, the array at index 0 has size 11040 and the array at index 1 has size 8126
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index

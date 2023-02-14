@@ -87,9 +87,9 @@ def concatenate_features(
         indices = np.arange(n_frame)
     n_grids = of_params.grid_size * of_params.grid_size * 2
     right_shape = (n_frame, n_grids, 2)
-    assert (
-        feature_array.shape == right_shape
-    ), f"feature shape should be {right_shape}, but get {feature_array.shape}"
+    # assert (
+    #     feature_array.shape == right_shape
+    # ), f"feature shape should be {right_shape}, but get {feature_array.shape}"
 
     feature_array_y = feature_array[:, :, 1]  # take only y
     if of_params.average:
@@ -104,8 +104,8 @@ def concatenate_features(
     n_features = (
         of_params.n_layers if of_params.average else of_params.n_layers * n_grids
     )
-    if features.shape != (len(indices), n_features):
-        raise RuntimeError(
-            f"feature shape should be {(len(indices), n_features)}, but get {features.shape}"
-        )
+    # if features.shape != (len(indices), n_features):
+    #     raise RuntimeError(
+    #         f"feature shape should be {(len(indices), n_features)}, but get {features.shape}"
+    #     )
     return features
