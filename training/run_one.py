@@ -140,7 +140,7 @@ def collect_samples_and_predict(
         datasets = video_loader(of_params, aug_params)
 
         # add information about dataset to be loaded here
-        datasets.collect(clip_names_train, bg_ratio=2, augment=True)
+        datasets.collect(clip_names_train, bg_ratio=3, augment=True)
 
         if datasets.augment:
             n_augmented_features = sum(
@@ -186,25 +186,6 @@ def train_classifier(
     features = concatenate(datasets.all_features, clip_names)
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
     labels = samples_gt.labels
-
-    grid_size = 20
-    of_grid = create_grids(datasets._of_params.img_shape, grid_size, full_grid=True)
-
-    small_grid = create_grids(
-        datasets._of_params.img_shape,
-        datasets._of_params.grid_size + 2,
-        full_grid=False,
-    )
-    n_rep = datasets._of_params.n_layers * 2
-
-    small_grid = np.concatenate(n_rep * [small_grid])
-    of_grid = np.concatenate(n_rep * [of_grid])
-
-    n_grid_points = datasets._of_params.grid_size**2
-
-    features = griddata(of_grid, features.transpose(), small_grid, method="nearest")
-
-    features = features.transpose()
 
     if datasets.augment:
         augmented_features = concatenate(datasets.augmented_features, clip_names)

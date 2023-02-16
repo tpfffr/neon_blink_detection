@@ -9372,3 +9372,39 @@ Traceback (most recent call last):
   File "/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/core.py", line 2018, in inplace_predict
     raise ValueError(
 ValueError: Feature shape mismatch, expected: 490, got 4000
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 1
+options 9
+save_path=/cluster/users/tom/git/neon_blink_detection/training-XGBClassifier-3-160220230929/n_layers5-layer_interval7-grid7-win15-shift0.1-zoom0.1
+experiment_name=n_layers5-layer_interval7-grid7-win15-shift0.1-zoom0.1
+Performing data augmentation for clip 1311-2023-02-02-14-30-40-96be0928
+Performing data augmentation for clip 1312-2023-02-02-16-21-47-cd28e8e0
+Performing data augmentation for clip 1313-2023-02-02-16-31-53-67b1bdbe
+Performing data augmentation for clip 1316-2023-02-03-09-34-09-31ef7938
+Performing data augmentation for clip 1317-2023-02-03-09-41-14-30f69b87
+Performing data augmentation for clip 1329-2023-02-06-10-40-29-c4308424
+Performing data augmentation for clip 1332-2023-02-06-11-58-03-8fc75e25
+Performing data augmentation for clip 1333-2023-02-06-13-17-50-ebc1e021
+Performing data augmentation for clip 1336-2023-02-06-15-28-30-adb9dbfb
+Performing data augmentation for clip 1337-2023-02-06-15-36-31-211278ea
+Traceback (most recent call last):
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 85, in <module>
+    main()
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 61, in main
+    submit_one_job(
+  File "/cluster/users/tom/git/neon_blink_detection/training/submit.py", line 72, in submit_one_job
+    run_one.main(**kwargs)
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 67, in main
+    all_samples, predictions = collect_samples_and_predict(
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 155, in collect_samples_and_predict
+    classifier = train_classifier(
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 201, in train_classifier
+    classifier.save_base_classifier(idx)
+  File "/cluster/users/tom/git/neon_blink_detection/functions/classifiers.py", line 44, in save_base_classifier
+    joblib.dump(self.clf, self.model_path(idx))
+  File "/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/joblib/numpy_pickle.py", line 552, in dump
+    with open(filename, 'wb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/cluster/users/tom/git/neon_blink_detection/export-XGBClassifier-3-160220230929/n_layers5-layer_interval7-grid7-win15-shift0.1-zoom0.1/weights-0.sav'

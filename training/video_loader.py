@@ -57,27 +57,6 @@ class video_loader:
             clip_name, self._of_params
         )
 
-        # grid_size = 20
-        # of_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
-
-        # grid_size = self._of_params.grid_size
-        # small_grid = create_grids(
-        #     self._of_params.img_shape, grid_size + 2, full_grid=False
-        # )
-
-        # of_grid = np.concatenate(2 * [of_grid])
-        # small_grid = np.concatenate(2 * [small_grid])
-
-        # feature_x = griddata(
-        #     of_grid, feature_array[:, :, 0].transpose(), small_grid
-        # ).transpose()
-
-        # feature_y = griddata(
-        #     of_grid, feature_array[:, :, 1].transpose(), small_grid
-        # ).transpose()
-
-        # feature_array = np.stack((feature_x, feature_y), axis=-1)
-
         n_clips = clip_transitions.shape[0] + 1
         clip_feature_array = np.split(feature_array, clip_transitions + 1, axis=0)
         clip_timestamps = np.split(all_timestamps, clip_transitions + 1, axis=0)
@@ -122,6 +101,7 @@ class video_loader:
 
         # perform data augmentation only for training data
         if augment:
+            self.augment = True
 
             zoom_factor = [
                 1 - self._aug_params.zoom,
@@ -130,7 +110,6 @@ class video_loader:
 
             xy_shift = [self._aug_params.xy_shift, self._aug_params.xy_shift]
 
-            self.augment = True
             print("Performing data augmentation for clip {}".format(clip_name))
             indices = np.arange(features.shape[0])
 
@@ -148,29 +127,27 @@ class video_loader:
 
             self.augmented_samples[clip_name] = Samples(timestamps[idc], gt_labels[idc])
             self.augmented_features[clip_name] = augmented_features
-        else:
-            self.augment = False
+        # else:
+        # self.augment = False
 
-            grid_size = 20
-            large_grid = create_grids(
-                self._of_params.img_shape, grid_size, full_grid=True
-            )
+        grid_size = 20
+        large_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
 
-            n_rep = self._of_params.n_layers * 2
+        n_rep = self._of_params.n_layers * 2
 
-            large_grid = np.concatenate(n_rep * [large_grid])
+        large_grid = np.concatenate(n_rep * [large_grid])
 
-            sub_grid = create_grids(
-                self._of_params.img_shape,
-                self._of_params.grid_size + 2,
-                full_grid=False,
-            )
+        sub_grid = create_grids(
+            self._of_params.img_shape,
+            self._of_params.grid_size + 2,
+            full_grid=False,
+        )
 
-            sub_grid = np.concatenate(n_rep * [sub_grid])
+        sub_grid = np.concatenate(n_rep * [sub_grid])
 
-            features = np.transpose(
-                griddata(large_grid, features.transpose(), sub_grid, method="nearest")
-            )
+        features = np.transpose(
+            griddata(large_grid, features.transpose(), sub_grid, method="nearest")
+        )
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
