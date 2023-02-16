@@ -40,7 +40,7 @@ def main(n_splits=5):
 
     use_pretrained_classifier = False
     use_cluster = False
-    compute_of = False
+    compute_of = True
 
     classifier_params = get_classifier_params()
     of_params, pp_params = get_params()
@@ -77,7 +77,7 @@ def main(n_splits=5):
                 )
 
                 for clip_name in clip_names:
-                    datasets = video_loader(of_params)
+                    datasets = video_loader(of_params, aug_params)
                     datasets._load_features(clip_name, of_params)
 
 
