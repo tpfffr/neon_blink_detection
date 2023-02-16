@@ -4,12 +4,12 @@ import typing as T
 from pathlib import Path
 
 import numpy as np
-
+from scipy.interpolate import griddata
 from functions.classifiers import Classifier, load_predictions, save_predictions
 from functions.pipeline import post_process_debug
 from functions.utils import print_run_time
 from src.event_array import Samples
-from src.helper import OfParams, PPParams
+from src.helper import OfParams, PPParams, AugParams
 from src.metrics import Scores, ScoresList
 from training.dataset_splitter import DatasetSplitter
 from video_loader import video_loader
@@ -20,6 +20,7 @@ from training.datasets_loader import (
     load_samples,
     save_samples,
 )
+from src.features_calculator import create_grids
 from training.evaluation import evaluate
 from training.helper import ClassifierParams, Results
 
@@ -33,6 +34,7 @@ def main(
     classifier_params: ClassifierParams,
     of_params: OfParams,
     pp_params: PPParams,
+    aug_params: AugParams,
     export_path: Path,
     save_path: Path,
     use_pretrained_classifier: bool,
@@ -68,6 +70,7 @@ def main(
             clip_names_test,
             classifier_params,
             of_params,
+            aug_params,
             export_path,
             idx,
             use_pretrained_classifier,
@@ -127,16 +130,17 @@ def collect_samples_and_predict(
     clip_names_test: T.List[str],
     classifier_params: ClassifierParams,
     of_params: OfParams,
+    aug_params: AugParams,
     export_path: Path,
     idx: int,
     use_pretrained_classifier: bool,
 ):
     if not use_pretrained_classifier:
         logger.info("Collect training data")
-        datasets = video_loader(of_params)
+        datasets = video_loader(of_params, aug_params)
 
         # add information about dataset to be loaded here
-        datasets.collect(clip_names_train, bg_ratio=3, augment=False)
+        datasets.collect(clip_names_train, bg_ratio=2, augment=True)
 
         if datasets.augment:
             n_augmented_features = sum(
@@ -182,6 +186,25 @@ def train_classifier(
     features = concatenate(datasets.all_features, clip_names)
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
     labels = samples_gt.labels
+
+    grid_size = 20
+    of_grid = create_grids(datasets._of_params.img_shape, grid_size, full_grid=True)
+
+    small_grid = create_grids(
+        datasets._of_params.img_shape,
+        datasets._of_params.grid_size + 2,
+        full_grid=False,
+    )
+    n_rep = datasets._of_params.n_layers * 2
+
+    small_grid = np.concatenate(n_rep * [small_grid])
+    of_grid = np.concatenate(n_rep * [of_grid])
+
+    n_grid_points = datasets._of_params.grid_size**2
+
+    features = griddata(of_grid, features.transpose(), small_grid, method="nearest")
+
+    features = features.transpose()
 
     if datasets.augment:
         augmented_features = concatenate(datasets.augmented_features, clip_names)

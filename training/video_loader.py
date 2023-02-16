@@ -35,10 +35,11 @@ of_path = Path(
 
 
 class video_loader:
-    def __init__(self, of_params: OfParams):
+    def __init__(self, of_params: OfParams, aug_params: PPParams):
         self.rec_folder = Path(video_path)
         self._of_params = of_params
         self._of_path = of_path
+        self._aug_params = aug_params
 
         self.all_samples = {}
         self.all_features = {}
@@ -55,6 +56,27 @@ class video_loader:
         feature_array, all_timestamps, clip_transitions = self._load_features(
             clip_name, self._of_params
         )
+
+        # grid_size = 20
+        # of_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
+
+        # grid_size = self._of_params.grid_size
+        # small_grid = create_grids(
+        #     self._of_params.img_shape, grid_size + 2, full_grid=False
+        # )
+
+        # of_grid = np.concatenate(2 * [of_grid])
+        # small_grid = np.concatenate(2 * [small_grid])
+
+        # feature_x = griddata(
+        #     of_grid, feature_array[:, :, 0].transpose(), small_grid
+        # ).transpose()
+
+        # feature_y = griddata(
+        #     of_grid, feature_array[:, :, 1].transpose(), small_grid
+        # ).transpose()
+
+        # feature_array = np.stack((feature_x, feature_y), axis=-1)
 
         n_clips = clip_transitions.shape[0] + 1
         clip_feature_array = np.split(feature_array, clip_transitions + 1, axis=0)
@@ -100,24 +122,28 @@ class video_loader:
 
         # perform data augmentation only for training data
         if augment:
+
+            zoom_factor = [
+                1 - self._aug_params.zoom,
+                1 + self._aug_params.zoom,
+            ]
+
+            xy_shift = [self._aug_params.xy_shift, self._aug_params.xy_shift]
+
             self.augment = True
             print("Performing data augmentation for clip {}".format(clip_name))
             indices = np.arange(features.shape[0])
 
-            on_idc = random_sample(
-                list(indices[gt_labels == 1]), sum(gt_labels == 1) // 1
-            )
-            off_idc = random_sample(
-                list(indices[gt_labels == 2]), sum(gt_labels == 2) // 1
-            )
-            bg_idc = random_sample(
-                list(indices[gt_labels == 0]), sum(gt_labels == 0) // 1
-            )
+            on_idc = random_sample(list(indices[gt_labels == 1]), sum(gt_labels == 1))
+            off_idc = random_sample(list(indices[gt_labels == 2]), sum(gt_labels == 2))
+            # bg_idc = random_sample(
+            #     list(indices[gt_labels == 0]), sum(gt_labels == 0) // 4
+            # )
 
-            idc = on_idc + off_idc + bg_idc
+            idc = on_idc + off_idc  # + bg_idc
 
             augmented_features = self._zoom_and_shift(
-                features[idc, :], zoom_factor=[0.85, 1.25], shift=[0.2, 0.2]
+                features[idc, :], zoom_factor=zoom_factor, shift=xy_shift
             )
 
             self.augmented_samples[clip_name] = Samples(timestamps[idc], gt_labels[idc])
@@ -188,13 +214,18 @@ class video_loader:
         features_right = transf_features_right.reshape(size[0] ** 2, size[2], size[3])
 
         intp_grid = create_grids((size[0] - 1, size[1] - 1), size[0], full_grid=True)
-        grid = create_grids(size[0:2], self._of_params.grid_size, full_grid=False)
+
+        small_grid = create_grids(
+            self._of_params.img_shape, self._of_params.grid_size + 2, full_grid=False
+        )
         n_grid_points = self._of_params.grid_size**2
 
-        features_grid_left = griddata(intp_grid, features_left, grid, method="nearest")
+        features_grid_left = griddata(
+            intp_grid, features_left, small_grid, method="nearest"
+        )
 
         features_grid_right = griddata(
-            intp_grid, features_right, grid, method="nearest"
+            intp_grid, features_right, small_grid, method="nearest"
         )
 
         all_features.append([features_grid_left, features_grid_right])
@@ -212,18 +243,23 @@ class video_loader:
         n_layers = self._of_params.n_layers
         n_samples = features.shape[0]
         img_dim = self._of_params.img_shape
+        # n_rep = self._of_params.n_layers * 2
 
-        # grid for interpolation
+        # 64x64 grid feature array should be interpolated onto
         intp_grid = create_grids((img_dim[0] - 1, img_dim[1] - 1), img_dim[0], True)
+        # intp_grid = np.concatenate(n_rep * [intp_grid])
 
-        # optical flow grid
-        grid = create_grids(img_dim, self._of_params.grid_size, full_grid=True)
+        # feature array grid is always computed on 20x20 grid
+        # (make this a parameter in the future)
+        grid_size = 20
+        grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
+        # grid = np.concatenate(n_rep * [grid])
 
-        n_grid_points = self._of_params.grid_size**2
+        n_grid_points = grid_size**2
 
         idc = np.arange(1, self._of_params.n_layers) * n_grid_points * 2
         features_per_layer = np.split(features.transpose(), idc)
-
+        # features = features.transpose()
         left = np.reshape(
             [
                 griddata(grid, feat[0:n_grid_points, :], intp_grid, method="linear")
@@ -244,15 +280,6 @@ class video_loader:
         right = np.transpose(right, (1, 2, 0, 3))
 
         return left, right
-
-    # def _create_image_grid(self, img_shape: T.Tuple[int, int]):
-
-    #     x = np.linspace(0, img_shape[0] - 1, img_shape[0], dtype=np.float32)
-    #     y = np.linspace(0, img_shape[0] - 1, img_shape[0], dtype=np.float32)
-    #     xx, yy = np.meshgrid(x, y)
-    #     p_grid = np.concatenate((xx.reshape(-1, 1), yy.reshape(-1, 1)), axis=1)
-
-    #     return p_grid
 
     def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
 

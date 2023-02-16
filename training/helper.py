@@ -6,7 +6,7 @@ import typing as T
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from src.helper import OfParams, PPParams
+from src.helper import OfParams, PPParams, AugParams
 from src.metrics import ScoresList
 from training.dataset_splitter import DatasetSplitter
 
@@ -32,13 +32,13 @@ class ClassifierParams:
 
 
 def get_of_params_options():
-    n_layers_options = [5, 7]  # used to be [3, 5, 7]
-    layer_interval_options = [5, 7]  # used to be [1, 3, 5, 7]
+    n_layers_options = [5]  # used to be [3, 5, 7]
+    layer_interval_options = [7]  # used to be [1, 3, 5, 7]
     average_options = [False]
     img_shape_options = [(64, 64)]
-    grid_size_options = [4, 7]  # used to be [4, 7, 10]
+    grid_size_options = [7]  # used to be [4, 7, 10]
     step_size_options = [7]
-    window_size_options = [7, 15]  # used to be [[7, 11, 15]]
+    window_size_options = [15]  # used to be [[7, 11, 15]]
     stop_steps_options = [3]
 
     options = itertools.product(
@@ -59,32 +59,19 @@ def get_of_params_options():
 
 
 def get_augmentation_options():
-    # x_shift = [-50, -25, 0, 25, 50]
-    # y_shift = [-50, -25, 0, 25, 50]  # used to be [3, 5, 7]
-
-    layer_interval_options = [5, 7]  # used to be [1, 3, 5, 7]
-    average_options = [False]
-    img_shape_options = [(64, 64)]
-    grid_size_options = [4, 7]  # used to be [4, 7, 10]
-    step_size_options = [7]
-    window_size_options = [7, 15]  # used to be [[7, 11, 15]]
-    stop_steps_options = [3]
+    xy_shift = [0.1, 0.2, 0.3]
+    zoom = [0.1, 0.2, 0.3]
 
     options = itertools.product(
-        n_layers_options,
-        layer_interval_options,
-        average_options,
-        img_shape_options,
-        grid_size_options,
-        step_size_options,
-        window_size_options,
-        stop_steps_options,
+        xy_shift,
+        zoom,
     )
-    options = list(options)
-    of_params_options = sorted(set(OfParams(*option) for option in options))
 
-    print(f"options {len(of_params_options)}")
-    return of_params_options
+    options = list(options)
+    aug_params_options = sorted(set(AugParams(*option) for option in options))
+
+    print(f"options {len(aug_params_options)}")
+    return aug_params_options
 
 
 def get_export_dir(classifier_name=None, use_pretrained_classifier=False):
@@ -231,13 +218,15 @@ def get_feature_dir_name(of_params: OfParams) -> str:
     )
 
 
-def get_experiment_name_new(of_params: OfParams) -> str:
+def get_experiment_name_new(of_params: OfParams, aug_params: AugParams) -> str:
     return (
         # "subtract-"
         f"n_layers{of_params.n_layers}-"
         f"layer_interval{of_params.layer_interval}-"
         f"grid{of_params.grid_size}-"
-        f"win{of_params.window_size}"
+        f"win{of_params.window_size}-"
+        f"shift{aug_params.xy_shift}-"
+        f"zoom{aug_params.zoom}"
     )
 
 
@@ -251,14 +240,14 @@ def get_feature_dir_name_new(of_params: OfParams) -> str:
     )
 
 
-def get_test_recording_ids() -> T.List[str]:
-    return [
-        "834b1e6c-1952-44a8-a5d3-6a0dfb701d2e",
-        "7cc0960d-f982-4da9-b849-cadd79e05291",
-        "6dc932bf-9cf5-40af-b28c-f19b93817259",
-        "76c6a92d-0870-43ce-bcaf-19fec7866207",
-        "4f2f7c16-8783-43ab-a801-2a251ca6b1dd",
-        "abe6ec68-d0c5-4bf1-b3ec-83523e518b93",
-        "321217b2-0dce-4e3c-9e79-a3faf3734e52",
-        "03c2c28e-a0c6-4592-8704-7687ffaac670",
-    ]
+# def get_test_recording_ids() -> T.List[str]:
+#     return [
+#         "834b1e6c-1952-44a8-a5d3-6a0dfb701d2e",
+#         "7cc0960d-f982-4da9-b849-cadd79e05291",
+#         "6dc932bf-9cf5-40af-b28c-f19b93817259",
+#         "76c6a92d-0870-43ce-bcaf-19fec7866207",
+#         "4f2f7c16-8783-43ab-a801-2a251ca6b1dd",
+#         "abe6ec68-d0c5-4bf1-b3ec-83523e518b93",
+#         "321217b2-0dce-4e3c-9e79-a3faf3734e52",
+#         "03c2c28e-a0c6-4592-8704-7687ffaac670",
+#     ]

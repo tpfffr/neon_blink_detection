@@ -9056,3 +9056,319 @@ ValueError: all the input array dimensions for the concatenation axis must match
   from pandas import MultiIndex, Int64Index
 /cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
   from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 16
+save_path=/cluster/users/tom/git/neon_blink_detection/training-XGBClassifier-3-140220232138/n_layers5-layer_interval5-grid4-win7
+experiment_name=n_layers5-layer_interval5-grid4-win7
+Performing data augmentation for clip 1000-2022-12-14-09-43-56-0fcac6d3
+Traceback (most recent call last):
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 79, in <module>
+    main()
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 56, in main
+    submit_one_job(
+  File "/cluster/users/tom/git/neon_blink_detection/training/submit.py", line 70, in submit_one_job
+    run_one.main(**kwargs)
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 65, in main
+    all_samples, predictions = collect_samples_and_predict(
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 139, in collect_samples_and_predict
+    datasets.collect(clip_names_train, bg_ratio=3, augment=True)
+  File "/cluster/users/tom/git/neon_blink_detection/training/video_loader.py", line 50, in collect
+    self._load(clip_name, bg_ratio, augment)
+  File "/cluster/users/tom/git/neon_blink_detection/training/video_loader.py", line 119, in _load
+    augmented_features = self._zoom_and_shift(
+  File "/cluster/users/tom/git/neon_blink_detection/training/video_loader.py", line 156, in _zoom_and_shift
+    feat_arr_left, feat_arr_right = self._interpolate_feature_array(feature_array)
+  File "/cluster/users/tom/git/neon_blink_detection/training/video_loader.py", line 236, in _interpolate_feature_array
+    [
+  File "/cluster/users/tom/git/neon_blink_detection/training/video_loader.py", line 237, in <listcomp>
+    griddata(grid, feat[n_grid_points:, :], intp_grid, method="linear")
+  File "/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/scipy/interpolate/_ndgriddata.py", line 264, in griddata
+    ip = LinearNDInterpolator(points, values, fill_value=fill_value,
+  File "interpnd.pyx", line 278, in scipy.interpolate.interpnd.LinearNDInterpolator.__init__
+  File "interpnd.pyx", line 78, in scipy.interpolate.interpnd.NDInterpolatorBase.__init__
+  File "interpnd.pyx", line 192, in scipy.interpolate.interpnd._check_init_shape
+ValueError: different number of values and points
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 1
+options 9
+save_path=/cluster/users/tom/git/neon_blink_detection/training-XGBClassifier-3-150220231602/n_layers5-layer_interval7-grid7-win15-shift0.1-zoom0.1
+experiment_name=n_layers5-layer_interval7-grid7-win15-shift0.1-zoom0.1
+Performing data augmentation for clip 1000-2022-12-14-09-43-56-0fcac6d3
+Performing data augmentation for clip 1002-2022-12-14-11-43-58-23e05b8c
+Performing data augmentation for clip 1004-2022-12-14-13-14-14-c8a509b9
+Performing data augmentation for clip 1005-2022-12-14-15-07-31-ba8d94d5
+Performing data augmentation for clip 1010-2022-12-15-13-27-31-f46dcdd8
+Performing data augmentation for clip 1140-2023-01-12-13-15-56-2f0172d2
+Performing data augmentation for clip 1141-2023-01-12-14-17-58-470c61da
+Performing data augmentation for clip 1142-2023-01-12-14-27-07-34f1fccf
+Performing data augmentation for clip 1144-2023-01-12-16-36-04-2c1ecc99
+Performing data augmentation for clip 1151-2023-01-13-12-03-16-bca271ec
+Performing data augmentation for clip 1152-2023-01-13-13-03-33-ddabe2a5
+Performing data augmentation for clip 1156-2023-01-13-15-15-36-93d791d5
+Performing data augmentation for clip 1167-2023-01-16-15-28-05-761a32fb
+Performing data augmentation for clip 1190-2023-01-18-11-47-36-4663855c
+Performing data augmentation for clip 1199-2023-01-19-10-39-37-cbad3d47
+Performing data augmentation for clip 1201-2023-01-19-11-43-16-41f36271
+Performing data augmentation for clip 1202-2023-01-19-13-17-50-3651315a
+Performing data augmentation for clip 1219-2023-01-23-10-52-53-f0f1506f
+Performing data augmentation for clip 1230-2023-01-24-10-34-24-8e573035
+Performing data augmentation for clip 1248-2023-01-25-12-59-30-e6407072
+Performing data augmentation for clip 1249-2023-01-25-14-29-18-e54693e4
+Performing data augmentation for clip 1250-2023-01-25-15-28-28-e49f5c02
+Performing data augmentation for clip 1251-2023-01-25-16-37-59-6778eeb5
+Performing data augmentation for clip 1252-2023-01-26-09-38-13-5b1af4ce
+Performing data augmentation for clip 1253-2023-01-26-11-39-39-c0de66cb
+Performing data augmentation for clip 1254-2023-01-26-11-39-01-7f79f26c
+Performing data augmentation for clip 1255-2023-01-26-13-20-00-5137ed82
+Performing data augmentation for clip 1258-2023-01-26-14-29-04-23d8a6a8
+Performing data augmentation for clip 1259-2023-01-26-15-23-42-69af6c5a
+Performing data augmentation for clip 1260-2023-01-26-16-16-34-0165fc4e
+Performing data augmentation for clip 1261-2023-01-26-16-33-22-32c2c928
+Performing data augmentation for clip 1262-2023-01-26-17-22-05-a4b97078
+Performing data augmentation for clip 1264-2023-01-27-09-36-12-df2f3ab1
+Performing data augmentation for clip 1265-2023-01-27-10-37-53-f3b4f617
+Performing data augmentation for clip 1266-2023-01-27-10-32-47-144fd890
+Performing data augmentation for clip 1267-2023-01-27-11-38-27-264bce1d
+Performing data augmentation for clip 1273-2023-01-27-16-37-52-f2d08d55
+Performing data augmentation for clip 1274-2023-01-27-16-44-58-962f6780
+Performing data augmentation for clip 1275-2023-01-27-17-25-45-4122dd25
+Performing data augmentation for clip 1276-2023-01-30-09-36-22-b48621f1
+Performing data augmentation for clip 1279-2023-01-30-13-06-13-e24bbdcf
+Performing data augmentation for clip 1280-2023-01-30-14-24-40-d879dc2a
+Performing data augmentation for clip 1282-2023-01-30-16-34-00-1249f6de
+Performing data augmentation for clip 1283-2023-01-30-16-42-51-e08daf16
+Performing data augmentation for clip 1284-2023-01-30-17-57-14-9d3b1e31
+Performing data augmentation for clip 1286-2023-01-31-10-43-45-210d7b9a
+Performing data augmentation for clip 1287-2023-01-31-11-44-32-c6118754
+Performing data augmentation for clip 1288-2023-01-31-12-15-03-89605fe1
+Performing data augmentation for clip 1289-2023-01-31-13-15-32-56e437ef
+Performing data augmentation for clip 1290-2023-01-31-13-22-58-3ef10981
+Performing data augmentation for clip 1291-2023-01-31-17-39-55-a701abd4
+Performing data augmentation for clip 1292-2023-01-31-17-44-04-c0a47014
+Performing data augmentation for clip 1293-2023-02-01-10-13-34-0c9638f8
+Performing data augmentation for clip 1294-2023-02-01-11-11-04-442d1d78
+Performing data augmentation for clip 1297-2023-02-01-13-37-41-668a3c8e
+Performing data augmentation for clip 1298-2023-02-01-14-29-40-08017935
+Performing data augmentation for clip 1299-2023-02-01-14-37-00-65f38d85
+Performing data augmentation for clip 1300-2023-02-01-15-30-06-808aa97c
+Performing data augmentation for clip 1301-2023-02-01-15-38-42-70991a8d
+Performing data augmentation for clip 1302-2023-02-01-16-38-55-bc30b710
+Performing data augmentation for clip 1303-2023-02-01-17-30-01-d3ee799c
+Performing data augmentation for clip 1304-2023-02-01-17-38-36-66aceb25
+Performing data augmentation for clip 1306-2023-02-02-10-44-25-4fec6abd
+Performing data augmentation for clip 1308-2023-02-02-13-13-29-b929df4c
+Performing data augmentation for clip 1311-2023-02-02-14-30-40-96be0928
+Performing data augmentation for clip 1312-2023-02-02-16-21-47-cd28e8e0
+Performing data augmentation for clip 1313-2023-02-02-16-31-53-67b1bdbe
+Performing data augmentation for clip 1316-2023-02-03-09-34-09-31ef7938
+Performing data augmentation for clip 1317-2023-02-03-09-41-14-30f69b87
+Performing data augmentation for clip 1318-2023-02-03-10-41-29-03c72c25
+Performing data augmentation for clip 1322-2023-02-03-14-25-41-7883a14f
+Performing data augmentation for clip 1325-2023-02-03-17-46-35-11ad4b90
+Performing data augmentation for clip 1326-2023-02-03-17-45-57-8a41f628
+Performing data augmentation for clip 1327-2023-02-06-09-40-56-d5cf1243
+Performing data augmentation for clip 1328-2023-02-06-09-45-58-f56cc84e
+Performing data augmentation for clip 1329-2023-02-06-10-40-29-c4308424
+Performing data augmentation for clip 1332-2023-02-06-11-58-03-8fc75e25
+Performing data augmentation for clip 1333-2023-02-06-13-17-50-ebc1e021
+Performing data augmentation for clip 1336-2023-02-06-15-28-30-adb9dbfb
+Performing data augmentation for clip 1337-2023-02-06-15-36-31-211278ea
+Traceback (most recent call last):
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 85, in <module>
+    main()
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 61, in main
+    submit_one_job(
+  File "/cluster/users/tom/git/neon_blink_detection/training/submit.py", line 72, in submit_one_job
+    run_one.main(**kwargs)
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 66, in main
+    all_samples, predictions = collect_samples_and_predict(
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 154, in collect_samples_and_predict
+    classifier = train_classifier(
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 195, in train_classifier
+    features = np.concatenate([features, augmented_features])
+  File "<__array_function__ internals>", line 180, in concatenate
+ValueError: all the input array dimensions for the concatenation axis must match exactly, but along dimension 1, the array at index 0 has size 4000 and the array at index 1 has size 490
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 1
+options 9
+save_path=/cluster/users/tom/git/neon_blink_detection/training-XGBClassifier-3-150220231856/n_layers5-layer_interval7-grid7-win15-shift0.1-zoom0.1
+experiment_name=n_layers5-layer_interval7-grid7-win15-shift0.1-zoom0.1
+Performing data augmentation for clip 1000-2022-12-14-09-43-56-0fcac6d3
+Performing data augmentation for clip 1002-2022-12-14-11-43-58-23e05b8c
+Performing data augmentation for clip 1004-2022-12-14-13-14-14-c8a509b9
+Performing data augmentation for clip 1005-2022-12-14-15-07-31-ba8d94d5
+Performing data augmentation for clip 1010-2022-12-15-13-27-31-f46dcdd8
+Performing data augmentation for clip 1140-2023-01-12-13-15-56-2f0172d2
+Performing data augmentation for clip 1141-2023-01-12-14-17-58-470c61da
+Performing data augmentation for clip 1142-2023-01-12-14-27-07-34f1fccf
+Performing data augmentation for clip 1144-2023-01-12-16-36-04-2c1ecc99
+Performing data augmentation for clip 1151-2023-01-13-12-03-16-bca271ec
+Performing data augmentation for clip 1152-2023-01-13-13-03-33-ddabe2a5
+Performing data augmentation for clip 1156-2023-01-13-15-15-36-93d791d5
+Performing data augmentation for clip 1167-2023-01-16-15-28-05-761a32fb
+Performing data augmentation for clip 1190-2023-01-18-11-47-36-4663855c
+Performing data augmentation for clip 1199-2023-01-19-10-39-37-cbad3d47
+Performing data augmentation for clip 1201-2023-01-19-11-43-16-41f36271
+Performing data augmentation for clip 1202-2023-01-19-13-17-50-3651315a
+Performing data augmentation for clip 1219-2023-01-23-10-52-53-f0f1506f
+Performing data augmentation for clip 1230-2023-01-24-10-34-24-8e573035
+Performing data augmentation for clip 1248-2023-01-25-12-59-30-e6407072
+Performing data augmentation for clip 1249-2023-01-25-14-29-18-e54693e4
+Performing data augmentation for clip 1250-2023-01-25-15-28-28-e49f5c02
+Performing data augmentation for clip 1251-2023-01-25-16-37-59-6778eeb5
+Performing data augmentation for clip 1252-2023-01-26-09-38-13-5b1af4ce
+Performing data augmentation for clip 1253-2023-01-26-11-39-39-c0de66cb
+Performing data augmentation for clip 1254-2023-01-26-11-39-01-7f79f26c
+Performing data augmentation for clip 1255-2023-01-26-13-20-00-5137ed82
+Performing data augmentation for clip 1258-2023-01-26-14-29-04-23d8a6a8
+Performing data augmentation for clip 1259-2023-01-26-15-23-42-69af6c5a
+Performing data augmentation for clip 1260-2023-01-26-16-16-34-0165fc4e
+Performing data augmentation for clip 1261-2023-01-26-16-33-22-32c2c928
+Performing data augmentation for clip 1262-2023-01-26-17-22-05-a4b97078
+Performing data augmentation for clip 1264-2023-01-27-09-36-12-df2f3ab1
+Performing data augmentation for clip 1265-2023-01-27-10-37-53-f3b4f617
+Performing data augmentation for clip 1266-2023-01-27-10-32-47-144fd890
+Performing data augmentation for clip 1267-2023-01-27-11-38-27-264bce1d
+Performing data augmentation for clip 1273-2023-01-27-16-37-52-f2d08d55
+Performing data augmentation for clip 1274-2023-01-27-16-44-58-962f6780
+Performing data augmentation for clip 1275-2023-01-27-17-25-45-4122dd25
+Performing data augmentation for clip 1276-2023-01-30-09-36-22-b48621f1
+Performing data augmentation for clip 1279-2023-01-30-13-06-13-e24bbdcf
+Performing data augmentation for clip 1280-2023-01-30-14-24-40-d879dc2a
+Performing data augmentation for clip 1282-2023-01-30-16-34-00-1249f6de
+Performing data augmentation for clip 1283-2023-01-30-16-42-51-e08daf16
+Performing data augmentation for clip 1284-2023-01-30-17-57-14-9d3b1e31
+Performing data augmentation for clip 1286-2023-01-31-10-43-45-210d7b9a
+Performing data augmentation for clip 1287-2023-01-31-11-44-32-c6118754
+Performing data augmentation for clip 1288-2023-01-31-12-15-03-89605fe1
+Performing data augmentation for clip 1289-2023-01-31-13-15-32-56e437ef
+Performing data augmentation for clip 1290-2023-01-31-13-22-58-3ef10981
+Performing data augmentation for clip 1291-2023-01-31-17-39-55-a701abd4
+Performing data augmentation for clip 1292-2023-01-31-17-44-04-c0a47014
+Performing data augmentation for clip 1293-2023-02-01-10-13-34-0c9638f8
+Performing data augmentation for clip 1294-2023-02-01-11-11-04-442d1d78
+Performing data augmentation for clip 1297-2023-02-01-13-37-41-668a3c8e
+Performing data augmentation for clip 1298-2023-02-01-14-29-40-08017935
+Performing data augmentation for clip 1299-2023-02-01-14-37-00-65f38d85
+Performing data augmentation for clip 1300-2023-02-01-15-30-06-808aa97c
+Performing data augmentation for clip 1301-2023-02-01-15-38-42-70991a8d
+Performing data augmentation for clip 1302-2023-02-01-16-38-55-bc30b710
+Performing data augmentation for clip 1303-2023-02-01-17-30-01-d3ee799c
+Performing data augmentation for clip 1304-2023-02-01-17-38-36-66aceb25
+Performing data augmentation for clip 1306-2023-02-02-10-44-25-4fec6abd
+Performing data augmentation for clip 1308-2023-02-02-13-13-29-b929df4c
+Performing data augmentation for clip 1311-2023-02-02-14-30-40-96be0928
+Performing data augmentation for clip 1312-2023-02-02-16-21-47-cd28e8e0
+Performing data augmentation for clip 1313-2023-02-02-16-31-53-67b1bdbe
+Performing data augmentation for clip 1316-2023-02-03-09-34-09-31ef7938
+Performing data augmentation for clip 1317-2023-02-03-09-41-14-30f69b87
+Performing data augmentation for clip 1318-2023-02-03-10-41-29-03c72c25
+Performing data augmentation for clip 1322-2023-02-03-14-25-41-7883a14f
+Performing data augmentation for clip 1325-2023-02-03-17-46-35-11ad4b90
+Performing data augmentation for clip 1326-2023-02-03-17-45-57-8a41f628
+Performing data augmentation for clip 1327-2023-02-06-09-40-56-d5cf1243
+Performing data augmentation for clip 1328-2023-02-06-09-45-58-f56cc84e
+Performing data augmentation for clip 1329-2023-02-06-10-40-29-c4308424
+Performing data augmentation for clip 1332-2023-02-06-11-58-03-8fc75e25
+Performing data augmentation for clip 1333-2023-02-06-13-17-50-ebc1e021
+Performing data augmentation for clip 1336-2023-02-06-15-28-30-adb9dbfb
+Performing data augmentation for clip 1337-2023-02-06-15-36-31-211278ea
+Performing data augmentation for clip 1201-2023-01-19-11-43-16-41f36271
+Performing data augmentation for clip 1202-2023-01-19-13-17-50-3651315a
+Performing data augmentation for clip 1219-2023-01-23-10-52-53-f0f1506f
+Performing data augmentation for clip 1230-2023-01-24-10-34-24-8e573035
+Performing data augmentation for clip 1248-2023-01-25-12-59-30-e6407072
+Performing data augmentation for clip 1249-2023-01-25-14-29-18-e54693e4
+Performing data augmentation for clip 1250-2023-01-25-15-28-28-e49f5c02
+Performing data augmentation for clip 1251-2023-01-25-16-37-59-6778eeb5
+Performing data augmentation for clip 1252-2023-01-26-09-38-13-5b1af4ce
+Performing data augmentation for clip 1253-2023-01-26-11-39-39-c0de66cb
+Performing data augmentation for clip 1254-2023-01-26-11-39-01-7f79f26c
+Performing data augmentation for clip 1255-2023-01-26-13-20-00-5137ed82
+Performing data augmentation for clip 1258-2023-01-26-14-29-04-23d8a6a8
+Performing data augmentation for clip 1259-2023-01-26-15-23-42-69af6c5a
+Performing data augmentation for clip 1260-2023-01-26-16-16-34-0165fc4e
+Performing data augmentation for clip 1261-2023-01-26-16-33-22-32c2c928
+Performing data augmentation for clip 1262-2023-01-26-17-22-05-a4b97078
+Performing data augmentation for clip 1264-2023-01-27-09-36-12-df2f3ab1
+Performing data augmentation for clip 1265-2023-01-27-10-37-53-f3b4f617
+Performing data augmentation for clip 1266-2023-01-27-10-32-47-144fd890
+Performing data augmentation for clip 1267-2023-01-27-11-38-27-264bce1d
+Performing data augmentation for clip 1273-2023-01-27-16-37-52-f2d08d55
+Performing data augmentation for clip 1274-2023-01-27-16-44-58-962f6780
+Performing data augmentation for clip 1275-2023-01-27-17-25-45-4122dd25
+Performing data augmentation for clip 1276-2023-01-30-09-36-22-b48621f1
+Performing data augmentation for clip 1279-2023-01-30-13-06-13-e24bbdcf
+Performing data augmentation for clip 1280-2023-01-30-14-24-40-d879dc2a
+Performing data augmentation for clip 1282-2023-01-30-16-34-00-1249f6de
+Performing data augmentation for clip 1283-2023-01-30-16-42-51-e08daf16
+Performing data augmentation for clip 1284-2023-01-30-17-57-14-9d3b1e31
+Performing data augmentation for clip 1286-2023-01-31-10-43-45-210d7b9a
+Performing data augmentation for clip 1288-2023-01-31-12-15-03-89605fe1
+Performing data augmentation for clip 1289-2023-01-31-13-15-32-56e437ef
+Performing data augmentation for clip 1290-2023-01-31-13-22-58-3ef10981
+Performing data augmentation for clip 1291-2023-01-31-17-39-55-a701abd4
+Performing data augmentation for clip 1292-2023-01-31-17-44-04-c0a47014
+Performing data augmentation for clip 1293-2023-02-01-10-13-34-0c9638f8
+Performing data augmentation for clip 1294-2023-02-01-11-11-04-442d1d78
+Performing data augmentation for clip 1297-2023-02-01-13-37-41-668a3c8e
+Performing data augmentation for clip 1298-2023-02-01-14-29-40-08017935
+Performing data augmentation for clip 1299-2023-02-01-14-37-00-65f38d85
+Performing data augmentation for clip 1300-2023-02-01-15-30-06-808aa97c
+Performing data augmentation for clip 1301-2023-02-01-15-38-42-70991a8d
+Performing data augmentation for clip 1302-2023-02-01-16-38-55-bc30b710
+Performing data augmentation for clip 1303-2023-02-01-17-30-01-d3ee799c
+Performing data augmentation for clip 1304-2023-02-01-17-38-36-66aceb25
+Performing data augmentation for clip 1306-2023-02-02-10-44-25-4fec6abd
+Performing data augmentation for clip 1308-2023-02-02-13-13-29-b929df4c
+Performing data augmentation for clip 1311-2023-02-02-14-30-40-96be0928
+Performing data augmentation for clip 1312-2023-02-02-16-21-47-cd28e8e0
+Performing data augmentation for clip 1313-2023-02-02-16-31-53-67b1bdbe
+Performing data augmentation for clip 1316-2023-02-03-09-34-09-31ef7938
+Performing data augmentation for clip 1317-2023-02-03-09-41-14-30f69b87
+Performing data augmentation for clip 1318-2023-02-03-10-41-29-03c72c25
+Performing data augmentation for clip 1322-2023-02-03-14-25-41-7883a14f
+Performing data augmentation for clip 1325-2023-02-03-17-46-35-11ad4b90
+Performing data augmentation for clip 1326-2023-02-03-17-45-57-8a41f628
+Performing data augmentation for clip 1327-2023-02-06-09-40-56-d5cf1243
+Performing data augmentation for clip 1328-2023-02-06-09-45-58-f56cc84e
+Performing data augmentation for clip 1329-2023-02-06-10-40-29-c4308424
+Performing data augmentation for clip 1332-2023-02-06-11-58-03-8fc75e25
+Performing data augmentation for clip 1333-2023-02-06-13-17-50-ebc1e021
+Performing data augmentation for clip 1336-2023-02-06-15-28-30-adb9dbfb
+Performing data augmentation for clip 1337-2023-02-06-15-36-31-211278ea
+Traceback (most recent call last):
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 85, in <module>
+    main()
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_all.py", line 61, in main
+    submit_one_job(
+  File "/cluster/users/tom/git/neon_blink_detection/training/submit.py", line 72, in submit_one_job
+    run_one.main(**kwargs)
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 67, in main
+    all_samples, predictions = collect_samples_and_predict(
+  File "/cluster/users/tom/git/neon_blink_detection/training/run_one.py", line 169, in collect_samples_and_predict
+    predictions = classifier.predict_all_clips(datasets.all_features)
+  File "/cluster/users/tom/git/neon_blink_detection/functions/utils.py", line 17, in wrapper_timer
+    output = func(*args, **kwargs)
+  File "/cluster/users/tom/git/neon_blink_detection/functions/classifiers.py", line 35, in predict_all_clips
+    return {
+  File "/cluster/users/tom/git/neon_blink_detection/functions/classifiers.py", line 36, in <dictcomp>
+    clip_tuple: self.predict(features)
+  File "/cluster/users/tom/git/neon_blink_detection/functions/classifiers.py", line 29, in predict
+    return self.clf.predict_proba(features)
+  File "/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/sklearn.py", line 1348, in predict_proba
+    class_probs = super().predict(
+  File "/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/sklearn.py", line 881, in predict
+    predts = self.get_booster().inplace_predict(
+  File "/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/core.py", line 2018, in inplace_predict
+    raise ValueError(
+ValueError: Feature shape mismatch, expected: 490, got 4000
