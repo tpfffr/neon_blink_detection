@@ -4,22 +4,23 @@ import typing as T
 from pathlib import Path
 
 import numpy as np
-
+from scipy.interpolate import griddata
 from functions.classifiers import Classifier, load_predictions, save_predictions
 from functions.pipeline import post_process_debug
 from functions.utils import print_run_time
 from src.event_array import Samples
-from src.helper import OfParams, PPParams
+from src.helper import OfParams, PPParams, AugParams
 from src.metrics import Scores, ScoresList
 from training.dataset_splitter import DatasetSplitter
 from video_loader import video_loader
 from training.datasets_loader import (
-    Datasets,
+    # Datasets,
     concatenate,
     concatenate_all_samples,
     load_samples,
     save_samples,
 )
+from src.features_calculator import create_grids
 from training.evaluation import evaluate
 from training.helper import ClassifierParams, Results
 
@@ -33,6 +34,7 @@ def main(
     classifier_params: ClassifierParams,
     of_params: OfParams,
     pp_params: PPParams,
+    aug_params: AugParams,
     export_path: Path,
     save_path: Path,
     use_pretrained_classifier: bool,
@@ -68,6 +70,7 @@ def main(
             clip_names_test,
             classifier_params,
             of_params,
+            aug_params,
             export_path,
             idx,
             use_pretrained_classifier,
@@ -127,14 +130,27 @@ def collect_samples_and_predict(
     clip_names_test: T.List[str],
     classifier_params: ClassifierParams,
     of_params: OfParams,
+    aug_params: AugParams,
     export_path: Path,
     idx: int,
     use_pretrained_classifier: bool,
 ):
     if not use_pretrained_classifier:
         logger.info("Collect training data")
-        datasets = video_loader(of_params)
-        datasets.collect(clip_names_train, bg_ratio=3)
+        datasets = video_loader(of_params, aug_params)
+
+        # add information about dataset to be loaded here
+        augment_data = False
+        datasets.collect(clip_names_train, bg_ratio=3, augment=augment_data)
+
+        if augment_data:
+            n_augmented_features = sum(
+                [datasets.augmented_features[x].shape[0] for x in clip_names_train]
+            )
+        else:
+            n_augmented_features = 0
+
+        logger.info("augmented features = %d", n_augmented_features)
 
         logger.info("Start training")
         classifier = train_classifier(
@@ -170,8 +186,21 @@ def train_classifier(
 ):
     features = concatenate(datasets.all_features, clip_names)
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
+    labels = samples_gt.labels
+
+    if datasets.augment:
+        augmented_features = concatenate(datasets.augmented_features, clip_names)
+        augmented_samples_gt = concatenate_all_samples(
+            datasets.augmented_samples, clip_names
+        )
+        # features = augmented_features
+        # labels = augmented_samples_gt.labels
+
+        features = np.concatenate([features, augmented_features])
+        labels = np.concatenate([labels, augmented_samples_gt.labels])
+
     classifier = Classifier(classifier_params, export_path)
-    classifier.on_fit(features, samples_gt.labels)
+    classifier.on_fit(features, labels)
     classifier.save_base_classifier(idx)
     return classifier
 

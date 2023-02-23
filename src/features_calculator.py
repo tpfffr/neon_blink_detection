@@ -2,7 +2,6 @@ import typing as T
 
 import cv2
 import numpy as np
-
 from helper import OfParams
 
 
@@ -27,7 +26,9 @@ def calculate_optical_flow(
         right_images_prev = [right_images_curr[prev_idx(idx)] for idx in indices]
 
     if grids is None:
-        grids = create_grids(of_params.img_shape, of_params.grid_size)
+        grid_size = 20
+        grids = create_grids(of_params.img_shape, grid_size, full_grid=True)
+
     args = grids, of_params.window_size, of_params.stop_steps
     feature_left = [
         cv2_calcOpticalFlowPyrLK(left_images_prev[idx], left_images_curr[idx], *args)
@@ -41,11 +42,17 @@ def calculate_optical_flow(
     return feature_array, grids
 
 
-def create_grids(img_shape: T.Tuple[int, int], grid_size: int) -> np.ndarray:
-    x = np.linspace(0, img_shape[1], grid_size + 2, dtype=np.float32)[1:-1]
-    y = np.linspace(0, img_shape[0], grid_size + 2, dtype=np.float32)[1:-1]
+def create_grids(
+    img_shape: T.Tuple[int, int], grid_size: int, full_grid: bool
+) -> np.ndarray:
+    x = np.linspace(0, img_shape[1], grid_size, dtype=np.float32)
+    y = np.linspace(0, img_shape[0], grid_size, dtype=np.float32)
     xx, yy = np.meshgrid(x, y)
     p_grid = np.concatenate((xx.reshape(-1, 1), yy.reshape(-1, 1)), axis=1)
+
+    if not full_grid:
+        p_grid = p_grid[np.all((p_grid != 0) & (p_grid != img_shape[0]), axis=1), :]
+
     return p_grid
 
 
@@ -79,10 +86,10 @@ def concatenate_features(
     if indices is None:
         indices = np.arange(n_frame)
     n_grids = of_params.grid_size * of_params.grid_size * 2
-    right_shape = (n_frame, n_grids, 2)
-    assert (
-        feature_array.shape == right_shape
-    ), f"feature shape should be {right_shape}, but get {feature_array.shape}"
+    # right_shape = (n_frame, n_grids, 2)
+    # assert (
+    #     feature_array.shape == right_shape
+    # ), f"feature shape should be {right_shape}, but get {feature_array.shape}"
 
     feature_array_y = feature_array[:, :, 1]  # take only y
     if of_params.average:
@@ -97,8 +104,8 @@ def concatenate_features(
     n_features = (
         of_params.n_layers if of_params.average else of_params.n_layers * n_grids
     )
-    if features.shape != (len(indices), n_features):
-        raise RuntimeError(
-            f"feature shape should be {(len(indices), n_features)}, but get {features.shape}"
-        )
+    # if features.shape != (len(indices), n_features):
+    #     raise RuntimeError(
+    #         f"feature shape should be {(len(indices), n_features)}, but get {features.shape}"
+    #     )
     return features

@@ -8,14 +8,24 @@ from pathlib import Path
 import typing as T
 import av
 import numpy as np
+import scipy
+import cv2
+from scipy.interpolate import griddata
+import torch
+import pims
 
-from src.features_calculator import concatenate_features, calculate_optical_flow
+from src.features_calculator import (
+    concatenate_features,
+    calculate_optical_flow,
+    create_grids,
+)
 from src.utils import resize_images
 from functions.utils import random_sample
 from training.helper import get_feature_dir_name_new
 from src.event_array import Samples
 from src.helper import OfParams, PPParams
 from training.helper import get_experiment_name_new
+import kornia.augmentation as K
 
 video_path = Path(
     "/cluster/users/tom/experiments/neon_blink_detection/datasets/train_data"
@@ -26,19 +36,23 @@ of_path = Path(
 
 
 class video_loader:
-    def __init__(self, of_params: OfParams):
+    def __init__(self, of_params: OfParams, aug_params: PPParams):
         self.rec_folder = Path(video_path)
         self._of_params = of_params
         self._of_path = of_path
+        self._aug_params = aug_params
 
         self.all_samples = {}
         self.all_features = {}
+        self.augmented_samples = {}
+        self.augmented_features = {}
 
-    def collect(self, clip_names, bg_ratio=None) -> None:
+    def collect(self, clip_names, bg_ratio=None, augment=False) -> None:
         for clip_name in clip_names:
-            self._load(clip_name, bg_ratio)
+            print("Loading clip: %s" % clip_name)
+            self._load(clip_name, bg_ratio, augment)
 
-    def _load(self, clip_name: str, bg_ratio: int) -> None:
+    def _load(self, clip_name: str, bg_ratio: int, augment: bool) -> None:
 
         # LOAD FEATURES OR COMPUTE THEM
         feature_array, all_timestamps, clip_transitions = self._load_features(
@@ -87,8 +101,164 @@ class video_loader:
         gt_labels = np.hstack(all_gt_labels)
         features = np.vstack(features)
 
+        # perform data augmentation only for training data
+        if augment:
+            self.augment = True
+
+            zoom_factor = [
+                1 - self._aug_params.zoom,
+                1 + self._aug_params.zoom,
+            ]
+
+            xy_shift = [self._aug_params.xy_shift, self._aug_params.xy_shift]
+
+            print("Performing data augmentation for clip {}".format(clip_name))
+            indices = np.arange(features.shape[0])
+
+            on_idc = random_sample(list(indices[gt_labels == 1]), sum(gt_labels == 1))
+            off_idc = random_sample(list(indices[gt_labels == 2]), sum(gt_labels == 2))
+            bg_idc = random_sample(
+                list(indices[gt_labels == 0]), sum(gt_labels == 0) // 2
+            )
+
+            idc = on_idc + off_idc + bg_idc
+
+            augmented_features = self._zoom_and_shift(
+                features[idc, :], zoom_factor=zoom_factor, shift=xy_shift
+            )
+
+            self.augmented_samples[clip_name] = Samples(timestamps[idc], gt_labels[idc])
+            self.augmented_features[clip_name] = augmented_features
+        else:
+            self.augment = False
+
+        grid_size = 20
+        large_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
+
+        n_rep = self._of_params.n_layers * 2
+
+        large_grid = np.concatenate(n_rep * [large_grid])
+
+        sub_grid = create_grids(
+            self._of_params.img_shape,
+            self._of_params.grid_size + 2,
+            full_grid=False,
+        )
+
+        sub_grid = np.concatenate(n_rep * [sub_grid])
+
+        features = np.transpose(
+            griddata(large_grid, features.transpose(), sub_grid, method="nearest")
+        )
+
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
+
+    def _zoom_and_shift(
+        self, feature_array: np.ndarray, zoom_factor: T.List[int], shift: T.List[int]
+    ):
+
+        feat_arr_left, feat_arr_right = self._interpolate_feature_array(feature_array)
+        size = feat_arr_left.shape
+
+        # nsamples, nlayers, ndim, ndim
+
+        feat_arr_left = torch.from_numpy(feat_arr_left.transpose(3, 2, 0, 1))
+        feat_arr_right = torch.from_numpy(feat_arr_right.transpose(3, 2, 0, 1))
+
+        all_features = []
+
+        transf_features_left = []
+        transf_features_right = []
+
+        transf = K.RandomAffine(
+            0,
+            translate=(shift[0], shift[1]),
+            scale=(zoom_factor[0], zoom_factor[1]),
+            p=1,
+        )
+
+        transf_features_left = transf(feat_arr_left).squeeze().numpy()
+
+        h_flip = K.RandomHorizontalFlip(p=1)
+        feat_arr_right = h_flip(feat_arr_right)
+
+        transf_features_right = transf(feat_arr_right, params=transf._params).squeeze()
+
+        transf_features_right = h_flip(transf_features_right).numpy()
+
+        features_left = transf_features_left.reshape(
+            size[3], size[2], size[0] ** 2
+        ).transpose(2, 1, 0)
+
+        features_right = transf_features_right.reshape(
+            size[3], size[2], size[0] ** 2
+        ).transpose(2, 1, 0)
+
+        intp_grid = create_grids((size[0] - 1, size[1] - 1), size[0], full_grid=True)
+
+        small_grid = create_grids(
+            self._of_params.img_shape, self._of_params.grid_size + 2, full_grid=False
+        )
+        n_grid_points = self._of_params.grid_size**2
+
+        features_grid_left = griddata(
+            intp_grid, features_left, small_grid, method="linear", fill_value=0
+        )
+
+        features_grid_right = griddata(
+            intp_grid, features_right, small_grid, method="linear", fill_value=0
+        )
+
+        all_features.append([features_grid_left, features_grid_right])
+
+        all_features = np.concatenate(all_features, axis=0)
+        all_features = np.concatenate(np.concatenate(all_features))
+
+        return np.transpose(all_features, (1, 0))
+
+    def _interpolate_feature_array(self, features: np.ndarray):
+
+        n_layers = self._of_params.n_layers
+        n_samples = features.shape[0]
+        img_dim = self._of_params.img_shape
+        # n_rep = self._of_params.n_layers * 2
+
+        # 64x64 grid feature array should be interpolated onto
+        intp_grid = create_grids((img_dim[0] - 1, img_dim[1] - 1), img_dim[0], True)
+        # intp_grid = np.concatenate(n_rep * [intp_grid])
+
+        # feature array grid is always computed on 20x20 grid
+        # (make this a parameter in the future)
+        grid_size = 20
+        grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
+        # grid = np.concatenate(n_rep * [grid])
+
+        n_grid_points = grid_size**2
+
+        idc = np.arange(1, self._of_params.n_layers) * n_grid_points * 2
+        features_per_layer = np.split(features.transpose(), idc)
+        # features = features.transpose()
+        left = np.reshape(
+            [
+                griddata(grid, feat[0:n_grid_points, :], intp_grid, method="linear")
+                for feat in features_per_layer
+            ],
+            (n_layers, img_dim[0], img_dim[1], n_samples),
+        )
+
+        right = np.reshape(
+            [
+                griddata(grid, feat[n_grid_points:, :], intp_grid, method="linear")
+                for feat in features_per_layer
+            ],
+            (n_layers, img_dim[0], img_dim[1], n_samples),
+        )
+
+        left = np.transpose(left, (1, 2, 0, 3))
+        right = np.transpose(right, (1, 2, 0, 3))
+
+        return left, right
 
     def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
 
@@ -128,7 +298,7 @@ class video_loader:
 
             n_clips = clip_transitions.shape[0] + 1
             clip_left_images = np.split(left_images, clip_transitions + 1)
-            clip_right_images = np.split(left_images, clip_transitions + 1)
+            clip_right_images = np.split(right_images, clip_transitions + 1)
 
             feature_array = []
 
@@ -159,28 +329,47 @@ class video_loader:
 
         clip_onsets, clip_offsets = self._get_clip_trigger(clip_name, timestamps)
 
-        gen = self._make_video_generator_mp4(clip_name, convert_to_gray=True)
+        vid = pims.Video(
+            str(self.rec_folder / clip_name / "Neon Sensor Module v1 ps1.mp4")
+        )
 
-        frames = []
+        all_frames = []
         ts_idc = []
-        for i_frame, x in enumerate(gen):
 
-            if i_frame > max(clip_offsets):
-                break
-
-            sign_onset = np.sign(i_frame - clip_onsets)
-            sign_offset = np.sign(i_frame - clip_offsets)
-
-            if any((sign_onset != sign_offset)):
-                print("adding frame %d" % i_frame)
-                frames.append(x)
+        for iclips in range(len(clip_onsets)):
+            print("Clip %i of %i" % (iclips + 1, len(clip_onsets)), end="\r")
+            for i_frame in range(clip_onsets[iclips], clip_offsets[iclips] + 1):
+                all_frames.append(np.array(vid[i_frame]))
                 ts_idc.append(i_frame)
 
-        all_frames = np.array(frames)
+        all_frames = np.array(all_frames)
         timestamps = timestamps[ts_idc]
 
-        eye_left_images = all_frames[:, :, 0:192, :]
-        eye_right_images = all_frames[:, :, 192:, :]
+        eye_left_images = all_frames[:, :, 0:192, 0]
+        eye_right_images = all_frames[:, :, 192:, 0]
+
+        # gen = self._make_video_generator_mp4(clip_name, convert_to_gray=True)
+
+        # frames = []
+        # ts_idc = []
+        # for i_frame, x in enumerate(gen):
+
+        #     if i_frame > max(clip_offsets):
+        #         break
+
+        #     sign_onset = np.sign(i_frame - clip_onsets)
+        #     sign_offset = np.sign(i_frame - clip_offsets)
+
+        #     if any((sign_onset != sign_offset)):
+        #         print("Appending frame %d \r" % i_frame, end="")
+        #         frames.append(x)
+        #         ts_idc.append(i_frame)
+
+        # all_frames = np.array(frames)
+        # timestamps = timestamps[ts_idc]
+
+        # eye_left_images = all_frames[:, :, 0:192, :]
+        # eye_right_images = all_frames[:, :, 192:, :]
 
         return timestamps, eye_left_images, eye_right_images
 
@@ -303,7 +492,7 @@ class video_loader:
         blink_indices = blink_labels["blink_indices"]
 
         bg_indices = self._get_background_indices(blink_indices, n_frames, bg_ratio)
-        pulse_indices = np.where(np.abs(np.mean(feature_array, axis=1)[:, 1]) > 0.1)[0]
+        pulse_indices = np.where(np.abs(np.mean(feature_array, axis=1)[:, 1]) > 0.05)[0]
         all_indices = np.hstack([blink_indices, bg_indices, pulse_indices])
         all_indices = np.unique(all_indices)
         all_indices = all_indices.astype(np.int64)
@@ -317,15 +506,3 @@ class video_loader:
             n_bg = len(on_indices) * bg_ratio if len(on_indices) else 300
             bg_indices = random_sample(bg_indices, n_bg)
         return bg_indices
-
-
-# clip_names = ["1004-2022-12-14-13-14-14-c8a509b9"]
-
-# from src.helper import OfParams
-# from video_loader import video_loader
-
-# of_params = OfParams()
-# rec = video_loader(of_params)
-# timestamps = rec._get_timestamps(clip_names[0])
-# clip_onsets, clip_offsets = rec._get_clip_trigger(clip_names[0], timestamps)
-# rec.collect(clip_names, bg_ratio=3)

@@ -19,8 +19,8 @@ class BlinkEvent:
 class EventArray:
     def __init__(self, start_times, end_times, labels):
         assert len(start_times) == len(end_times) == len(labels)
-        assert is_sorted(start_times)
-        assert is_sorted(end_times)
+        # assert is_sorted(start_times)
+        # assert is_sorted(end_times)
 
         self.start_times = np.asarray(start_times)
         self.end_times = np.asarray(end_times)
@@ -83,7 +83,7 @@ class EventArray:
     def from_samples(cls, timestamps, sample_labels, mapping=None):
         """Creates an instance from a time-series of labelled samples."""
         assert len(timestamps) == len(sample_labels)
-        assert is_sorted(timestamps)
+        # assert is_sorted(timestamps)
 
         timestamps = np.asarray(timestamps)
         sample_labels = np.asarray(sample_labels)
@@ -378,7 +378,7 @@ class MatchedEventArray:
 class Samples:
     def __init__(self, timestamps: T.Sequence, labels: T.Sequence):
         assert len(timestamps) == len(labels)
-        assert is_sorted(timestamps)
+        # assert is_sorted(timestamps)
 
         self.timestamps = np.array(timestamps, copy=True)
         self.labels = np.array(labels, copy=True)

@@ -54,3 +54,11 @@ class PPParams:
             f"proba_onset_threshold={self.proba_onset_threshold}, "
             f"proba_offset_threshold={self.proba_offset_threshold}"
         )
+
+
+@dataclass(unsafe_hash=True, order=True)
+class AugParams:
+    """Parameters for data augmentation"""
+
+    xy_shift: float = 0.2
+    zoom: float = 0.2

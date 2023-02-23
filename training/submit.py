@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 from plml.cluster.submit_job import submit_job_to_gridengine
 
-from src.helper import OfParams, PPParams
+from src.helper import OfParams, PPParams, AugParams
 from training.dataset_splitter import DatasetSplitter
 from training.helper import ClassifierParams
 
@@ -17,6 +17,7 @@ def submit_one_job(
     classifier_params: ClassifierParams,
     of_params: OfParams,
     pp_params: PPParams,
+    aug_params: AugParams,
     export_path: Path,
     save_path: Path,
     use_pretrained_classifier: bool,
@@ -32,6 +33,7 @@ def submit_one_job(
         "classifier_params": classifier_params,
         "of_params": of_params,
         "pp_params": pp_params,
+        "aug_params": aug_params,
         "export_path": export_path,
         "save_path": save_path,
         "use_pretrained_classifier": use_pretrained_classifier,
@@ -43,7 +45,7 @@ def submit_one_job(
         if use_pretrained_classifier:
             ram_gb = 0.5
         else:
-            ram_gb = 3
+            ram_gb = 15
             print(f"estimate ram_gb={ram_gb}")
 
         submit_job_to_gridengine(

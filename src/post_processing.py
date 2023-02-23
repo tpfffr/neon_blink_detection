@@ -26,7 +26,7 @@ def post_process(
 
 
 def smooth_proba(proba: np.ndarray, pp_params: PPParams) -> np.ndarray:
-    # proba = proba.copy()
+    proba = proba.copy()
     proba_onset = proba[:, label_mapping.onset]
     proba_offset = proba[:, label_mapping.offset]
 

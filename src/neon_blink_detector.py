@@ -7,7 +7,7 @@ from xgboost import XGBClassifier
 
 from event_array import BlinkEvent
 from features_calculator import calculate_optical_flow, concatenate_features
-from helper import OfParams, PPParams
+from helper import OfParams, PPParams, AugParams
 from post_processing import post_process
 from utils import resize_images, rotate_images
 
@@ -21,7 +21,7 @@ def detect_blinks(
     clf = get_classifier(clf_path=Path(__file__).parent.parent / "weights" / "xgb.sav")
     check_input(eye_left_images, eye_right_images, timestamps, of_params, clf)
 
-    eye_left_images, eye_right_images = rotate_images(eye_left_images, eye_right_images)
+    # eye_left_images, eye_right_images = rotate_images(eye_left_images, eye_right_images)
     feature_array = calculate_optical_flow(of_params, eye_left_images, eye_right_images)
     features = concatenate_features(feature_array, of_params)
 
@@ -41,7 +41,8 @@ def get_params() -> T.Tuple[OfParams, PPParams]:
         proba_onset_threshold=0.25,
         proba_offset_threshold=0.25,
     )
-    return of_params, pp_params
+    aug_params = AugParams()
+    return of_params, pp_params, aug_params
 
 
 def get_classifier(clf_path: Path) -> XGBClassifier:
