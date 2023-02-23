@@ -7,7 +7,7 @@ from xgboost import XGBClassifier
 
 from event_array import BlinkEvent
 from features_calculator import calculate_optical_flow, concatenate_features
-from helper import OfParams, PPParams
+from helper import OfParams, PPParams, AugParams
 from post_processing import post_process
 from utils import resize_images, rotate_images
 
@@ -41,7 +41,8 @@ def get_params() -> T.Tuple[OfParams, PPParams]:
         proba_onset_threshold=0.25,
         proba_offset_threshold=0.25,
     )
-    return of_params, pp_params
+    aug_params = AugParams()
+    return of_params, pp_params, aug_params
 
 
 def get_classifier(clf_path: Path) -> XGBClassifier:

@@ -86,7 +86,7 @@ def concatenate_features(
     if indices is None:
         indices = np.arange(n_frame)
     n_grids = of_params.grid_size * of_params.grid_size * 2
-    right_shape = (n_frame, n_grids, 2)
+    # right_shape = (n_frame, n_grids, 2)
     # assert (
     #     feature_array.shape == right_shape
     # ), f"feature shape should be {right_shape}, but get {feature_array.shape}"

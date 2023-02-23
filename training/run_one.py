@@ -140,9 +140,10 @@ def collect_samples_and_predict(
         datasets = video_loader(of_params, aug_params)
 
         # add information about dataset to be loaded here
-        datasets.collect(clip_names_train, bg_ratio=1, augment=False)
+        augment_data = False
+        datasets.collect(clip_names_train, bg_ratio=3, augment=augment_data)
 
-        if datasets.augment:
+        if augment_data:
             n_augmented_features = sum(
                 [datasets.augmented_features[x].shape[0] for x in clip_names_train]
             )
@@ -192,6 +193,8 @@ def train_classifier(
         augmented_samples_gt = concatenate_all_samples(
             datasets.augmented_samples, clip_names
         )
+        # features = augmented_features
+        # labels = augmented_samples_gt.labels
 
         features = np.concatenate([features, augmented_features])
         labels = np.concatenate([labels, augmented_samples_gt.labels])

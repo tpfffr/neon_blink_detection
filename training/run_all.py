@@ -39,11 +39,11 @@ def main(n_splits=5):
     dataset_splitter = load_dataset_splitter(n_clips=None, n_splits=n_splits)
 
     use_pretrained_classifier = False
-    use_cluster = False
-    compute_of = True
+    use_cluster = True
+    compute_of = False
 
     classifier_params = get_classifier_params()
-    of_params, pp_params = get_params()
+    of_params, pp_params, _ = get_params()
     of_params_options = get_of_params_options()
     aug_params_options = get_augmentation_options()
 

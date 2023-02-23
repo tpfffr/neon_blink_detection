@@ -12,6 +12,7 @@ import scipy
 import cv2
 from scipy.interpolate import griddata
 import torch
+import pims
 
 from src.features_calculator import (
     concatenate_features,
@@ -48,6 +49,7 @@ class video_loader:
 
     def collect(self, clip_names, bg_ratio=None, augment=False) -> None:
         for clip_name in clip_names:
+            print("Loading clip: %s" % clip_name)
             self._load(clip_name, bg_ratio, augment)
 
     def _load(self, clip_name: str, bg_ratio: int, augment: bool) -> None:
@@ -115,11 +117,11 @@ class video_loader:
 
             on_idc = random_sample(list(indices[gt_labels == 1]), sum(gt_labels == 1))
             off_idc = random_sample(list(indices[gt_labels == 2]), sum(gt_labels == 2))
-            # bg_idc = random_sample(
-            #     list(indices[gt_labels == 0]), sum(gt_labels == 0) // 4
-            # )
+            bg_idc = random_sample(
+                list(indices[gt_labels == 0]), sum(gt_labels == 0) // 2
+            )
 
-            idc = on_idc + off_idc  # + bg_idc
+            idc = on_idc + off_idc + bg_idc
 
             augmented_features = self._zoom_and_shift(
                 features[idc, :], zoom_factor=zoom_factor, shift=xy_shift
@@ -127,8 +129,8 @@ class video_loader:
 
             self.augmented_samples[clip_name] = Samples(timestamps[idc], gt_labels[idc])
             self.augmented_features[clip_name] = augmented_features
-        # else:
-        # self.augment = False
+        else:
+            self.augment = False
 
         grid_size = 20
         large_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
@@ -181,14 +183,17 @@ class video_loader:
         h_flip = K.RandomHorizontalFlip(p=1)
         feat_arr_right = h_flip(feat_arr_right)
 
-        transf_features_right = (
-            transf(feat_arr_right, params=transf._params).squeeze().numpy()
-        )
+        transf_features_right = transf(feat_arr_right, params=transf._params).squeeze()
 
-        feat_arr_right = h_flip(feat_arr_right)
+        transf_features_right = h_flip(transf_features_right).numpy()
 
-        features_left = transf_features_left.reshape(size[0] ** 2, size[2], size[3])
-        features_right = transf_features_right.reshape(size[0] ** 2, size[2], size[3])
+        features_left = transf_features_left.reshape(
+            size[3], size[2], size[0] ** 2
+        ).transpose(2, 1, 0)
+
+        features_right = transf_features_right.reshape(
+            size[3], size[2], size[0] ** 2
+        ).transpose(2, 1, 0)
 
         intp_grid = create_grids((size[0] - 1, size[1] - 1), size[0], full_grid=True)
 
@@ -198,20 +203,17 @@ class video_loader:
         n_grid_points = self._of_params.grid_size**2
 
         features_grid_left = griddata(
-            intp_grid, features_left, small_grid, method="nearest"
+            intp_grid, features_left, small_grid, method="linear", fill_value=0
         )
 
         features_grid_right = griddata(
-            intp_grid, features_right, small_grid, method="nearest"
+            intp_grid, features_right, small_grid, method="linear", fill_value=0
         )
 
         all_features.append([features_grid_left, features_grid_right])
 
         all_features = np.concatenate(all_features, axis=0)
-        all_features = all_features.reshape(
-            all_features.shape[0] * all_features.shape[1] * all_features.shape[2],
-            all_features.shape[3],
-        )
+        all_features = np.concatenate(np.concatenate(all_features))
 
         return np.transpose(all_features, (1, 0))
 
@@ -296,7 +298,7 @@ class video_loader:
 
             n_clips = clip_transitions.shape[0] + 1
             clip_left_images = np.split(left_images, clip_transitions + 1)
-            clip_right_images = np.split(left_images, clip_transitions + 1)
+            clip_right_images = np.split(right_images, clip_transitions + 1)
 
             feature_array = []
 
@@ -327,28 +329,47 @@ class video_loader:
 
         clip_onsets, clip_offsets = self._get_clip_trigger(clip_name, timestamps)
 
-        gen = self._make_video_generator_mp4(clip_name, convert_to_gray=True)
+        vid = pims.Video(
+            str(self.rec_folder / clip_name / "Neon Sensor Module v1 ps1.mp4")
+        )
 
-        frames = []
+        all_frames = []
         ts_idc = []
-        for i_frame, x in enumerate(gen):
 
-            if i_frame > max(clip_offsets):
-                break
-
-            sign_onset = np.sign(i_frame - clip_onsets)
-            sign_offset = np.sign(i_frame - clip_offsets)
-
-            if any((sign_onset != sign_offset)):
-                print("Appending frame %d \r" % i_frame, end="")
-                frames.append(x)
+        for iclips in range(len(clip_onsets)):
+            print("Clip %i of %i" % (iclips + 1, len(clip_onsets)), end="\r")
+            for i_frame in range(clip_onsets[iclips], clip_offsets[iclips] + 1):
+                all_frames.append(np.array(vid[i_frame]))
                 ts_idc.append(i_frame)
 
-        all_frames = np.array(frames)
+        all_frames = np.array(all_frames)
         timestamps = timestamps[ts_idc]
 
-        eye_left_images = all_frames[:, :, 0:192, :]
-        eye_right_images = all_frames[:, :, 192:, :]
+        eye_left_images = all_frames[:, :, 0:192, 0]
+        eye_right_images = all_frames[:, :, 192:, 0]
+
+        # gen = self._make_video_generator_mp4(clip_name, convert_to_gray=True)
+
+        # frames = []
+        # ts_idc = []
+        # for i_frame, x in enumerate(gen):
+
+        #     if i_frame > max(clip_offsets):
+        #         break
+
+        #     sign_onset = np.sign(i_frame - clip_onsets)
+        #     sign_offset = np.sign(i_frame - clip_offsets)
+
+        #     if any((sign_onset != sign_offset)):
+        #         print("Appending frame %d \r" % i_frame, end="")
+        #         frames.append(x)
+        #         ts_idc.append(i_frame)
+
+        # all_frames = np.array(frames)
+        # timestamps = timestamps[ts_idc]
+
+        # eye_left_images = all_frames[:, :, 0:192, :]
+        # eye_right_images = all_frames[:, :, 192:, :]
 
         return timestamps, eye_left_images, eye_right_images
 
