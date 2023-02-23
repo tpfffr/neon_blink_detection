@@ -32,13 +32,13 @@ class ClassifierParams:
 
 
 def get_of_params_options():
-    n_layers_options = [3, 5, 7]  # used to be [3, 5, 7]
-    layer_interval_options = [3, 5, 7]  # used to be [1, 3, 5, 7]
+    n_layers_options = [7]  # used to be [3, 5, 7]
+    layer_interval_options = [7]  # used to be [1, 3, 5, 7]
     average_options = [False]
     img_shape_options = [(64, 64)]
-    grid_size_options = [4, 10]  # used to be [4, 7, 10]
-    step_size_options = [5, 7]
-    window_size_options = [11, 15]  # used to be [[7, 11, 15]]
+    grid_size_options = [4]  # used to be [4, 7, 10]
+    step_size_options = [5]
+    window_size_options = [15]  # used to be [[7, 11, 15]]
     stop_steps_options = [3]
 
     options = itertools.product(
@@ -224,9 +224,9 @@ def get_experiment_name_new(of_params: OfParams, aug_params: AugParams) -> str:
         f"n_layers{of_params.n_layers}-"
         f"layer_interval{of_params.layer_interval}-"
         f"grid{of_params.grid_size}-"
-        f"win{of_params.window_size}-"
-        f"shift{aug_params.xy_shift}-"
-        f"zoom{aug_params.zoom}"
+        f"win{of_params.window_size}"
+        # f"shift{aug_params.xy_shift}-"
+        # f"zoom{aug_params.zoom}"
     )
 
 

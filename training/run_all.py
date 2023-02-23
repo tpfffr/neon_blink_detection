@@ -39,7 +39,7 @@ def main(n_splits=5):
     dataset_splitter = load_dataset_splitter(n_clips=None, n_splits=n_splits)
 
     use_pretrained_classifier = False
-    use_cluster = True
+    use_cluster = False
     compute_of = False
 
     classifier_params = get_classifier_params()
