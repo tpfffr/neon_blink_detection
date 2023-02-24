@@ -82,14 +82,14 @@ clip_names = np.array(
         "1333-2023-02-06-13-17-50-ebc1e021",
         "1336-2023-02-06-15-28-30-adb9dbfb",
         "1337-2023-02-06-15-36-31-211278ea",
-        # "2023-01-27_15-59-54-49a115d5",  # tom computer
-        # "2023-02-01_11-45-11-7621531e",  # kai computer
-        # "2023-01-27_16-10-14-a2a8cbe1",  # ryan discussing
-        # "2023-01-27_16-15-26-57802f75",  # tom walking
-        # "2023-01-27_16-24-04-eb4305b1",  # kai walking
-        # "2023-01-27_16-31-52-5f743ed0",  # moritz snowboarding
-        # "padel_tennis_neon_01-b922b245",  # mgg padel
-        # "padel_tennis_neon_03-2ded8f56",  # mgg partner padel
+        "2023-01-27_15-59-54-49a115d5",  # tom computer
+        "2023-02-01_11-45-11-7621531e",  # kai computer
+        "2023-01-27_16-10-14-a2a8cbe1",  # ryan discussing
+        "2023-01-27_16-15-26-57802f75",  # tom walking
+        "2023-01-27_16-24-04-eb4305b1",  # kai walking
+        "2023-01-27_16-31-52-5f743ed0",  # moritz snowboarding
+        "padel_tennis_neon_01-b922b245",  # mgg padel
+        "padel_tennis_neon_03-2ded8f56",  # mgg partner padel
     ]
 )
 

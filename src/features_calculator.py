@@ -3,6 +3,7 @@ import typing as T
 import cv2
 import numpy as np
 from helper import OfParams
+from scipy.interpolate import RegularGridInterpolator
 
 
 def calculate_optical_flow(
@@ -74,6 +75,97 @@ def cv2_calcOpticalFlowPyrLK(
         img_prev, img_curr, pts_prev, None, **lk_params
     )
     return pts_next - pts_prev
+
+
+import typing as T
+
+
+def new_concatenate_features(
+    feature_array: np.ndarray,
+    of_params: OfParams,
+    times: np.ndarray,
+    indices: np.ndarray = None,
+) -> np.ndarray:
+    def get_layers(n, layer_interval):
+        return np.arange(-(n // 2), (n + 1) // 2) * layer_interval
+
+    # only y direction
+    feature_array = feature_array[:, :, 1]
+
+    interp_left, interp_right = _create_interpolater(feature_array, times)
+
+    layer_interval = of_params.layer_interval / 200  # sampling rate to convert to ms
+
+    n_frame = len(feature_array)
+
+    if indices is None:
+        indices = np.arange(n_frame) / 200
+
+    n_grids = of_params.grid_size * of_params.grid_size * 2
+    layers = get_layers(of_params.n_layers, layer_interval)
+
+    indices_layers = np.array([[indices + i] for i in layers]).reshape(len(layers), -1)
+    indices_layers = np.clip(indices_layers, 0, len(feature_array) - 1)
+
+    features_left = np.concatenate(
+        [
+            interpolate_spacetime(
+                interp_left, indices, grid_size=of_params.grid_size
+            ).reshape(-1, of_params.grid_size**2)
+            for indices in indices_layers
+        ],
+        axis=-1,
+    )
+
+    features_right = np.concatenate(
+        [
+            interpolate_spacetime(
+                interp_right, indices, grid_size=of_params.grid_size
+            ).reshape(-1, of_params.grid_size**2)
+            for indices in indices_layers
+        ],
+        axis=-1,
+    )
+
+    return np.concatenate((features_left, features_right), axis=-1)
+
+
+def _create_interpolater(feature_array: np.ndarray, times, grid_size=20):
+
+    length = grid_size**2
+
+    of_left = np.reshape(feature_array[:, :length], (-1, grid_size, grid_size))
+    of_right = np.reshape(feature_array[:, length:], (-1, grid_size, grid_size))
+
+    x = np.linspace(0, 64, grid_size + 2, dtype=np.float32)[1:-1]
+    y = np.linspace(0, 64, grid_size + 2, dtype=np.float32)[1:-1]
+
+    interpolator_left = RegularGridInterpolator(
+        (times, x, y), of_left, bounds_error=False, fill_value=None, method="linear"
+    )
+    interpolator_right = RegularGridInterpolator(
+        (times, x, y), of_right, bounds_error=False, fill_value=None, method="linear"
+    )
+
+    return interpolator_left, interpolator_right
+
+
+def interpolate_spacetime(interpolator, time_points: T.List[int], grid_size: int):
+
+    x = np.linspace(0, 64, grid_size + 2, dtype=np.float32)[1:-1]
+    y = np.linspace(0, 64, grid_size + 2, dtype=np.float32)[1:-1]
+
+    tt, xx, yy = np.meshgrid(time_points, x, y)
+
+    txy_grid = np.concatenate(
+        (tt.reshape(-1, 1), xx.reshape(-1, 1), yy.reshape(-1, 1)), axis=1
+    )
+
+    return (
+        interpolator(txy_grid)
+        .reshape(grid_size, len(time_points), grid_size)
+        .transpose(1, 0, 2)
+    )
 
 
 def concatenate_features(

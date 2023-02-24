@@ -18,6 +18,7 @@ from src.features_calculator import (
     concatenate_features,
     calculate_optical_flow,
     create_grids,
+    new_concatenate_features,
 )
 from src.utils import resize_images
 from functions.utils import random_sample
@@ -44,6 +45,7 @@ class video_loader:
 
         self.all_samples = {}
         self.all_features = {}
+        self.new_features = {}
         self.augmented_samples = {}
         self.augmented_features = {}
 
@@ -64,6 +66,7 @@ class video_loader:
         clip_timestamps = np.split(all_timestamps, clip_transitions + 1, axis=0)
 
         features = []
+        new_features = []
         all_gt_labels = []
         all_timestamps = []
 
@@ -86,7 +89,18 @@ class video_loader:
                 gt_labels[onset_indices] = 1
             gt_labels = gt_labels[all_indices]
 
+            all_times = (clip_timestamps[iclip] - clip_timestamps[iclip][0]) / 1e9
+            indc_times = all_times[all_indices]
             timestamps = clip_timestamps[iclip][all_indices]
+
+            new_features.append(
+                new_concatenate_features(
+                    clip_feature_array[iclip],
+                    self._of_params,
+                    all_times,
+                    indc_times,
+                )
+            )
 
             features.append(
                 concatenate_features(
@@ -100,44 +114,12 @@ class video_loader:
         timestamps = np.hstack(all_timestamps)
         gt_labels = np.hstack(all_gt_labels)
         features = np.vstack(features)
+        new_features = np.vstack(new_features)
 
-        # perform data augmentation only for training data
-        if augment:
-            self.augment = True
-
-            zoom_factor = [
-                1 - self._aug_params.zoom,
-                1 + self._aug_params.zoom,
-            ]
-
-            xy_shift = [self._aug_params.xy_shift, self._aug_params.xy_shift]
-
-            print("Performing data augmentation for clip {}".format(clip_name))
-            indices = np.arange(features.shape[0])
-
-            on_idc = random_sample(list(indices[gt_labels == 1]), sum(gt_labels == 1))
-            off_idc = random_sample(list(indices[gt_labels == 2]), sum(gt_labels == 2))
-            bg_idc = random_sample(
-                list(indices[gt_labels == 0]), sum(gt_labels == 0) // 2
-            )
-
-            idc = on_idc + off_idc + bg_idc
-
-            augmented_features = self._zoom_and_shift(
-                features[idc, :], zoom_factor=zoom_factor, shift=xy_shift
-            )
-
-            self.augmented_samples[clip_name] = Samples(timestamps[idc], gt_labels[idc])
-            self.augmented_features[clip_name] = augmented_features
-        else:
-            self.augment = False
-
+        # GET RID OF THIS
+        # -===============
         grid_size = 20
         large_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
-
-        n_rep = self._of_params.n_layers * 2
-
-        large_grid = np.concatenate(n_rep * [large_grid])
 
         sub_grid = create_grids(
             self._of_params.img_shape,
@@ -145,120 +127,19 @@ class video_loader:
             full_grid=False,
         )
 
-        sub_grid = np.concatenate(n_rep * [sub_grid])
+        idc = np.arange(1, self._of_params.n_layers * 2) * (grid_size**2)
+        features_per_layer = np.split(features, idc, axis=1)
 
-        features = np.transpose(
-            griddata(large_grid, features.transpose(), sub_grid, method="nearest")
-        )
+        features = np.concatenate(
+            [
+                griddata(large_grid, x.transpose(), sub_grid, method="linear")
+                for x in features_per_layer
+            ]
+        ).transpose()
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
-
-    def _zoom_and_shift(
-        self, feature_array: np.ndarray, zoom_factor: T.List[int], shift: T.List[int]
-    ):
-
-        feat_arr_left, feat_arr_right = self._interpolate_feature_array(feature_array)
-        size = feat_arr_left.shape
-
-        # nsamples, nlayers, ndim, ndim
-
-        feat_arr_left = torch.from_numpy(feat_arr_left.transpose(3, 2, 0, 1))
-        feat_arr_right = torch.from_numpy(feat_arr_right.transpose(3, 2, 0, 1))
-
-        all_features = []
-
-        transf_features_left = []
-        transf_features_right = []
-
-        transf = K.RandomAffine(
-            0,
-            translate=(shift[0], shift[1]),
-            scale=(zoom_factor[0], zoom_factor[1]),
-            p=1,
-        )
-
-        transf_features_left = transf(feat_arr_left).squeeze().numpy()
-
-        h_flip = K.RandomHorizontalFlip(p=1)
-        feat_arr_right = h_flip(feat_arr_right)
-
-        transf_features_right = transf(feat_arr_right, params=transf._params).squeeze()
-
-        transf_features_right = h_flip(transf_features_right).numpy()
-
-        features_left = transf_features_left.reshape(
-            size[3], size[2], size[0] ** 2
-        ).transpose(2, 1, 0)
-
-        features_right = transf_features_right.reshape(
-            size[3], size[2], size[0] ** 2
-        ).transpose(2, 1, 0)
-
-        intp_grid = create_grids((size[0] - 1, size[1] - 1), size[0], full_grid=True)
-
-        small_grid = create_grids(
-            self._of_params.img_shape, self._of_params.grid_size + 2, full_grid=False
-        )
-        n_grid_points = self._of_params.grid_size**2
-
-        features_grid_left = griddata(
-            intp_grid, features_left, small_grid, method="linear", fill_value=0
-        )
-
-        features_grid_right = griddata(
-            intp_grid, features_right, small_grid, method="linear", fill_value=0
-        )
-
-        all_features.append([features_grid_left, features_grid_right])
-
-        all_features = np.concatenate(all_features, axis=0)
-        all_features = np.concatenate(np.concatenate(all_features))
-
-        return np.transpose(all_features, (1, 0))
-
-    def _interpolate_feature_array(self, features: np.ndarray):
-
-        n_layers = self._of_params.n_layers
-        n_samples = features.shape[0]
-        img_dim = self._of_params.img_shape
-        # n_rep = self._of_params.n_layers * 2
-
-        # 64x64 grid feature array should be interpolated onto
-        intp_grid = create_grids((img_dim[0] - 1, img_dim[1] - 1), img_dim[0], True)
-        # intp_grid = np.concatenate(n_rep * [intp_grid])
-
-        # feature array grid is always computed on 20x20 grid
-        # (make this a parameter in the future)
-        grid_size = 20
-        grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
-        # grid = np.concatenate(n_rep * [grid])
-
-        n_grid_points = grid_size**2
-
-        idc = np.arange(1, self._of_params.n_layers) * n_grid_points * 2
-        features_per_layer = np.split(features.transpose(), idc)
-        # features = features.transpose()
-        left = np.reshape(
-            [
-                griddata(grid, feat[0:n_grid_points, :], intp_grid, method="linear")
-                for feat in features_per_layer
-            ],
-            (n_layers, img_dim[0], img_dim[1], n_samples),
-        )
-
-        right = np.reshape(
-            [
-                griddata(grid, feat[n_grid_points:, :], intp_grid, method="linear")
-                for feat in features_per_layer
-            ],
-            (n_layers, img_dim[0], img_dim[1], n_samples),
-        )
-
-        left = np.transpose(left, (1, 2, 0, 3))
-        right = np.transpose(right, (1, 2, 0, 3))
-
-        return left, right
+        self.new_features[clip_name] = new_features
 
     def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
 
@@ -474,6 +355,54 @@ class video_loader:
         )
 
         return feature_array, grid
+
+    # def grid_points(t, x, y):
+
+    #     temp = np.meshgrid(t, x, y, indexing="ij")
+
+    #     return np.concatenate(
+    #         [np.ravel(entry)[:, np.newaxis] for entry in temp], axis=1
+    #     )
+
+    # def _augment_features(self, n_features: int, grid_size: int):
+
+    #     speed, translation, scale, linear_distort = _get_augmentation_pars()
+
+    #     x_of = np.linspace(0, 64, 20 + 2, dtype=np.float32)[1:-1]
+    #     y_of = np.linspace(0, 64, 20 + 2, dtype=np.float32)[1:-1]
+
+    #     t_p_grid = grid_points(t, x_of, y_of)
+
+    #     t_p_grid_trans = np.zeros_like(t_p_grid)
+    #     t_p_grid_trans[:, 1:] = (
+    #         (linear_distort @ (scale * (t_p_grid[:, 1:] - 32.0)).T).T + 32 + translation
+    #     )
+    #     t_p_grid_trans[:, 0] = t[0] + speed * (t_p_grid[:, 0] - t[0])
+
+    #     t_trans = t[0] + speed * (t - t[0])
+
+    #     of_trans = np.reshape(
+    #         1.0 / speed * interpolator_left(t_p_grid_trans),
+    #         (len(t), len(x_of), len(y_of)),
+    #     )
+
+    #     return of_trans
+
+    # def _get_augmentation_pars(self, n_features: int):
+
+    #     std_speed = 0.2
+    #     std_translation = 3
+    #     std_scale = 0.15
+    #     std_linear = 0.03
+
+    #     speed = np.random.normal(1, std_speed, n_features)
+    #     translation = np.random.normal(0, std_translation, (2, n_features))
+    #     scale = np.random.normal(1, std_scale, n_features)
+
+    #     id_mat = np.tile(np.expand_dims(np.eye(2), -1), (1, 1, n_features))
+    #     linear_distort = id_mat + np.random.normal(0, std_linear, (2, 2, n_features))
+
+    #     return speed, translation, scale, linear_distort
 
     def _find_indices(
         self,

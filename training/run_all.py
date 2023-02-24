@@ -12,6 +12,7 @@ from src.neon_blink_detector import get_params
 from training.dataset_splitter import load_dataset_splitter
 from training.helper import (
     get_experiment_name_new,
+    get_feature_dir_name_new,
     get_export_dir,
     get_of_params_options,
     # get_test_recording_ids,
@@ -24,14 +25,14 @@ import numpy as np
 
 
 clip_names_test = [
-    # "2023-01-27_15-59-54-49a115d5", # tom computer
-    "2023-02-01_11-45-11-7621531e",  # kai computer
-    "2023-01-27_16-10-14-a2a8cbe1",  # ryan discussing
-    "2023-01-27_16-15-26-57802f75",  # tom walking
-    "2023-01-27_16-24-04-eb4305b1",  # kai walking
-    "2023-01-27_16-31-52-5f743ed0",  # moritz snowboarding
-    "padel_tennis_neon_01-b922b245",  # mgg padel
-    "padel_tennis_neon_03-2ded8f56",  # mgg partner padel
+    "2023-01-27_15-59-54-49a115d5",  # tom computer
+    # "2023-02-01_11-45-11-7621531e",  # kai computer
+    # "2023-01-27_16-10-14-a2a8cbe1",  # ryan discussing
+    # "2023-01-27_16-15-26-57802f75",  # tom walking
+    # "2023-01-27_16-24-04-eb4305b1",  # kai walking
+    # "2023-01-27_16-31-52-5f743ed0",  # moritz snowboarding
+    # "padel_tennis_neon_01-b922b245",  # mgg padel
+    # "padel_tennis_neon_03-2ded8f56",  # mgg partner padel
 ]
 
 
@@ -76,9 +77,20 @@ def main(n_splits=5):
                     "/cluster/users/tom/git/neon_blink_detection/clip_list.npy"
                 )
 
+                of_path = Path(
+                    "/cluster/users/tom/experiments/neon_blink_detection/datasets/train_data/optical_flow/"
+                )
+
+                feature_dir = get_feature_dir_name_new(of_params)
+
+                of_save_path = of_path / feature_dir
+
+                # if not of_save_path.exists():
                 for clip_name in clip_names:
                     datasets = video_loader(of_params, aug_params)
                     datasets._load_features(clip_name, of_params)
+                # else:
+                #     continue
 
 
 if __name__ == "__main__":
