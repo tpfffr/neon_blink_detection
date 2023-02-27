@@ -42,8 +42,8 @@ class video_loader:
         self._aug_params = aug_params
 
         self.all_samples = {}
+        self.old_features = {}
         self.all_features = {}
-        self.new_features = {}
         self.augmented_samples = {}
         self.augmented_features = {}
 
@@ -63,7 +63,7 @@ class video_loader:
         clip_feature_array = np.split(feature_array, clip_transitions + 1, axis=0)
         clip_timestamps = np.split(all_timestamps, clip_transitions + 1, axis=0)
 
-        features = []
+        old_features = []
         new_features = []
         all_gt_labels = []
         all_timestamps = []
@@ -100,44 +100,45 @@ class video_loader:
                 )
             )
 
-            # features.append(
-            #     concatenate_features(
-            #         clip_feature_array[iclip], self._of_params, all_indices
-            #     )
-            # )
+            old_features.append(
+                concatenate_features(
+                    clip_feature_array[iclip], self._of_params, all_indices
+                )
+            )
 
             all_gt_labels.append(gt_labels)
             all_timestamps.append(timestamps)
 
         timestamps = np.hstack(all_timestamps)
         gt_labels = np.hstack(all_gt_labels)
-        # # features = np.vstack(features)
+        old_features = np.vstack(old_features)
         new_features = np.vstack(new_features)
 
         # GET RID OF THIS
         # -===============
-        # grid_size = 20
-        # large_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
+        grid_size = 20
+        large_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
 
-        # sub_grid = create_grids(
-        #     self._of_params.img_shape,
-        #     self._of_params.grid_size + 2,
-        #     full_grid=False,
-        # )
+        sub_grid = create_grids(
+            self._of_params.img_shape,
+            self._of_params.grid_size + 2,
+            full_grid=False,
+        )
 
-        # idc = np.arange(1, self._of_params.n_layers * 2) * (grid_size**2)
-        # features_per_layer = np.split(features, idc, axis=1)
+        idc = np.arange(1, self._of_params.n_layers * 2) * (grid_size**2)
+        features_per_layer = np.split(old_features, idc, axis=1)
 
-        # features = np.concatenate(
-        #     [
-        #         griddata(large_grid, x.transpose(), sub_grid, method="linear")
-        #         for x in features_per_layer
-        #     ]
-        # ).transpose()
+        old_features = np.concatenate(
+            [
+                griddata(large_grid, x.transpose(), sub_grid, method="linear")
+                for x in features_per_layer
+            ]
+        ).transpose()
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
-        # self.all_features[clip_name] = features
-        self.all_features[clip_name] = new_features
+        # self.old_features[clip_name] = old_features
+        self.all_features[clip_name] = old_features
+        # self.all_features[clip_name] = new_features
 
     def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
 
