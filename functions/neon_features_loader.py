@@ -9,8 +9,8 @@ from src.helper import OfParams
 from src.utils import preprocess_images
 from training.helper import get_feature_dir_name_new
 
-# OF_dir = Path("/cluster/users/Ching/experiments/blink_detection/optical_flow")
-OF_dir = Path("/cluster/users/tom/experiments/blink_detection/optical_flow")
+# OF_dir = Path("/users/Ching/experiments/blink_detection/optical_flow")
+OF_dir = Path("/users/tom/experiments/blink_detection/optical_flow")
 
 feature_arrays = {}
 

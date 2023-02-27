@@ -188,17 +188,6 @@ def train_classifier(
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
     labels = samples_gt.labels
 
-    if datasets.augment:
-        augmented_features = concatenate(datasets.augmented_features, clip_names)
-        augmented_samples_gt = concatenate_all_samples(
-            datasets.augmented_samples, clip_names
-        )
-        # features = augmented_features
-        # labels = augmented_samples_gt.labels
-
-        features = np.concatenate([features, augmented_features])
-        labels = np.concatenate([labels, augmented_samples_gt.labels])
-
     classifier = Classifier(classifier_params, export_path)
     classifier.on_fit(features, labels)
     classifier.save_base_classifier(idx)

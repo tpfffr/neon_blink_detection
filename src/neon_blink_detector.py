@@ -85,7 +85,7 @@ if __name__ == "__main__":
         sys.path.append(str(base_dir))
         from functions.video_loader import decode_frames
 
-        recording_dir = Path("/cluster/users/Ching/datasets/blink_detection/staging")
+        recording_dir = Path("/users/Ching/datasets/blink_detection/staging")
         recording = Recording(recording_dir / recording_id)
         timestamps, eye_left_images, eye_right_images = decode_frames(recording)
         eye_left_images, eye_right_images = resize_images(

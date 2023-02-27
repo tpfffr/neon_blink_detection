@@ -84,7 +84,7 @@ class DatasetSplitter:
         pickle.dump(self, open(path, "wb"))
 
 
-export_path = Path("/cluster/users/tom/git/neon_blink_detection")
+export_path = Path("/users/tom/git/neon_blink_detection")
 export_path.mkdir(parents=True, exist_ok=True)
 
 

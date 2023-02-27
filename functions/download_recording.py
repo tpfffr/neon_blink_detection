@@ -62,6 +62,6 @@ def get_api_token():
 
 
 if __name__ == "__main__":
-    _recording_dir = Path("/cluster/users/Ching/datasets/blink_detection/staging")
+    _recording_dir = Path("/users/Ching/datasets/blink_detection/staging")
     _recording_id = "abe6ec68-d0c5-4bf1-b3ec-83523e518b93"
     download(_recording_dir, [_recording_id])

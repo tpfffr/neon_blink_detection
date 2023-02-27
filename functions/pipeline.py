@@ -39,25 +39,25 @@ def get_classifier_params(max_depth=3) -> ClassifierParams:
     return classifier_params
 
 
-def load_data(
-    recording_name: str, of_params: OfParams, use_cache=True, min_s=None, max_s=None
-):
-    if use_cache:
-        timestamps = load_timestamps(recording_name)
-        left_images, right_images = load_eye_video_cache(recording_name)
-        left_images, right_images = preprocess_images(
-            left_images, right_images, of_params.img_shape
-        )
-        feature_array = load_features(recording_name, of_params)
-    else:
-        recording_dir = Path("/cluster/users/Ching/datasets/blink_detection/staging")
-        recording = Recording(recording_dir / recording_name)
-        timestamps, left_images, right_images = decode_frames(recording, min_s, max_s)
-        left_images, right_images = preprocess_images(
-            left_images, right_images, of_params.img_shape
-        )
-        feature_array = calculate_optical_flow(of_params, left_images, right_images)
-    return timestamps, left_images, right_images, feature_array
+# def load_data(
+#     recording_name: str, of_params: OfParams, use_cache=True, min_s=None, max_s=None
+# ):
+#     if use_cache:
+#         timestamps = load_timestamps(recording_name)
+#         left_images, right_images = load_eye_video_cache(recording_name)
+#         left_images, right_images = preprocess_images(
+#             left_images, right_images, of_params.img_shape
+#         )
+#         feature_array = load_features(recording_name, of_params)
+#     else:
+#         recording_dir = Path("/users/Ching/datasets/blink_detection/staging")
+#         recording = Recording(recording_dir / recording_name)
+#         timestamps, left_images, right_images = decode_frames(recording, min_s, max_s)
+#         left_images, right_images = preprocess_images(
+#             left_images, right_images, of_params.img_shape
+#         )
+#         feature_array = calculate_optical_flow(of_params, left_images, right_images)
+#     return timestamps, left_images, right_images, feature_array
 
 
 def post_process_debug(timestamps: T.Sequence, proba: np.ndarray, pp_params: PPParams):

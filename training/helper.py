@@ -15,7 +15,7 @@ from datetime import datetime
 logger = logging.getLogger("main")
 
 
-root_dir = Path("/cluster/users/tom/git/neon_blink_detection")
+root_dir = Path("/users/tom/git/neon_blink_detection")
 classifier_name_default = "XGBClassifier-3"
 
 

@@ -1,7 +1,7 @@
 import sys
 
-sys.path.append("/cluster/users/tom/git/neon_blink_detection/")
-sys.path.append("/cluster/users/tom/git/neon_blink_detection/src")
+sys.path.append("/users/tom/git/neon_blink_detection/")
+sys.path.append("/users/tom/git/neon_blink_detection/src")
 
 import pandas as pd
 from pathlib import Path
@@ -28,11 +28,9 @@ from src.helper import OfParams, PPParams
 from training.helper import get_experiment_name_new
 import kornia.augmentation as K
 
-video_path = Path(
-    "/cluster/users/tom/experiments/neon_blink_detection/datasets/train_data"
-)
+video_path = Path("/users/tom/experiments/neon_blink_detection/datasets/train_data")
 of_path = Path(
-    "/cluster/users/tom/experiments/neon_blink_detection/datasets/train_data/optical_flow"
+    "/users/tom/experiments/neon_blink_detection/datasets/train_data/optical_flow"
 )
 
 
@@ -102,44 +100,44 @@ class video_loader:
                 )
             )
 
-            features.append(
-                concatenate_features(
-                    clip_feature_array[iclip], self._of_params, all_indices
-                )
-            )
+            # features.append(
+            #     concatenate_features(
+            #         clip_feature_array[iclip], self._of_params, all_indices
+            #     )
+            # )
 
             all_gt_labels.append(gt_labels)
             all_timestamps.append(timestamps)
 
         timestamps = np.hstack(all_timestamps)
         gt_labels = np.hstack(all_gt_labels)
-        features = np.vstack(features)
+        # # features = np.vstack(features)
         new_features = np.vstack(new_features)
 
         # GET RID OF THIS
         # -===============
-        grid_size = 20
-        large_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
+        # grid_size = 20
+        # large_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
 
-        sub_grid = create_grids(
-            self._of_params.img_shape,
-            self._of_params.grid_size + 2,
-            full_grid=False,
-        )
+        # sub_grid = create_grids(
+        #     self._of_params.img_shape,
+        #     self._of_params.grid_size + 2,
+        #     full_grid=False,
+        # )
 
-        idc = np.arange(1, self._of_params.n_layers * 2) * (grid_size**2)
-        features_per_layer = np.split(features, idc, axis=1)
+        # idc = np.arange(1, self._of_params.n_layers * 2) * (grid_size**2)
+        # features_per_layer = np.split(features, idc, axis=1)
 
-        features = np.concatenate(
-            [
-                griddata(large_grid, x.transpose(), sub_grid, method="linear")
-                for x in features_per_layer
-            ]
-        ).transpose()
+        # features = np.concatenate(
+        #     [
+        #         griddata(large_grid, x.transpose(), sub_grid, method="linear")
+        #         for x in features_per_layer
+        #     ]
+        # ).transpose()
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
-        self.all_features[clip_name] = features
-        self.new_features[clip_name] = new_features
+        # self.all_features[clip_name] = features
+        self.all_features[clip_name] = new_features
 
     def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
 
