@@ -134,11 +134,12 @@ def _create_interpolater(feature_array: np.ndarray, times, grid_size=20):
 
     length = grid_size**2
 
+    # note that optical flow is computed on a 20x20 grid, incl. the points on the edges
     of_left = np.reshape(feature_array[:, :length], (-1, grid_size, grid_size))
     of_right = np.reshape(feature_array[:, length:], (-1, grid_size, grid_size))
 
-    x = np.linspace(0, 64, grid_size + 2, dtype=np.float32)[1:-1]
-    y = np.linspace(0, 64, grid_size + 2, dtype=np.float32)[1:-1]
+    x = np.linspace(0, 64, grid_size, dtype=np.float32)
+    y = np.linspace(0, 64, grid_size, dtype=np.float32)
 
     interpolator_left = RegularGridInterpolator(
         (times, x, y), of_left, bounds_error=False, fill_value=None, method="linear"
