@@ -26,7 +26,6 @@ from training.helper import get_feature_dir_name_new
 from src.event_array import Samples
 from src.helper import OfParams, PPParams
 from training.helper import get_experiment_name_new
-import kornia.augmentation as K
 
 video_path = Path("/users/tom/experiments/neon_blink_detection/datasets/train_data")
 of_path = Path(
@@ -63,8 +62,7 @@ class video_loader:
         clip_feature_array = np.split(feature_array, clip_transitions + 1, axis=0)
         clip_timestamps = np.split(all_timestamps, clip_transitions + 1, axis=0)
 
-        old_features = []
-        new_features = []
+        features = []
         all_gt_labels = []
         all_timestamps = []
 
@@ -91,7 +89,7 @@ class video_loader:
             indc_times = all_times[all_indices]
             timestamps = clip_timestamps[iclip][all_indices]
 
-            new_features.append(
+            features.append(
                 new_concatenate_features(
                     clip_feature_array[iclip],
                     self._of_params,
@@ -100,45 +98,15 @@ class video_loader:
                 )
             )
 
-            old_features.append(
-                concatenate_features(
-                    clip_feature_array[iclip], self._of_params, all_indices
-                )
-            )
-
             all_gt_labels.append(gt_labels)
             all_timestamps.append(timestamps)
 
         timestamps = np.hstack(all_timestamps)
         gt_labels = np.hstack(all_gt_labels)
-        old_features = np.vstack(old_features)
-        new_features = np.vstack(new_features)
-
-        # GET RID OF THIS
-        # -===============
-        grid_size = 20
-        large_grid = create_grids(self._of_params.img_shape, grid_size, full_grid=True)
-
-        sub_grid = create_grids(
-            self._of_params.img_shape,
-            self._of_params.grid_size + 2,
-            full_grid=False,
-        )
-
-        idc = np.arange(1, self._of_params.n_layers * 2) * (grid_size**2)
-        features_per_layer = np.split(old_features, idc, axis=1)
-
-        old_features = np.concatenate(
-            [
-                griddata(large_grid, x.transpose(), sub_grid, method="linear")
-                for x in features_per_layer
-            ]
-        ).transpose()
+        features = np.vstack(features)
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
-        # self.old_features[clip_name] = old_features
-        self.all_features[clip_name] = old_features
-        # self.all_features[clip_name] = new_features
+        self.all_features[clip_name] = features
 
     def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
 
@@ -227,29 +195,6 @@ class video_loader:
 
         eye_left_images = all_frames[:, :, 0:192, 0]
         eye_right_images = all_frames[:, :, 192:, 0]
-
-        # gen = self._make_video_generator_mp4(clip_name, convert_to_gray=True)
-
-        # frames = []
-        # ts_idc = []
-        # for i_frame, x in enumerate(gen):
-
-        #     if i_frame > max(clip_offsets):
-        #         break
-
-        #     sign_onset = np.sign(i_frame - clip_onsets)
-        #     sign_offset = np.sign(i_frame - clip_offsets)
-
-        #     if any((sign_onset != sign_offset)):
-        #         print("Appending frame %d \r" % i_frame, end="")
-        #         frames.append(x)
-        #         ts_idc.append(i_frame)
-
-        # all_frames = np.array(frames)
-        # timestamps = timestamps[ts_idc]
-
-        # eye_left_images = all_frames[:, :, 0:192, :]
-        # eye_right_images = all_frames[:, :, 192:, :]
 
         return timestamps, eye_left_images, eye_right_images
 
@@ -354,54 +299,6 @@ class video_loader:
         )
 
         return feature_array, grid
-
-    # def grid_points(t, x, y):
-
-    #     temp = np.meshgrid(t, x, y, indexing="ij")
-
-    #     return np.concatenate(
-    #         [np.ravel(entry)[:, np.newaxis] for entry in temp], axis=1
-    #     )
-
-    # def _augment_features(self, n_features: int, grid_size: int):
-
-    #     speed, translation, scale, linear_distort = _get_augmentation_pars()
-
-    #     x_of = np.linspace(0, 64, 20 + 2, dtype=np.float32)[1:-1]
-    #     y_of = np.linspace(0, 64, 20 + 2, dtype=np.float32)[1:-1]
-
-    #     t_p_grid = grid_points(t, x_of, y_of)
-
-    #     t_p_grid_trans = np.zeros_like(t_p_grid)
-    #     t_p_grid_trans[:, 1:] = (
-    #         (linear_distort @ (scale * (t_p_grid[:, 1:] - 32.0)).T).T + 32 + translation
-    #     )
-    #     t_p_grid_trans[:, 0] = t[0] + speed * (t_p_grid[:, 0] - t[0])
-
-    #     t_trans = t[0] + speed * (t - t[0])
-
-    #     of_trans = np.reshape(
-    #         1.0 / speed * interpolator_left(t_p_grid_trans),
-    #         (len(t), len(x_of), len(y_of)),
-    #     )
-
-    #     return of_trans
-
-    # def _get_augmentation_pars(self, n_features: int):
-
-    #     std_speed = 0.2
-    #     std_translation = 3
-    #     std_scale = 0.15
-    #     std_linear = 0.03
-
-    #     speed = np.random.normal(1, std_speed, n_features)
-    #     translation = np.random.normal(0, std_translation, (2, n_features))
-    #     scale = np.random.normal(1, std_scale, n_features)
-
-    #     id_mat = np.tile(np.expand_dims(np.eye(2), -1), (1, 1, n_features))
-    #     linear_distort = id_mat + np.random.normal(0, std_linear, (2, 2, n_features))
-
-    #     return speed, translation, scale, linear_distort
 
     def _find_indices(
         self,
