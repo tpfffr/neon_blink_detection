@@ -77,14 +77,12 @@ def cv2_calcOpticalFlowPyrLK(
     return pts_next - pts_prev
 
 
-import typing as T
-
-
 def new_concatenate_features(
     feature_array: np.ndarray,
     of_params: OfParams,
     times: np.ndarray,
     indices: np.ndarray = None,
+    aug_params: T.Dict[str, int] = None,
 ) -> np.ndarray:
     def get_layers(n, layer_interval):
         return np.arange(-(n // 2), (n + 1) // 2) * layer_interval
@@ -101,8 +99,10 @@ def new_concatenate_features(
     if indices is None:
         indices = np.arange(n_frame) / 200
 
-    n_grids = of_params.grid_size * of_params.grid_size * 2
-    layers = get_layers(of_params.n_layers, layer_interval)
+    if aug_params is not None:
+        layers = get_layers(of_params.n_layers, layer_interval) * aug_params["speed"]
+    else:
+        layers = get_layers(of_params.n_layers, layer_interval)
 
     indices_layers = np.array([[indices + i] for i in layers]).reshape(len(layers), -1)
     indices_layers = np.clip(indices_layers, 0, len(feature_array) - 1)
@@ -110,7 +110,10 @@ def new_concatenate_features(
     features_left = np.concatenate(
         [
             interpolate_spacetime(
-                interp_left, indices, grid_size=of_params.grid_size
+                interp_left,
+                indices,
+                grid_size=of_params.grid_size,
+                aug_params=aug_params,
             ).reshape(-1, of_params.grid_size**2)
             for indices in indices_layers
         ],
@@ -120,7 +123,10 @@ def new_concatenate_features(
     features_right = np.concatenate(
         [
             interpolate_spacetime(
-                interp_right, indices, grid_size=of_params.grid_size
+                interp_right,
+                indices,
+                grid_size=of_params.grid_size,
+                aug_params=aug_params,
             ).reshape(-1, of_params.grid_size**2)
             for indices in indices_layers
         ],
@@ -151,7 +157,30 @@ def _create_interpolater(feature_array: np.ndarray, times, grid_size=20):
     return interpolator_left, interpolator_right
 
 
-def interpolate_spacetime(interpolator, time_points: T.List[int], grid_size: int):
+def get_augmentation_pars():
+
+    aug_params = {}
+
+    std_speed = 0.2
+    std_translation = 3
+    std_scale = 0.15
+    std_linear = 0.03
+
+    aug_params["speed"] = np.random.normal(1, std_speed)
+    aug_params["translation"] = np.random.normal(0, std_translation, 2)
+    aug_params["scale"] = np.random.normal(1, std_scale)
+    aug_params["linear_distort"] = np.eye(2) + np.random.normal(0, std_linear, (2, 2))
+
+    return aug_params
+
+
+def interpolate_spacetime(
+    interpolator,
+    time_points: T.List[int],
+    grid_size: int,
+    aug_params: T.Dict[str, int] = None,
+    counter: int = 0,
+):
 
     x = np.linspace(0, 64, grid_size + 2, dtype=np.float32)[1:-1]
     y = np.linspace(0, 64, grid_size + 2, dtype=np.float32)[1:-1]
@@ -162,6 +191,21 @@ def interpolate_spacetime(interpolator, time_points: T.List[int], grid_size: int
         (tt.reshape(-1, 1), xx.reshape(-1, 1), yy.reshape(-1, 1)), axis=1
     )
 
+    if aug_params is not None:
+
+        grid_trans = np.zeros_like(txy_grid)
+
+        lin_dis = aug_params["linear_distort"]
+        sc = aug_params["scale"]
+        transl = aug_params["translation"]
+
+        grid_trans[:, 0] = txy_grid[:, 0]
+        grid_trans[:, 1:] = (
+            (lin_dis @ (sc * (txy_grid[:, 1:] - 32.0)).T).T + 32 + transl
+        )
+
+        txy_grid = grid_trans
+
     return (
         interpolator(txy_grid)
         .reshape(grid_size, len(time_points), grid_size)
@@ -169,36 +213,36 @@ def interpolate_spacetime(interpolator, time_points: T.List[int], grid_size: int
     )
 
 
-def concatenate_features(
-    feature_array: np.ndarray, of_params: OfParams, indices: np.ndarray = None
-) -> np.ndarray:
-    def get_layers(n, layer_interval):
-        return np.arange(-(n // 2), (n + 1) // 2) * layer_interval
+# def concatenate_features(
+#     feature_array: np.ndarray, of_params: OfParams, indices: np.ndarray = None
+# ) -> np.ndarray:
+#     def get_layers(n, layer_interval):
+#         return np.arange(-(n // 2), (n + 1) // 2) * layer_interval
 
-    n_frame = len(feature_array)
-    if indices is None:
-        indices = np.arange(n_frame)
-    n_grids = of_params.grid_size * of_params.grid_size * 2
-    # right_shape = (n_frame, n_grids, 2)
-    # assert (
-    #     feature_array.shape == right_shape
-    # ), f"feature shape should be {right_shape}, but get {feature_array.shape}"
+#     n_frame = len(feature_array)
+#     if indices is None:
+#         indices = np.arange(n_frame)
+#     n_grids = of_params.grid_size * of_params.grid_size * 2
+#     # right_shape = (n_frame, n_grids, 2)
+#     # assert (
+#     #     feature_array.shape == right_shape
+#     # ), f"feature shape should be {right_shape}, but get {feature_array.shape}"
 
-    feature_array_y = feature_array[:, :, 1]  # take only y
-    if of_params.average:
-        feature_array_y = np.median(feature_array_y, axis=1)[:, np.newaxis]
-    layers = get_layers(of_params.n_layers, of_params.layer_interval)
+#     feature_array_y = feature_array[:, :, 1]  # take only y
+#     if of_params.average:
+#         feature_array_y = np.median(feature_array_y, axis=1)[:, np.newaxis]
+#     layers = get_layers(of_params.n_layers, of_params.layer_interval)
 
-    indices_layers = np.array([[indices + i] for i in layers]).reshape(len(layers), -1)
-    indices_layers = np.clip(indices_layers, 0, len(feature_array_y) - 1)
-    features = np.concatenate(
-        [feature_array_y[indices] for indices in indices_layers], axis=1
-    )
-    n_features = (
-        of_params.n_layers if of_params.average else of_params.n_layers * n_grids
-    )
-    # if features.shape != (len(indices), n_features):
-    #     raise RuntimeError(
-    #         f"feature shape should be {(len(indices), n_features)}, but get {features.shape}"
-    #     )
-    return features
+#     indices_layers = np.array([[indices + i] for i in layers]).reshape(len(layers), -1)
+#     indices_layers = np.clip(indices_layers, 0, len(feature_array_y) - 1)
+#     features = np.concatenate(
+#         [feature_array_y[indices] for indices in indices_layers], axis=1
+#     )
+#     n_features = (
+#         of_params.n_layers if of_params.average else of_params.n_layers * n_grids
+#     )
+#     # if features.shape != (len(indices), n_features):
+#     #     raise RuntimeError(
+#     #         f"feature shape should be {(len(indices), n_features)}, but get {features.shape}"
+#     #     )
+#     return features

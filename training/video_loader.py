@@ -15,10 +15,9 @@ import torch
 import pims
 
 from src.features_calculator import (
-    concatenate_features,
     calculate_optical_flow,
-    create_grids,
     new_concatenate_features,
+    get_augmentation_pars,
 )
 from src.utils import resize_images
 from functions.utils import random_sample
@@ -41,7 +40,6 @@ class video_loader:
         self._aug_params = aug_params
 
         self.all_samples = {}
-        self.old_features = {}
         self.all_features = {}
         self.augmented_samples = {}
         self.augmented_features = {}
@@ -65,6 +63,10 @@ class video_loader:
         features = []
         all_gt_labels = []
         all_timestamps = []
+
+        aug_features = []
+        aug_gt_labels = []
+        aug_timestamps = []
 
         for iclip in range(0, n_clips):
             n_frames = len(clip_timestamps[iclip])
@@ -101,12 +103,61 @@ class video_loader:
             all_gt_labels.append(gt_labels)
             all_timestamps.append(timestamps)
 
-        timestamps = np.hstack(all_timestamps)
-        gt_labels = np.hstack(all_gt_labels)
+            if augment:
+
+                n_onsets = int(len(onset_indices) * 0.5)
+                aug_onset_indices = random_sample(list(onset_indices), n_onsets)
+                n_offsets = int(len(offset_indices) * 0.5)
+                aug_offset_indices = random_sample(list(offset_indices), n_offsets)
+                all_indices = aug_onset_indices + aug_offset_indices
+                indc_times = all_times[all_indices]
+                aug_timestamps_clip = clip_timestamps[iclip][all_indices]
+
+                augmented_clip_features = []
+                for i in range(0, len(all_indices)):
+
+                    print(
+                        "\rAugmenting features... %d/%d"
+                        % (i + 1, n_onsets + n_offsets),
+                        end="",
+                    )
+
+                    aug_params = get_augmentation_pars()
+
+                    augmented_clip_features.append(
+                        new_concatenate_features(
+                            clip_feature_array[iclip],
+                            self._of_params,
+                            all_times,
+                            indc_times[i],
+                            aug_params,
+                        )
+                    )
+
+                aug_features.append(np.concatenate(augmented_clip_features))
+
+                aug_gt_labels_clip = np.full(n_onsets + n_offsets, 0)
+                aug_gt_labels_clip[0:n_onsets] = 1
+                aug_gt_labels_clip[n_onsets:] = 2
+
+                aug_gt_labels.append(aug_gt_labels_clip)
+
+                aug_timestamps.append(aug_timestamps_clip)
+
         features = np.vstack(features)
+        gt_labels = np.hstack(all_gt_labels)
+        timestamps = np.hstack(all_timestamps)
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
+
+        if augment:
+            aug_features = np.vstack(aug_features)
+            aug_gt_labels = np.hstack(aug_gt_labels)
+            aug_timestamps = np.hstack(aug_timestamps)
+
+            self.augmented_samples[clip_name] = Samples(aug_timestamps, aug_gt_labels)
+            self.augmented_features[clip_name] = aug_features
 
     def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
 
@@ -134,6 +185,8 @@ class video_loader:
             feature_array = tmp["feature_array"]
             clip_transitions = tmp["clip_transitions"]
             timestamps = tmp["timestamps"]
+            n_clips = clip_transitions.shape[0] + 1
+            print("\nNumber of clips: %d" % n_clips)
 
         except FileNotFoundError:
             print(f"cannot load from {path}")
@@ -143,8 +196,8 @@ class video_loader:
 
             # where difference in frames is larger than 100 ms
             clip_transitions = np.where(np.diff(timestamps) > 1e8)[0]
-
             n_clips = clip_transitions.shape[0] + 1
+            print("Number of clips: %d" % n_clips)
             clip_left_images = np.split(left_images, clip_transitions + 1)
             clip_right_images = np.split(right_images, clip_transitions + 1)
 
@@ -321,6 +374,7 @@ class video_loader:
         all_indices = np.hstack([blink_indices, bg_indices, pulse_indices])
         all_indices = np.unique(all_indices)
         all_indices = all_indices.astype(np.int64)
+
         return np.array(onset_indices), np.array(offset_indices), all_indices
 
     @staticmethod

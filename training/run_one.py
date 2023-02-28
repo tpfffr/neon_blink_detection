@@ -140,7 +140,7 @@ def collect_samples_and_predict(
         datasets = video_loader(of_params, aug_params)
 
         # add information about dataset to be loaded here
-        augment_data = False
+        augment_data = True
         datasets.collect(clip_names_train, bg_ratio=3, augment=augment_data)
 
         if augment_data:
@@ -154,7 +154,12 @@ def collect_samples_and_predict(
 
         logger.info("Start training")
         classifier = train_classifier(
-            datasets, clip_names_train, classifier_params, export_path, idx
+            datasets,
+            clip_names_train,
+            classifier_params,
+            export_path,
+            idx,
+            augment_data=augment_data,
         )
 
         logger.info("Collect validation data")
@@ -183,10 +188,21 @@ def train_classifier(
     classifier_params: ClassifierParams,
     export_path: Path,
     idx: int,
+    augment_data: bool,
 ):
     features = concatenate(datasets.all_features, clip_names)
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
     labels = samples_gt.labels
+
+    if augment_data:
+        augmented_features = concatenate(datasets.augmented_features, clip_names)
+        augmented_samples_gt = concatenate_all_samples(
+            datasets.augmented_samples, clip_names
+        )
+        augmented_labels = augmented_samples_gt.labels
+
+        features = np.concatenate((features, augmented_features), axis=0)
+        labels = np.concatenate((labels, augmented_labels), axis=0)
 
     classifier = Classifier(classifier_params, export_path)
     classifier.on_fit(features, labels)
