@@ -6,7 +6,7 @@ import numpy as np
 # from blink_labelling.preprocessing import load_processed_blink_indices
 from pikit import Recording
 from src.event_array import EventArray, Samples
-from src.features_calculator import calculate_optical_flow, concatenate_features
+from src.features_calculator import calculate_optical_flow, new_concatenate_features
 from src.helper import OfParams, PPParams
 from src.label_mapper import label_mapping
 from src.post_processing import (
@@ -92,7 +92,7 @@ def predict(timestamps: np.ndarray, feature_array: np.ndarray, of_params: OfPara
     classifier_params = get_classifier_params()
     classifier = get_exp_classifier(experiment_name, classifier_params)
     n_frames = len(timestamps)
-    features = concatenate_features(feature_array, of_params)
+    features = new_concatenate_features(feature_array, of_params)
     proba = classifier.predict(features)
     return proba
 

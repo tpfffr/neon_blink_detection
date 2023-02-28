@@ -324,7 +324,7 @@ class video_loader:
         off_end = blink_df[blink_df["label"] == "offset"]["end_ts"]
         off_end_idc = np.where(np.isin(timestamps, off_end))[0]
 
-        blink_vec = np.zeros(timestamps.shape[0])
+        blink_vec = np.zeros_like(timestamps)
 
         for onset, offset in zip(on_start_idc, on_end_idc):
             blink_vec[onset:offset] = 1
@@ -370,7 +370,7 @@ class video_loader:
         blink_indices = blink_labels["blink_indices"]
 
         bg_indices = self._get_background_indices(blink_indices, n_frames, bg_ratio)
-        pulse_indices = np.where(np.abs(np.mean(feature_array, axis=1)[:, 1]) > 0.05)[0]
+        pulse_indices = np.where(abs(np.mean(feature_array, axis=1))[:, 1] > 0.075)[0]
         all_indices = np.hstack([blink_indices, bg_indices, pulse_indices])
         all_indices = np.unique(all_indices)
         all_indices = all_indices.astype(np.int64)

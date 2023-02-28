@@ -6,7 +6,7 @@ import numpy as np
 from xgboost import XGBClassifier
 
 from event_array import BlinkEvent
-from features_calculator import calculate_optical_flow, concatenate_features
+from features_calculator import calculate_optical_flow, new_concatenate_features
 from helper import OfParams, PPParams, AugParams
 from post_processing import post_process
 from utils import resize_images, rotate_images
@@ -23,7 +23,7 @@ def detect_blinks(
 
     # eye_left_images, eye_right_images = rotate_images(eye_left_images, eye_right_images)
     feature_array = calculate_optical_flow(of_params, eye_left_images, eye_right_images)
-    features = concatenate_features(feature_array, of_params)
+    features = new_concatenate_features(feature_array, of_params)
 
     proba = clf.predict_proba(features)
     blink_events = post_process(timestamps, proba, pp_params)

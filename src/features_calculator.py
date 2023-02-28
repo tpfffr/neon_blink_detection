@@ -114,6 +114,7 @@ def new_concatenate_features(
                 indices,
                 grid_size=of_params.grid_size,
                 aug_params=aug_params,
+                side="left",
             ).reshape(-1, of_params.grid_size**2)
             for indices in indices_layers
         ],
@@ -127,6 +128,7 @@ def new_concatenate_features(
                 indices,
                 grid_size=of_params.grid_size,
                 aug_params=aug_params,
+                side="right",
             ).reshape(-1, of_params.grid_size**2)
             for indices in indices_layers
         ],
@@ -148,10 +150,10 @@ def _create_interpolater(feature_array: np.ndarray, times, grid_size=20):
     y = np.linspace(0, 64, grid_size, dtype=np.float32)
 
     interpolator_left = RegularGridInterpolator(
-        (times, x, y), of_left, bounds_error=False, fill_value=None, method="linear"
+        (times, x, y), of_left, bounds_error=False, fill_value=0, method="linear"
     )
     interpolator_right = RegularGridInterpolator(
-        (times, x, y), of_right, bounds_error=False, fill_value=None, method="linear"
+        (times, x, y), of_right, bounds_error=False, fill_value=0, method="linear"
     )
 
     return interpolator_left, interpolator_right
@@ -168,7 +170,7 @@ def get_augmentation_pars():
 
     aug_params["speed"] = np.random.normal(1, std_speed)
     aug_params["translation"] = np.random.normal(0, std_translation, 2)
-    aug_params["scale"] = np.random.normal(1, std_scale)
+    aug_params["scale"] = 1 / np.random.normal(1, std_scale)
     aug_params["linear_distort"] = np.eye(2) + np.random.normal(0, std_linear, (2, 2))
 
     return aug_params
@@ -179,7 +181,7 @@ def interpolate_spacetime(
     time_points: T.List[int],
     grid_size: int,
     aug_params: T.Dict[str, int] = None,
-    counter: int = 0,
+    side: str = None,
 ):
 
     x = np.linspace(0, 64, grid_size + 2, dtype=np.float32)[1:-1]
@@ -195,8 +197,13 @@ def interpolate_spacetime(
 
         grid_trans = np.zeros_like(txy_grid)
 
-        lin_dis = aug_params["linear_distort"]
         sc = aug_params["scale"]
+
+        if side == "right":
+            # shift linear distorion to the right side
+            lin_dis = np.array([[0, 1], [-1, 0]]) @ aug_params["linear_distort"]
+
+        lin_dis = aug_params["linear_distort"]
         transl = aug_params["translation"]
 
         grid_trans[:, 0] = txy_grid[:, 0]
