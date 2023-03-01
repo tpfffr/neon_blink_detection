@@ -1,0 +1,7860 @@
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 1
+options 1
+save_path=/users/tom/git/neon_blink_detection/training-XGBClassifier-3-010320231621/n_lay7-lay_intv7-grid4-win11-trans50-scale0.0
+experiment_name=n_lay7-lay_intv7-grid4-win11-trans50-scale0.0
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 1
+options 1
+save_path=/users/tom/git/neon_blink_detection/training-XGBClassifier-3-010320231717/n_lay7-lay_intv7-grid4-win11-trans50-scale0.0
+experiment_name=n_lay7-lay_intv7-grid4-win11-trans50-scale0.0
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Traceback (most recent call last):
+  File "/users/tom/git/neon_blink_detection/training/run_all.py", line 98, in <module>
+    main()
+  File "/users/tom/git/neon_blink_detection/training/run_all.py", line 63, in main
+    submit_one_job(
+  File "/users/tom/git/neon_blink_detection/training/submit.py", line 72, in submit_one_job
+    run_one.main(**kwargs)
+  File "/users/tom/git/neon_blink_detection/training/run_one.py", line 67, in main
+    all_samples, predictions = collect_samples_and_predict(
+  File "/users/tom/git/neon_blink_detection/training/run_one.py", line 144, in collect_samples_and_predict
+    datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data)
+  File "/users/tom/git/neon_blink_detection/training/video_loader.py", line 49, in collect
+    self._load(clip_name, bg_ratio, augment)
+  File "/users/tom/git/neon_blink_detection/training/video_loader.py", line 73, in _load
+    onset_indices, offset_indices, all_indices = self._find_indices(
+  File "/users/tom/git/neon_blink_detection/training/video_loader.py", line 359, in _find_indices
+    n_offsets = int(np.min([n_offsets, n_onsets]))
+UnboundLocalError: local variable 'n_offsets' referenced before assignment
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 1
+options 1
+save_path=/users/tom/git/neon_blink_detection/training-XGBClassifier-3-010320231725/n_lay7-lay_intv7-grid4-win11-trans50-scale0.0
+experiment_name=n_lay7-lay_intv7-grid4-win11-trans50-scale0.0
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Traceback (most recent call last):
+  File "/users/tom/git/neon_blink_detection/training/run_all.py", line 98, in <module>
+    main()
+  File "/users/tom/git/neon_blink_detection/training/run_all.py", line 63, in main
+    submit_one_job(
+  File "/users/tom/git/neon_blink_detection/training/submit.py", line 72, in submit_one_job
+    run_one.main(**kwargs)
+  File "/users/tom/git/neon_blink_detection/training/run_one.py", line 67, in main
+    all_samples, predictions = collect_samples_and_predict(
+  File "/users/tom/git/neon_blink_detection/training/run_one.py", line 144, in collect_samples_and_predict
+    datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data)
+  File "/users/tom/git/neon_blink_detection/training/video_loader.py", line 49, in collect
+    self._load(clip_name, bg_ratio, augment)
+  File "/users/tom/git/neon_blink_detection/training/video_loader.py", line 73, in _load
+    onset_indices, offset_indices, all_indices = self._find_indices(
+  File "/users/tom/git/neon_blink_detection/training/video_loader.py", line 359, in _find_indices
+    n_offsets = int(np.min([n_offsets, n_onsets]))
+UnboundLocalError: local variable 'n_offsets' referenced before assignment
+/cluster/anaconda3/envs/tom_py310/lib/python3.10/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+options 1
+options 1
+save_path=/users/tom/git/neon_blink_detection/training-XGBClassifier-3-010320231726-010320231726/n_lay7-lay_intv7-grid4-win11-trans50-scale0.0
+experiment_name=n_lay7-lay_intv7-grid4-win11-trans50-scale0.0
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490
+Loading clip: 1000-2022-12-14-09-43-56-0fcac6d3
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 1237
+Loading clip: 1002-2022-12-14-11-43-58-23e05b8c
+
+Number of clips: 1
+Number of onsets: 294
+Number of offsets: 535
+Loading clip: 1004-2022-12-14-13-14-14-c8a509b9
+
+Number of clips: 2
+Number of onsets: 705
+Number of offsets: 1135
+Number of onsets: 1368
+Number of offsets: 2216
+Loading clip: 1005-2022-12-14-15-07-31-ba8d94d5
+
+Number of clips: 2
+Number of onsets: 465
+Number of offsets: 780
+Number of onsets: 2163
+Number of offsets: 3498
+Loading clip: 1010-2022-12-15-13-27-31-f46dcdd8
+
+Number of clips: 1
+Number of onsets: 415
+Number of offsets: 864
+Loading clip: 1140-2023-01-12-13-15-56-2f0172d2
+
+Number of clips: 3
+Number of onsets: 282
+Number of offsets: 440
+Number of onsets: 65
+Number of offsets: 114
+Number of onsets: 258
+Number of offsets: 492
+Loading clip: 1141-2023-01-12-14-17-58-470c61da
+
+Number of clips: 3
+Number of onsets: 353
+Number of offsets: 591
+Number of onsets: 263
+Number of offsets: 509
+Number of onsets: 376
+Number of offsets: 796
+Loading clip: 1142-2023-01-12-14-27-07-34f1fccf
+
+Number of clips: 1
+Number of onsets: 348
+Number of offsets: 660
+Loading clip: 1144-2023-01-12-16-36-04-2c1ecc99
+
+Number of clips: 1
+Number of onsets: 807
+Number of offsets: 1033
+Loading clip: 1151-2023-01-13-12-03-16-bca271ec
+
+Number of clips: 2
+Number of onsets: 548
+Number of offsets: 909
+Number of onsets: 91
+Number of offsets: 148
+Loading clip: 1152-2023-01-13-13-03-33-ddabe2a5
+
+Number of clips: 2
+Number of onsets: 1232
+Number of offsets: 1944
+Number of onsets: 1384
+Number of offsets: 2300
+Loading clip: 1156-2023-01-13-15-15-36-93d791d5
+
+Number of clips: 3
+Number of onsets: 371
+Number of offsets: 858
+Number of onsets: 881
+Number of offsets: 1866
+Number of onsets: 754
+Number of offsets: 1746
+Loading clip: 1167-2023-01-16-15-28-05-761a32fb
+
+Number of clips: 2
+Number of onsets: 675
+Number of offsets: 1545
+Number of onsets: 425
+Number of offsets: 774
+Loading clip: 1190-2023-01-18-11-47-36-4663855c
+
+Number of clips: 2
+Number of onsets: 787
+Number of offsets: 1195
+Number of onsets: 219
+Number of offsets: 326
+Loading clip: 1199-2023-01-19-10-39-37-cbad3d47
+
+Number of clips: 2
+Number of onsets: 437
+Number of offsets: 802
+Number of onsets: 538
+Number of offsets: 1025
+Loading clip: 1201-2023-01-19-11-43-16-41f36271
+
+Number of clips: 2
+Number of onsets: 692
+Number of offsets: 1290
+Number of onsets: 433
+Number of offsets: 764
+Loading clip: 1202-2023-01-19-13-17-50-3651315a
+
+Number of clips: 2
+Number of onsets: 948
+Number of offsets: 2000
+Number of onsets: 617
+Number of offsets: 936
+Loading clip: 1219-2023-01-23-10-52-53-f0f1506f
+
+Number of clips: 3
+Number of onsets: 1408
+Number of offsets: 2640
+Number of onsets: 1166
+Number of offsets: 2104
+Number of onsets: 608
+Number of offsets: 1083
+Loading clip: 1230-2023-01-24-10-34-24-8e573035
+
+Number of clips: 3
+Number of onsets: 424
+Number of offsets: 684
+Number of onsets: 785
+Number of offsets: 1368
+Number of onsets: 646
+Number of offsets: 1137
+Loading clip: 1248-2023-01-25-12-59-30-e6407072
+
+Number of clips: 3
+Number of onsets: 113
+Number of offsets: 310
+Number of onsets: 10
+Number of offsets: 24
+Number of onsets: 46
+Number of offsets: 74
+Loading clip: 1249-2023-01-25-14-29-18-e54693e4
+
+Number of clips: 1
+Number of onsets: 246
+Number of offsets: 481
+Loading clip: 1250-2023-01-25-15-28-28-e49f5c02
+
+Number of clips: 3
+Number of onsets: 82
+Number of offsets: 143
+Number of onsets: 439
+Number of offsets: 641
+Number of onsets: 430
+Number of offsets: 585
+Loading clip: 1251-2023-01-25-16-37-59-6778eeb5
+
+Number of clips: 1
+Number of onsets: 244
+Number of offsets: 331
+Loading clip: 1252-2023-01-26-09-38-13-5b1af4ce
+
+Number of clips: 1
+Number of onsets: 968
+Number of offsets: 1546
+Loading clip: 1253-2023-01-26-11-39-39-c0de66cb
+
+Number of clips: 2
+Number of onsets: 289
+Number of offsets: 434
+Number of onsets: 394
+Number of offsets: 527
+Loading clip: 1254-2023-01-26-11-39-01-7f79f26c
+
+Number of clips: 1
+Number of onsets: 625
+Number of offsets: 987
+Loading clip: 1255-2023-01-26-13-20-00-5137ed82
+
+Number of clips: 7
+Number of onsets: 39
+Number of offsets: 80
+Number of onsets: 47
+Number of offsets: 99
+Number of onsets: 17
+Number of offsets: 40
+Number of onsets: 75
+Number of offsets: 146
+Number of onsets: 22
+Number of offsets: 29
+Number of onsets: 60
+Number of offsets: 43
+Number of onsets: 59
+Number of offsets: 99
+Loading clip: 1258-2023-01-26-14-29-04-23d8a6a8
+
+Number of clips: 1
+Number of onsets: 612
+Number of offsets: 1231
+Loading clip: 1259-2023-01-26-15-23-42-69af6c5a
+
+Number of clips: 1
+Number of onsets: 524
+Number of offsets: 898
+Loading clip: 1260-2023-01-26-16-16-34-0165fc4e
+
+Number of clips: 1
+Number of onsets: 302
+Number of offsets: 425
+Loading clip: 1261-2023-01-26-16-33-22-32c2c928
+
+Number of clips: 1
+Number of onsets: 683
+Number of offsets: 1274
+Loading clip: 1262-2023-01-26-17-22-05-a4b97078
+
+Number of clips: 1
+Number of onsets: 1389
+Number of offsets: 2226
+Loading clip: 1264-2023-01-27-09-36-12-df2f3ab1
+
+Number of clips: 1
+Number of onsets: 287
+Number of offsets: 366
+Loading clip: 1265-2023-01-27-10-37-53-f3b4f617
+
+Number of clips: 1
+Number of onsets: 241
+Number of offsets: 500
+Loading clip: 1266-2023-01-27-10-32-47-144fd890
+
+Number of clips: 1
+Number of onsets: 336
+Number of offsets: 547
+Loading clip: 1267-2023-01-27-11-38-27-264bce1d
+
+Number of clips: 1
+Number of onsets: 535
+Number of offsets: 890
+Loading clip: 1273-2023-01-27-16-37-52-f2d08d55
+
+Number of clips: 1
+Number of onsets: 203
+Number of offsets: 365
+Loading clip: 1274-2023-01-27-16-44-58-962f6780
+
+Number of clips: 1
+Number of onsets: 369
+Number of offsets: 476
+Loading clip: 1275-2023-01-27-17-25-45-4122dd25
+
+Number of clips: 1
+Number of onsets: 283
+Number of offsets: 497
+Loading clip: 1276-2023-01-30-09-36-22-b48621f1
+
+Number of clips: 1
+Number of onsets: 439
+Number of offsets: 643
+Loading clip: 1279-2023-01-30-13-06-13-e24bbdcf
+
+Number of clips: 1
+Number of onsets: 582
+Number of offsets: 1036
+Loading clip: 1280-2023-01-30-14-24-40-d879dc2a
+
+Number of clips: 2
+Number of onsets: 1076
+Number of offsets: 1846
+Number of onsets: 405
+Number of offsets: 530
+Loading clip: 1282-2023-01-30-16-34-00-1249f6de
+
+Number of clips: 4
+Number of onsets: 64
+Number of offsets: 102
+Number of onsets: 16
+Number of offsets: 20
+Number of onsets: 18
+Number of offsets: 28
+Number of onsets: 31
+Number of offsets: 48
+Loading clip: 1283-2023-01-30-16-42-51-e08daf16
+
+Number of clips: 2
+Number of onsets: 107
+Number of offsets: 144
+Number of onsets: 97
+Number of offsets: 182
+Loading clip: 1284-2023-01-30-17-57-14-9d3b1e31
+
+Number of clips: 2
+Number of onsets: 97
+Number of offsets: 234
+Number of onsets: 132
+Number of offsets: 212
+Loading clip: 1286-2023-01-31-10-43-45-210d7b9a
+
+Number of clips: 3
+Number of onsets: 62
+Number of offsets: 89
+Number of onsets: 26
+Number of offsets: 55
+Number of onsets: 46
+Number of offsets: 80
+Loading clip: 1287-2023-01-31-11-44-32-c6118754
+
+Number of clips: 2
+Number of onsets: 1368
+Number of offsets: 2978
+Number of onsets: 614
+Number of offsets: 1167
+Loading clip: 1288-2023-01-31-12-15-03-89605fe1
+
+Number of clips: 2
+Number of onsets: 91
+Number of offsets: 272
+Number of onsets: 57
+Number of offsets: 179
+Loading clip: 1289-2023-01-31-13-15-32-56e437ef
+
+Number of clips: 2
+Number of onsets: 153
+Number of offsets: 255
+Number of onsets: 110
+Number of offsets: 194
+Loading clip: 1290-2023-01-31-13-22-58-3ef10981
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 80
+Number of onsets: 109
+Number of offsets: 203
+Loading clip: 1291-2023-01-31-17-39-55-a701abd4
+
+Number of clips: 2
+Number of onsets: 189
+Number of offsets: 355
+Number of onsets: 50
+Number of offsets: 90
+Loading clip: 1292-2023-01-31-17-44-04-c0a47014
+
+Number of clips: 2
+Number of onsets: 85
+Number of offsets: 121
+Number of onsets: 94
+Number of offsets: 178
+Loading clip: 1293-2023-02-01-10-13-34-0c9638f8
+
+Number of clips: 4
+Number of onsets: 69
+Number of offsets: 94
+Number of onsets: 14
+Number of offsets: 22
+Number of onsets: 15
+Number of offsets: 30
+Number of onsets: 16
+Number of offsets: 30
+Loading clip: 1294-2023-02-01-11-11-04-442d1d78
+
+Number of clips: 1
+Number of onsets: 229
+Number of offsets: 479
+Loading clip: 1297-2023-02-01-13-37-41-668a3c8e
+
+Number of clips: 2
+Number of onsets: 104
+Number of offsets: 168
+Number of onsets: 64
+Number of offsets: 119
+Loading clip: 1298-2023-02-01-14-29-40-08017935
+
+Number of clips: 1
+Number of onsets: 115
+Number of offsets: 234
+Loading clip: 1299-2023-02-01-14-37-00-65f38d85
+
+Number of clips: 1
+Number of onsets: 119
+Number of offsets: 233
+Loading clip: 1300-2023-02-01-15-30-06-808aa97c
+
+Number of clips: 1
+Number of onsets: 274
+Number of offsets: 487
+Loading clip: 1301-2023-02-01-15-38-42-70991a8d
+
+Number of clips: 1
+Number of onsets: 198
+Number of offsets: 230
+Loading clip: 1302-2023-02-01-16-38-55-bc30b710
+
+Number of clips: 1
+Number of onsets: 263
+Number of offsets: 460
+Loading clip: 1303-2023-02-01-17-30-01-d3ee799c
+
+Number of clips: 1
+Number of onsets: 135
+Number of offsets: 265
+Loading clip: 1304-2023-02-01-17-38-36-66aceb25
+
+Number of clips: 1
+Number of onsets: 307
+Number of offsets: 556
+Loading clip: 1306-2023-02-02-10-44-25-4fec6abd
+
+Number of clips: 2
+Number of onsets: 781
+Number of offsets: 1351
+Number of onsets: 530
+Number of offsets: 835
+Loading clip: 1308-2023-02-02-13-13-29-b929df4c
+
+Number of clips: 2
+Number of onsets: 210
+Number of offsets: 283
+Number of onsets: 17
+Number of offsets: 20
+Loading clip: 1311-2023-02-02-14-30-40-96be0928
+
+Number of clips: 1
+Number of onsets: 509
+Number of offsets: 845
+Loading clip: 1312-2023-02-02-16-21-47-cd28e8e0
+
+Number of clips: 1
+Number of onsets: 502
+Number of offsets: 1096
+Loading clip: 1313-2023-02-02-16-31-53-67b1bdbe
+
+Number of clips: 1
+Number of onsets: 473
+Number of offsets: 828
+Loading clip: 1316-2023-02-03-09-34-09-31ef7938
+
+Number of clips: 4
+Number of onsets: 50
+Number of offsets: 82
+Number of onsets: 175
+Number of offsets: 311
+Number of onsets: 189
+Number of offsets: 273
+Number of onsets: 115
+Number of offsets: 74
+Loading clip: 1317-2023-02-03-09-41-14-30f69b87
+
+Number of clips: 2
+Number of onsets: 147
+Number of offsets: 248
+Number of onsets: 154
+Number of offsets: 341
+Loading clip: 1318-2023-02-03-10-41-29-03c72c25
+
+Number of clips: 1
+Number of onsets: 378
+Number of offsets: 614
+Loading clip: 1322-2023-02-03-14-25-41-7883a14f
+
+Number of clips: 2
+Number of onsets: 64
+Number of offsets: 103
+Number of onsets: 202
+Number of offsets: 164
+Loading clip: 1325-2023-02-03-17-46-35-11ad4b90
+
+Number of clips: 1
+Number of onsets: 253
+Number of offsets: 377
+Loading clip: 1326-2023-02-03-17-45-57-8a41f628
+
+Number of clips: 1
+Number of onsets: 455
+Number of offsets: 907
+Loading clip: 1327-2023-02-06-09-40-56-d5cf1243
+
+Number of clips: 1
+Number of onsets: 176
+Number of offsets: 339
+Loading clip: 1328-2023-02-06-09-45-58-f56cc84e
+
+Number of clips: 2
+Number of onsets: 1033
+Number of offsets: 1572
+Number of onsets: 726
+Number of offsets: 1081
+Loading clip: 1329-2023-02-06-10-40-29-c4308424
+
+Number of clips: 2
+Number of onsets: 487
+Number of offsets: 746
+Number of onsets: 168
+Number of offsets: 194
+Loading clip: 1332-2023-02-06-11-58-03-8fc75e25
+
+Number of clips: 1
+Number of onsets: 324
+Number of offsets: 749
+Loading clip: 1333-2023-02-06-13-17-50-ebc1e021
+
+Number of clips: 1
+Number of onsets: 342
+Number of offsets: 686
+Loading clip: 1336-2023-02-06-15-28-30-adb9dbfb
+
+Number of clips: 2
+Number of onsets: 217
+Number of offsets: 337
+Number of onsets: 110
+Number of offsets: 162
+Loading clip: 1337-2023-02-06-15-36-31-211278ea
+
+Number of clips: 1
+Number of onsets: 557
+Number of offsets: 952
+Loading clip: 2023-03-01_09-59-07-2ea49126
+
+Number of clips: 2
+Number of onsets: 1155
+Number of offsets: 1469
+Number of onsets: 1735
+Number of offsets: 2540
+Loading clip: 2023-01-27_15-59-54-49a115d5
+
+Number of clips: 1
+Number of onsets: 2668
+Number of offsets: 5271
+Loading clip: 2023-02-01_11-45-11-7621531e
+
+Number of clips: 1
+Number of onsets: 1334
+Number of offsets: 2169
+Loading clip: 2023-01-27_16-10-14-a2a8cbe1
+
+Number of clips: 1
+Number of onsets: 663
+Number of offsets: 1489
+Loading clip: 2023-01-27_16-15-26-57802f75
+
+Number of clips: 1
+Number of onsets: 4525
+Number of offsets: 7807
+Loading clip: 2023-01-27_16-24-04-eb4305b1
+
+Number of clips: 1
+Number of onsets: 3446
+Number of offsets: 5981
+Loading clip: 2023-01-27_16-31-52-5f743ed0
+
+Number of clips: 1
+Number of onsets: 2280
+Number of offsets: 4130
+Loading clip: padel_tennis_neon_01-b922b245
+
+Number of clips: 1
+Number of onsets: 577
+Number of offsets: 1150
+Loading clip: padel_tennis_neon_03-2ded8f56
+
+Number of clips: 1
+Number of onsets: 854
+Number of offsets: 1490

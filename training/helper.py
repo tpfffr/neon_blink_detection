@@ -61,8 +61,8 @@ def get_of_params_options():
 def get_augmentation_options():
 
     std_speed = [0.0]
-    std_translation = [50]
-    std_scale = [0.0]
+    std_translation = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+    std_scale = [0.0, 0.1]
     std_linear = [0.0]
 
     options = itertools.product(

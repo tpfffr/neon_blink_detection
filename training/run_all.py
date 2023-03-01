@@ -25,7 +25,8 @@ import numpy as np
 
 
 clip_names_test = [
-    # "2023-01-27_15-59-54-49a115d5",  # tom computer
+    "2023-03-01_09-59-07-2ea49126",  # kai bike
+    "2023-01-27_15-59-54-49a115d5",  # tom computer
     "2023-02-01_11-45-11-7621531e",  # kai computer
     "2023-01-27_16-10-14-a2a8cbe1",  # ryan discussing
     "2023-01-27_16-15-26-57802f75",  # tom walking
@@ -40,7 +41,7 @@ def main(n_splits=5):
     dataset_splitter = load_dataset_splitter(n_clips=None, n_splits=n_splits)
 
     use_pretrained_classifier = False
-    use_cluster = False
+    use_cluster = True
     compute_of = False
 
     classifier_params = get_classifier_params()
@@ -87,7 +88,7 @@ def main(n_splits=5):
 
                 # if not of_save_path.exists():
                 for clip_name in clip_names:
-                    datasets = video_loader(of_params, aug_params)
+                    datasets = video_loader(of_params, aug_options)
                     datasets._load_features(clip_name, of_params)
                 # else:
                 #     continue

@@ -118,8 +118,7 @@ class video_loader:
                 for i in range(0, len(all_indices)):
 
                     print(
-                        "\rAugmenting features... %d/%d"
-                        % (i + 1, n_onset_augs + n_offset_augs),
+                        "\rAugmenting features %d/%d" % (i, len(all_indices)),
                         end="",
                     )
 
@@ -137,7 +136,7 @@ class video_loader:
 
                 aug_features.append(np.concatenate(augmented_clip_features))
 
-                aug_gt_labels_clip = np.full(n_onset_augs + n_offset_augs, 0)
+                aug_gt_labels_clip = np.full(len(all_indices), 0)
                 aug_gt_labels_clip[0:n_onset_augs] = 1
                 aug_gt_labels_clip[n_offset_augs:] = 2
 
@@ -353,16 +352,22 @@ class video_loader:
         offset_indices = blink_labels["offset_indices"]
         blink_indices = blink_labels["blink_indices"]
 
-        # n_samples = np.min(0.2 * len(onset_indices), 20)
-        # onset_indices = choices(onset_indices, k=bg_ratio)
-        # n_samples = np.min(0.2 * len(offset_indices), 20)
-        # offset_indices = choices(offset_indices, k=bg_ratio)
+        # print("Number of onsets: %d" % len(onset_indices))
+        # n_onsets = int(len(onset_indices))
+        # onset_indices = choices(onset_indices, k=n_onsets)
+        # print("Number of offsets: %d" % len(offset_indices))
+        # n_offsets = int(np.min([len(offset_indices), n_onsets]))
+        # offset_indices = choices(offset_indices, k=n_offsets)
 
         # blink_indices = list(set(onset_indices) | (set(offset_indices)))
         # blink_indices.sort()
 
         bg_indices = self._get_background_indices(blink_indices, n_frames, bg_ratio)
-        pulse_indices = np.where(np.mean(abs(feature_array), axis=1)[:, 1] > 0.1)[0]
+        pulse_indices = np.where(abs(np.mean(feature_array, axis=1))[:, 1] > 0.075)[0]
+
+        n_pulses = int(np.min([5 * len(blink_indices), len(pulse_indices)]))
+        pulse_indices = choices(pulse_indices, k=n_pulses)
+
         all_indices = np.hstack([blink_indices, bg_indices, pulse_indices])
         all_indices = np.unique(all_indices)
         all_indices = all_indices.astype(np.int64)
@@ -377,3 +382,50 @@ class video_loader:
             n_bg = len(on_indices) * bg_ratio if len(on_indices) else 300
             bg_indices = random_sample(bg_indices, n_bg)
         return bg_indices
+
+    def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
+
+        container = av.open(
+            str(self.rec_folder / clip_name / "Neon Sensor Module v1 ps1.mp4")
+        )
+
+        for frame in container.decode(video=0):
+            if convert_to_gray:
+                y_plane = frame.planes[0]
+                gray_data = np.frombuffer(y_plane, np.uint8)
+                img_np = gray_data.reshape(y_plane.height, y_plane.line_size, 1)
+                img_np = img_np[:, : frame.width]
+            else:
+                img_np = frame.to_rgb().to_ndarray()
+            yield img_np
+
+    def _get_frames_pyav(self, clip_name, convert_to_gray=True):
+
+        timestamps = self._get_timestamps(clip_name)
+
+        clip_onsets, clip_offsets = self._get_clip_trigger(clip_name, timestamps)
+
+        gen = self._make_video_generator_mp4(clip_name, convert_to_gray=True)
+
+        frames = []
+        ts_idc = []
+        for i_frame, x in enumerate(gen):
+
+            if i_frame > max(clip_offsets):
+                break
+
+            sign_onset = np.sign(i_frame - clip_onsets)
+            sign_offset = np.sign(i_frame - clip_offsets)
+
+            if any((sign_onset != sign_offset)):
+                print("Appending frame %d \r" % i_frame, end="")
+                frames.append(x)
+                ts_idc.append(i_frame)
+
+        all_frames = np.array(frames)
+        timestamps = timestamps[ts_idc]
+
+        eye_left_images = all_frames[:, :, 0:192, :]
+        eye_right_images = all_frames[:, :, 192:, :]
+
+        return timestamps, eye_left_images, eye_right_images

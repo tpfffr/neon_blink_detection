@@ -140,7 +140,7 @@ def collect_samples_and_predict(
         datasets = video_loader(of_params, aug_options)
 
         # add information about dataset to be loaded here
-        augment_data = False
+        augment_data = True
         datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data)
 
         if augment_data:
