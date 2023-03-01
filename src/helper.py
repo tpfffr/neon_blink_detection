@@ -60,5 +60,7 @@ class PPParams:
 class AugParams:
     """Parameters for data augmentation"""
 
-    xy_shift: float = 0.2
-    zoom: float = 0.2
+    std_speed: float = 0.0
+    std_translation: int = 0
+    std_scale: float = 0.0
+    std_linear: float = 0.0

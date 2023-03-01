@@ -59,12 +59,17 @@ def get_of_params_options():
 
 
 def get_augmentation_options():
-    xy_shift = [0.3]
-    zoom = [0.4]
+
+    std_speed = [0.0]
+    std_translation = [50]
+    std_scale = [0.0]
+    std_linear = [0.0]
 
     options = itertools.product(
-        xy_shift,
-        zoom,
+        std_speed,
+        std_translation,
+        std_scale,
+        std_linear,
     )
 
     options = list(options)
@@ -221,12 +226,12 @@ def get_feature_dir_name(of_params: OfParams) -> str:
 def get_experiment_name_new(of_params: OfParams, aug_params: AugParams) -> str:
     return (
         # "subtract-"
-        f"n_layers{of_params.n_layers}-"
-        f"layer_interval{of_params.layer_interval}-"
+        f"n_lay{of_params.n_layers}-"
+        f"lay_intv{of_params.layer_interval}-"
         f"grid{of_params.grid_size}-"
-        f"win{of_params.window_size}"
-        # f"shift{aug_params.xy_shift}-"
-        # f"zoom{aug_params.zoom}"
+        f"win{of_params.window_size}-"
+        f"trans{aug_params.std_translation}-"
+        f"scale{aug_params.std_scale}"
     )
 
 

@@ -51,8 +51,8 @@ def main(n_splits=5):
     training_dir = get_training_dir(classifier_params.name, use_pretrained_classifier)
     export_dir = get_export_dir(classifier_params.name, use_pretrained_classifier)
     for of_params in of_params_options:
-        for aug_params in aug_params_options:
-            experiment_name = get_experiment_name_new(of_params, aug_params)
+        for aug_options in aug_params_options:
+            experiment_name = get_experiment_name_new(of_params, aug_options)
             save_path = training_dir / experiment_name
             export_path = export_dir / experiment_name
 
@@ -65,7 +65,7 @@ def main(n_splits=5):
                     classifier_params,
                     of_params,
                     pp_params,
-                    aug_params,
+                    aug_options,
                     export_path=export_path,
                     save_path=save_path,
                     use_pretrained_classifier=use_pretrained_classifier,

@@ -130,14 +130,14 @@ def collect_samples_and_predict(
     clip_names_test: T.List[str],
     classifier_params: ClassifierParams,
     of_params: OfParams,
-    aug_params: AugParams,
+    aug_options: AugParams,
     export_path: Path,
     idx: int,
     use_pretrained_classifier: bool,
 ):
     if not use_pretrained_classifier:
         logger.info("Collect training data")
-        datasets = video_loader(of_params, aug_params)
+        datasets = video_loader(of_params, aug_options)
 
         # add information about dataset to be loaded here
         augment_data = False

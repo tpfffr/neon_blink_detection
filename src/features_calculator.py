@@ -159,14 +159,14 @@ def _create_interpolater(feature_array: np.ndarray, times, grid_size=20):
     return interpolator_left, interpolator_right
 
 
-def get_augmentation_pars():
+def get_augmentation_pars(aug_options):
 
     aug_params = {}
 
-    std_speed = 0.2
-    std_translation = 3
-    std_scale = 0.15
-    std_linear = 0.03
+    std_speed = aug_options.std_speed
+    std_translation = aug_options.std_translation
+    std_scale = aug_options.std_scale
+    std_linear = aug_options.std_linear
 
     aug_params["speed"] = np.random.normal(1, std_speed)
     aug_params["translation"] = np.random.normal(0, std_translation, 2)
@@ -198,13 +198,12 @@ def interpolate_spacetime(
         grid_trans = np.zeros_like(txy_grid)
 
         sc = aug_params["scale"]
+        transl = aug_params["translation"]
+        lin_dis = aug_params["linear_distort"]
 
         if side == "right":
-            # shift linear distorion to the right side
-            lin_dis = np.array([[0, 1], [-1, 0]]) @ aug_params["linear_distort"]
-
-        lin_dis = aug_params["linear_distort"]
-        transl = aug_params["translation"]
+            # lin_dis = np.array([[0, 1], [-1, 0]]) @ aug_params["linear_distort"]
+            transl = aug_params["translation"] * np.array([1, -1])
 
         grid_trans[:, 0] = txy_grid[:, 0]
         grid_trans[:, 1:] = (

@@ -8,11 +8,10 @@ from pathlib import Path
 import typing as T
 import av
 import numpy as np
-import scipy
 import cv2
 from scipy.interpolate import griddata
-import torch
 import pims
+from random import choices
 
 from src.features_calculator import (
     calculate_optical_flow,
@@ -23,7 +22,7 @@ from src.utils import resize_images
 from functions.utils import random_sample
 from training.helper import get_feature_dir_name_new
 from src.event_array import Samples
-from src.helper import OfParams, PPParams
+from src.helper import OfParams, PPParams, AugParams
 from training.helper import get_experiment_name_new
 
 video_path = Path("/users/tom/experiments/neon_blink_detection/datasets/train_data")
@@ -33,11 +32,11 @@ of_path = Path(
 
 
 class video_loader:
-    def __init__(self, of_params: OfParams, aug_params: PPParams):
+    def __init__(self, of_params: OfParams, aug_options: AugParams):
         self.rec_folder = Path(video_path)
         self._of_params = of_params
         self._of_path = of_path
-        self._aug_params = aug_params
+        self._aug_options = aug_options
 
         self.all_samples = {}
         self.all_features = {}
@@ -77,7 +76,6 @@ class video_loader:
                 clip_timestamps[iclip],
                 n_frames,
                 bg_ratio,
-                half=True,
             )
 
             gt_labels = np.full(n_frames, 0)
@@ -105,10 +103,13 @@ class video_loader:
 
             if augment:
 
-                n_onsets = int(len(onset_indices) * 0.5)
-                aug_onset_indices = random_sample(list(onset_indices), n_onsets)
-                n_offsets = int(len(offset_indices) * 0.5)
-                aug_offset_indices = random_sample(list(offset_indices), n_offsets)
+                aug_ratio = 2
+                n_onset_augs = np.floor(len(onset_indices) * aug_ratio).astype(int)
+                n_offset_augs = np.floor(len(offset_indices) * aug_ratio).astype(int)
+
+                aug_onset_indices = choices(list(onset_indices), k=n_onset_augs)
+                aug_offset_indices = choices(list(offset_indices), k=n_offset_augs)
+
                 all_indices = aug_onset_indices + aug_offset_indices
                 indc_times = all_times[all_indices]
                 aug_timestamps_clip = clip_timestamps[iclip][all_indices]
@@ -118,11 +119,11 @@ class video_loader:
 
                     print(
                         "\rAugmenting features... %d/%d"
-                        % (i + 1, n_onsets + n_offsets),
+                        % (i + 1, n_onset_augs + n_offset_augs),
                         end="",
                     )
 
-                    aug_params = get_augmentation_pars()
+                    aug_params = get_augmentation_pars(self._aug_options)
 
                     augmented_clip_features.append(
                         new_concatenate_features(
@@ -136,9 +137,9 @@ class video_loader:
 
                 aug_features.append(np.concatenate(augmented_clip_features))
 
-                aug_gt_labels_clip = np.full(n_onsets + n_offsets, 0)
-                aug_gt_labels_clip[0:n_onsets] = 1
-                aug_gt_labels_clip[n_onsets:] = 2
+                aug_gt_labels_clip = np.full(n_onset_augs + n_offset_augs, 0)
+                aug_gt_labels_clip[0:n_onset_augs] = 1
+                aug_gt_labels_clip[n_offset_augs:] = 2
 
                 aug_gt_labels.append(aug_gt_labels_clip)
 
@@ -158,22 +159,6 @@ class video_loader:
 
             self.augmented_samples[clip_name] = Samples(aug_timestamps, aug_gt_labels)
             self.augmented_features[clip_name] = aug_features
-
-    def _make_video_generator_mp4(self, clip_name, convert_to_gray: bool):
-
-        container = av.open(
-            str(self.rec_folder / clip_name / "Neon Sensor Module v1 ps1.mp4")
-        )
-
-        for frame in container.decode(video=0):
-            if convert_to_gray:
-                y_plane = frame.planes[0]
-                gray_data = np.frombuffer(y_plane, np.uint8)
-                img_np = gray_data.reshape(y_plane.height, y_plane.line_size, 1)
-                img_np = img_np[:, : frame.width]
-            else:
-                img_np = frame.to_rgb().to_ndarray()
-            yield img_np
 
     def _load_features(self, clip_name, of_params):
 
@@ -335,7 +320,7 @@ class video_loader:
         blink_labels = dict()
         blink_labels["onset_indices"] = np.where(blink_vec == 1)[0]
         blink_labels["offset_indices"] = np.where(blink_vec == 2)[0]
-        blink_labels["blink_indices"] = np.where(blink_vec == 2)[0]
+        blink_labels["blink_indices"] = np.where(blink_vec > 0)[0]
 
         return blink_labels
 
@@ -360,7 +345,6 @@ class video_loader:
         timestamps: np.ndarray,
         n_frames: int,
         bg_ratio: int,
-        half: bool,
     ) -> T.Tuple[np.ndarray, np.ndarray, np.ndarray]:
 
         blink_labels = self._get_blink_labels(clip_name, timestamps)
@@ -369,8 +353,16 @@ class video_loader:
         offset_indices = blink_labels["offset_indices"]
         blink_indices = blink_labels["blink_indices"]
 
+        # n_samples = np.min(0.2 * len(onset_indices), 20)
+        # onset_indices = choices(onset_indices, k=bg_ratio)
+        # n_samples = np.min(0.2 * len(offset_indices), 20)
+        # offset_indices = choices(offset_indices, k=bg_ratio)
+
+        # blink_indices = list(set(onset_indices) | (set(offset_indices)))
+        # blink_indices.sort()
+
         bg_indices = self._get_background_indices(blink_indices, n_frames, bg_ratio)
-        pulse_indices = np.where(abs(np.mean(feature_array, axis=1))[:, 1] > 0.075)[0]
+        pulse_indices = np.where(np.mean(abs(feature_array), axis=1)[:, 1] > 0.1)[0]
         all_indices = np.hstack([blink_indices, bg_indices, pulse_indices])
         all_indices = np.unique(all_indices)
         all_indices = all_indices.astype(np.int64)
