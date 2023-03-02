@@ -17,6 +17,7 @@ from src.features_calculator import (
     calculate_optical_flow,
     new_concatenate_features,
     get_augmentation_pars,
+    create_interpolater,
 )
 from src.utils import resize_images
 from functions.utils import random_sample
@@ -89,11 +90,19 @@ class video_loader:
             indc_times = all_times[all_indices]
             timestamps = clip_timestamps[iclip][all_indices]
 
+            # only y direction
+            interp_left, interp_right = create_interpolater(
+                clip_feature_array[iclip][:, :, 1], all_times
+            )
+
+            n_clip_frames = clip_feature_array[iclip].shape[0]
+
             features.append(
                 new_concatenate_features(
-                    clip_feature_array[iclip],
+                    interp_left,
+                    interp_right,
+                    n_clip_frames,
                     self._of_params,
-                    all_times,
                     indc_times,
                 )
             )
@@ -115,6 +124,7 @@ class video_loader:
                 aug_timestamps_clip = clip_timestamps[iclip][all_indices]
 
                 augmented_clip_features = []
+
                 for i in range(0, len(all_indices)):
 
                     print(
@@ -126,9 +136,10 @@ class video_loader:
 
                     augmented_clip_features.append(
                         new_concatenate_features(
-                            clip_feature_array[iclip],
+                            interp_left,
+                            interp_right,
+                            n_clip_frames,
                             self._of_params,
-                            all_times,
                             indc_times[i],
                             aug_params,
                         )
@@ -153,11 +164,12 @@ class video_loader:
             aug_gt_labels = np.hstack(aug_gt_labels)
             aug_timestamps = np.hstack(aug_timestamps)
 
-            features = np.vstack((features, aug_features))
-            gt_labels = np.hstack((gt_labels, aug_gt_labels))
-            timestamps = np.hstack((timestamps, aug_timestamps))
-            # self.all_aug_samples[clip_name] = Samples(aug_timestamps, aug_gt_labels)
-            # self.all_aug_features[clip_name] = aug_features
+            # features = np.vstack((features, aug_features))
+            # gt_labels = np.hstack((gt_labels, aug_gt_labels))
+            # timestamps = np.hstack((timestamps, aug_timestamps))
+
+            self.all_aug_samples[clip_name] = Samples(aug_timestamps, aug_gt_labels)
+            self.all_aug_features[clip_name] = aug_features
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features

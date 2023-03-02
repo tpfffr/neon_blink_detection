@@ -78,26 +78,20 @@ def cv2_calcOpticalFlowPyrLK(
 
 
 def new_concatenate_features(
-    feature_array: np.ndarray,
+    interp_left: RegularGridInterpolator,
+    interp_right: RegularGridInterpolator,
+    n_clip_frames: int,
     of_params: OfParams,
-    times: np.ndarray,
     indices: np.ndarray = None,
     aug_params: T.Dict[str, int] = None,
 ) -> np.ndarray:
     def get_layers(n, layer_interval):
         return np.arange(-(n // 2), (n + 1) // 2) * layer_interval
 
-    # only y direction
-    feature_array = feature_array[:, :, 1]
-
-    interp_left, interp_right = _create_interpolater(feature_array, times)
-
     layer_interval = of_params.layer_interval / 200  # sampling rate to convert to ms
 
-    n_frame = len(feature_array)
-
     if indices is None:
-        indices = np.arange(n_frame) / 200
+        indices = np.arange(n_clip_frames) / 200
 
     if aug_params is not None:
         layers = get_layers(of_params.n_layers, layer_interval) * aug_params["speed"]
@@ -105,7 +99,7 @@ def new_concatenate_features(
         layers = get_layers(of_params.n_layers, layer_interval)
 
     indices_layers = np.array([[indices + i] for i in layers]).reshape(len(layers), -1)
-    indices_layers = np.clip(indices_layers, 0, len(feature_array) - 1)
+    indices_layers = np.clip(indices_layers, 0, n_clip_frames - 1)
 
     features_left = np.concatenate(
         [
@@ -138,7 +132,7 @@ def new_concatenate_features(
     return np.concatenate((features_left, features_right), axis=-1)
 
 
-def _create_interpolater(feature_array: np.ndarray, times, grid_size=20):
+def create_interpolater(feature_array: np.ndarray, times, grid_size=20):
 
     length = grid_size**2
 
@@ -150,10 +144,10 @@ def _create_interpolater(feature_array: np.ndarray, times, grid_size=20):
     y = np.linspace(0, 64, grid_size, dtype=np.float32)
 
     interpolator_left = RegularGridInterpolator(
-        (times, x, y), of_left, bounds_error=False, fill_value=0, method="linear"
+        (times, x, y), of_left, bounds_error=False, fill_value=None, method="linear"
     )
     interpolator_right = RegularGridInterpolator(
-        (times, x, y), of_right, bounds_error=False, fill_value=0, method="linear"
+        (times, x, y), of_right, bounds_error=False, fill_value=None, method="linear"
     )
 
     return interpolator_left, interpolator_right

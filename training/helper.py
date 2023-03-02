@@ -61,7 +61,7 @@ def get_of_params_options():
 def get_augmentation_options():
 
     std_speed = [0.0]
-    std_translation = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+    std_translation = [4, 6, 8, 10, 12, 14, 16, 18]
     std_scale = [0.0, 0.1]
     std_linear = [0.0]
 
@@ -120,6 +120,7 @@ class Results:
     metrics_sample_test: ScoresList
     metrics_ml_test: ScoresList
     metrics_pp_test: ScoresList
+    clf_scores: T.Dict
 
     def dump(self, save_path):
         path = save_path / "results.pkl"
@@ -130,7 +131,13 @@ class Results:
 
     def print(self):
         logger.info(
-            "Training scores:\n"
+            "Classifier scores:\n"
+            f"Sample-based recall = {self.clf_scores['recall']:.2f}, "
+            f"precision = {self.clf_scores['precision']:.2f}, "
+            f"F1 = {self.clf_scores['f1']:.2f}"
+        )
+        logger.info(
+            "Full training scores:\n"
             f"Sample-based {self.metrics_sample_train}\n"
             f"Event-based-ml {self.metrics_ml_train}\n"
             f"Event-based-pp {self.metrics_pp_train}"

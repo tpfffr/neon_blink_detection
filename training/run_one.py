@@ -13,6 +13,7 @@ from src.helper import OfParams, PPParams, AugParams
 from src.metrics import Scores, ScoresList
 from training.dataset_splitter import DatasetSplitter
 from video_loader import video_loader
+from src.post_processing import classify
 from training.datasets_loader import (
     # Datasets,
     concatenate,
@@ -23,6 +24,7 @@ from training.datasets_loader import (
 from src.features_calculator import create_grids
 from training.evaluation import evaluate
 from training.helper import ClassifierParams, Results
+from sklearn.metrics import f1_score, precision_score, recall_score
 
 logger = logging.getLogger("main")
 from sklearn.model_selection import KFold
@@ -64,19 +66,20 @@ def main(
     metrics_ml_test = ScoresList()
 
     for idx, (clip_names_train, clip_names_val) in enumerate(dataset_splitter):
-        all_samples, predictions = collect_samples_and_predict(
+        all_samples, predictions, clf_scores = collect_samples_and_predict(
             clip_names_train,
             clip_names_val,
             clip_names_test,
             classifier_params,
             of_params,
             aug_params,
+            pp_params,
             export_path,
             idx,
             use_pretrained_classifier,
         )
 
-        logger.info("Evaluate training data")
+        logger.info("Evaluate full training data")
         metrics_sample, metrics_ml, metrics_pp, n_samples = evaluate_clips(
             clip_names_train, all_samples, predictions, pp_params
         )
@@ -118,6 +121,7 @@ def main(
         metrics_sample_test,
         metrics_ml_test,
         metrics_pp_test,
+        clf_scores,
     )
     results.dump(save_path)
 
@@ -131,46 +135,54 @@ def collect_samples_and_predict(
     classifier_params: ClassifierParams,
     of_params: OfParams,
     aug_options: AugParams,
+    pp_params: PPParams,
     export_path: Path,
     idx: int,
     use_pretrained_classifier: bool,
 ):
     if not use_pretrained_classifier:
-        logger.info("Collect training data")
         datasets = video_loader(of_params, aug_options)
 
         # add information about dataset to be loaded here
-        augment_data = False
+        augment_data = True
+
+        logger.info("Collect subsampled training data")
         datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data)
 
-        # if augment_data:
-        #     n_augmented_features = sum(
-        #         [datasets.all_aug_features[x].shape[0] for x in clip_names_train]
-        #     )
-        # else:
-        #     n_augmented_features = 0
+        if augment_data:
+            n_aug_features = sum(
+                [datasets.all_aug_features[x].shape[0] for x in clip_names_train]
+            )
+        else:
+            n_aug_features = 0
 
-        # logger.info("augmented features = %d", n_augmented_features)
+        logger.info("augmented features = %d", n_aug_features)
 
         logger.info("Start training")
-        classifier = train_classifier(
+        # compute performance in classifier - TO BE IMPLEMENTED
+        classifier, scores = train_classifier(
             datasets,
             clip_names_train,
             classifier_params,
             export_path,
             idx,
             augment_data=augment_data,
+            pp_params=pp_params,
         )
 
-        if idx != 0:
-            logger.info("Collect validation data")
-            datasets.collect(clip_names_val)
+        del datasets
+        datasets = video_loader(of_params, aug_options)
+
+        logger.info("Collect all training data")
+        datasets.collect(clip_names_train)
+
+        logger.info("Collect validation data")
+        datasets.collect(clip_names_val)
 
         logger.info("Collect test data")
         datasets.collect(clip_names_test)
 
         all_samples = datasets.all_samples
-
         save_samples(all_samples, export_path, idx)
 
         logger.info("Predict training & validation & test data")
@@ -182,7 +194,7 @@ def collect_samples_and_predict(
         all_samples = load_samples(export_path, idx)
         predictions = load_predictions(export_path, idx)
 
-    return all_samples, predictions
+    return all_samples, predictions, scores
 
 
 def train_classifier(
@@ -192,23 +204,43 @@ def train_classifier(
     export_path: Path,
     idx: int,
     augment_data: bool,
+    pp_params: PPParams,
 ):
     features = concatenate(datasets.all_features, clip_names)
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
     labels = samples_gt.labels
 
-    # if augment_data:
-    #     aug_features = concatenate(datasets.all_aug_features, clip_names)
-    #     aug_samples_gt = concatenate_all_samples(datasets.all_aug_samples, clip_names)
-    #     aug_labels = aug_samples_gt.labels
+    if augment_data:
+        aug_features = concatenate(datasets.all_aug_features, clip_names)
+        aug_samples_gt = concatenate_all_samples(datasets.all_aug_samples, clip_names)
+        aug_labels = aug_samples_gt.labels
 
-    #     features = np.concatenate((features, aug_features), axis=0)
-    #     labels = np.concatenate((labels, aug_labels), axis=0)
+        features = np.concatenate((features, aug_features), axis=0)
+        labels = np.concatenate((labels, aug_labels), axis=0)
 
     classifier = Classifier(classifier_params, export_path)
     classifier.on_fit(features, labels)
+
+    predictions = classifier.predict(features)
+    predictions = classify(predictions, pp_params)
+
+    predictions[predictions > 0] = 1
+    labels[labels > 0] = 1
+
+    clf_scores = {}
+    clf_scores["recall"] = recall_score(labels, predictions)
+    clf_scores["precision"] = precision_score(labels, predictions)
+    clf_scores["f1"] = f1_score(labels, predictions)
+
+    logger.info("Classifier scores:")
+    logger.info(
+        f"Sample-based recall = {clf_scores['recall']:.2f}, "
+        f"precision = {clf_scores['precision']:.2f}, "
+        f"F1 = {clf_scores['f1']:.2f}"
+    )
+
     classifier.save_base_classifier(idx)
-    return classifier
+    return classifier, clf_scores
 
 
 def evaluate_clips(
