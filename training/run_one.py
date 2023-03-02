@@ -140,17 +140,17 @@ def collect_samples_and_predict(
         datasets = video_loader(of_params, aug_options)
 
         # add information about dataset to be loaded here
-        augment_data = True
+        augment_data = False
         datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data)
 
-        if augment_data:
-            n_augmented_features = sum(
-                [datasets.augmented_features[x].shape[0] for x in clip_names_train]
-            )
-        else:
-            n_augmented_features = 0
+        # if augment_data:
+        #     n_augmented_features = sum(
+        #         [datasets.all_aug_features[x].shape[0] for x in clip_names_train]
+        #     )
+        # else:
+        #     n_augmented_features = 0
 
-        logger.info("augmented features = %d", n_augmented_features)
+        # logger.info("augmented features = %d", n_augmented_features)
 
         logger.info("Start training")
         classifier = train_classifier(
@@ -162,16 +162,19 @@ def collect_samples_and_predict(
             augment_data=augment_data,
         )
 
-        logger.info("Collect validation data")
-        datasets.collect(clip_names_val)
+        if idx != 0:
+            logger.info("Collect validation data")
+            datasets.collect(clip_names_val)
 
         logger.info("Collect test data")
         datasets.collect(clip_names_test)
 
         all_samples = datasets.all_samples
+
         save_samples(all_samples, export_path, idx)
 
         logger.info("Predict training & validation & test data")
+
         predictions = classifier.predict_all_clips(datasets.all_features)
         save_predictions(export_path, idx, predictions)
     else:
@@ -194,15 +197,13 @@ def train_classifier(
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
     labels = samples_gt.labels
 
-    if augment_data:
-        augmented_features = concatenate(datasets.augmented_features, clip_names)
-        augmented_samples_gt = concatenate_all_samples(
-            datasets.augmented_samples, clip_names
-        )
-        augmented_labels = augmented_samples_gt.labels
+    # if augment_data:
+    #     aug_features = concatenate(datasets.all_aug_features, clip_names)
+    #     aug_samples_gt = concatenate_all_samples(datasets.all_aug_samples, clip_names)
+    #     aug_labels = aug_samples_gt.labels
 
-        features = np.concatenate((features, augmented_features), axis=0)
-        labels = np.concatenate((labels, augmented_labels), axis=0)
+    #     features = np.concatenate((features, aug_features), axis=0)
+    #     labels = np.concatenate((labels, aug_labels), axis=0)
 
     classifier = Classifier(classifier_params, export_path)
     classifier.on_fit(features, labels)

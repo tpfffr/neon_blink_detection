@@ -40,8 +40,8 @@ class video_loader:
 
         self.all_samples = {}
         self.all_features = {}
-        self.augmented_samples = {}
-        self.augmented_features = {}
+        self.all_aug_samples = {}
+        self.all_aug_features = {}
 
     def collect(self, clip_names, bg_ratio=None, augment=False) -> None:
         for clip_name in clip_names:
@@ -148,16 +148,19 @@ class video_loader:
         gt_labels = np.hstack(all_gt_labels)
         timestamps = np.hstack(all_timestamps)
 
-        self.all_samples[clip_name] = Samples(timestamps, gt_labels)
-        self.all_features[clip_name] = features
-
         if augment:
             aug_features = np.vstack(aug_features)
             aug_gt_labels = np.hstack(aug_gt_labels)
             aug_timestamps = np.hstack(aug_timestamps)
 
-            self.augmented_samples[clip_name] = Samples(aug_timestamps, aug_gt_labels)
-            self.augmented_features[clip_name] = aug_features
+            features = np.vstack((features, aug_features))
+            gt_labels = np.hstack((gt_labels, aug_gt_labels))
+            timestamps = np.hstack((timestamps, aug_timestamps))
+            # self.all_aug_samples[clip_name] = Samples(aug_timestamps, aug_gt_labels)
+            # self.all_aug_features[clip_name] = aug_features
+
+        self.all_samples[clip_name] = Samples(timestamps, gt_labels)
+        self.all_features[clip_name] = features
 
     def _load_features(self, clip_name, of_params):
 
