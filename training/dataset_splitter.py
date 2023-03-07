@@ -93,7 +93,7 @@ def load_dataset_splitter(n_clips, n_splits):
     dataset_splitter.save()
     n_val = dataset_splitter.splitter.n_val
     n_clips = len(dataset_splitter.splitter.names)
-    # print(f"{n_clips - n_val} training clips & {n_val} validation clips.")
+    print(f"{n_clips - n_val} training clips & {n_val} validation clips.")
     return dataset_splitter
 
 
@@ -103,18 +103,7 @@ def splitter_file_path(n_clips, n_splits):
 
 def get_clip_list(load=True) -> np.ndarray:
     path = export_path / "clip_list.npy"
-
-    # if load and path.is_file():
     clip_tuples = np.load(path)
-    # else:
-    #     phase_dict_path = Path(
-    #         "/cluster/users/Ching/datasets/blink_detection/phase_dict.pkl"
-    #     )
-    #     phase_dict = pickle.load(open(phase_dict_path, "rb"))
-    #     clip_tuples = sorted(phase_dict.keys())
-    #     rng = np.random.default_rng(seed=0)
-    #     clip_tuples = rng.permutation(clip_tuples)
-    #     np.save(path, clip_tuples)
     return clip_tuples
 
 

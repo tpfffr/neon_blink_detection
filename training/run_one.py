@@ -28,6 +28,7 @@ from sklearn.metrics import f1_score, precision_score, recall_score
 
 logger = logging.getLogger("main")
 from sklearn.model_selection import KFold
+from copy import copy
 
 
 def main(
@@ -65,8 +66,17 @@ def main(
     metrics_pp_test = ScoresList()
     metrics_ml_test = ScoresList()
 
+    aug_features = None
+    aug_samples = None
+
     for idx, (clip_names_train, clip_names_val) in enumerate(dataset_splitter):
-        all_samples, predictions, clf_scores = collect_samples_and_predict(
+        (
+            all_samples,
+            predictions,
+            clf_scores,
+            aug_features,
+            aug_samples,
+        ) = collect_samples_and_predict(
             clip_names_train,
             clip_names_val,
             clip_names_test,
@@ -77,6 +87,8 @@ def main(
             export_path,
             idx,
             use_pretrained_classifier,
+            aug_features,
+            aug_samples,
         )
 
         logger.info("Evaluate full training data")
@@ -139,19 +151,28 @@ def collect_samples_and_predict(
     export_path: Path,
     idx: int,
     use_pretrained_classifier: bool,
+    augmented_features: T.Optional[T.Dict[str, np.ndarray]] = None,
+    augmented_samples: T.Optional[T.Dict[str, np.ndarray]] = None,
 ):
     if not use_pretrained_classifier:
-        datasets = video_loader(of_params, aug_options)
 
-        # add information about dataset to be loaded here
+        if idx == 0:
+            datasets = video_loader(of_params, aug_options)
+        else:
+            datasets = video_loader(
+                of_params, aug_options, augmented_features, augmented_samples
+            )
+
         augment_data = True
 
         logger.info("Collect subsampled training data")
-        datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data)
+        datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data, idx=idx)
 
         if augment_data:
+            augmented_features = datasets.all_aug_features
+            augmented_samples = datasets.all_aug_samples
             n_aug_features = sum(
-                [datasets.all_aug_features[x].shape[0] for x in clip_names_train]
+                [augmented_features[x].shape[0] for x in clip_names_train]
             )
         else:
             n_aug_features = 0
@@ -159,7 +180,6 @@ def collect_samples_and_predict(
         logger.info("augmented features = %d", n_aug_features)
 
         logger.info("Start training")
-        # compute performance in classifier - TO BE IMPLEMENTED
         classifier, scores = train_classifier(
             datasets,
             clip_names_train,
@@ -169,9 +189,6 @@ def collect_samples_and_predict(
             augment_data=augment_data,
             pp_params=pp_params,
         )
-
-        del datasets
-        datasets = video_loader(of_params, aug_options)
 
         logger.info("Collect all training data")
         datasets.collect(clip_names_train)
@@ -194,7 +211,7 @@ def collect_samples_and_predict(
         all_samples = load_samples(export_path, idx)
         predictions = load_predictions(export_path, idx)
 
-    return all_samples, predictions, scores
+    return all_samples, predictions, scores, augmented_features, augmented_samples
 
 
 def train_classifier(
@@ -210,6 +227,26 @@ def train_classifier(
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
     labels = samples_gt.labels
 
+    # classifier_noaug = Classifier(classifier_params, export_path)
+    # classifier_noaug.on_fit(features, labels)
+
+    # predictions = classifier_noaug.predict(features)
+    # predictions = classify(predictions, pp_params)
+
+    # scores = compute_basic_scores(predictions, labels)
+
+    # logger.info("Classifier scores (w/o augmentation):")
+    # logger.info(
+    #     f"Sample-based recall on = {scores['recall_on']:.2f}, "
+    #     f"precision on = {scores['precision_on']:.2f}, "
+    #     f"F1 on = {scores['f1_on']:.2f}"
+    # )
+    # logger.info(
+    #     f"Sample-based recall off = {scores['recall_off']:.2f}, "
+    #     f"precision off = {scores['precision_off']:.2f}, "
+    #     f"F1 off = {scores['f1_off']:.2f}"
+    # )
+
     if augment_data:
         aug_features = concatenate(datasets.all_aug_features, clip_names)
         aug_samples_gt = concatenate_all_samples(datasets.all_aug_samples, clip_names)
@@ -224,6 +261,20 @@ def train_classifier(
     predictions = classifier.predict(features)
     predictions = classify(predictions, pp_params)
 
+    scores = compute_clf_scores(predictions, labels)
+
+    logger.info("Classifier scores (with augmentation):")
+    logger.info(
+        f"Sample-based recall on = {scores['recall_on']:.2f}, "
+        f"precision on = {scores['precision_on']:.2f}, "
+        f"F1 on = {scores['f1_on']:.2f}"
+    )
+    logger.info(
+        f"Sample-based recall off = {scores['recall_off']:.2f}, "
+        f"precision off = {scores['precision_off']:.2f}, "
+        f"F1 off = {scores['f1_off']:.2f}"
+    )
+
     predictions[predictions > 0] = 1
     labels[labels > 0] = 1
 
@@ -232,15 +283,47 @@ def train_classifier(
     clf_scores["precision"] = precision_score(labels, predictions)
     clf_scores["f1"] = f1_score(labels, predictions)
 
-    logger.info("Classifier scores:")
-    logger.info(
-        f"Sample-based recall = {clf_scores['recall']:.2f}, "
-        f"precision = {clf_scores['precision']:.2f}, "
-        f"F1 = {clf_scores['f1']:.2f}"
-    )
-
     classifier.save_base_classifier(idx)
+
     return classifier, clf_scores
+
+
+def compute_clf_scores(predictions, labels):
+
+    pred = copy(predictions)
+    pred[pred == 1] = 0
+    pred[pred == 2] = 1
+    lab = copy(labels)
+    lab[lab == 1] = 0
+    lab[lab == 2] = 1
+
+    scores = {}
+
+    scores["recall_off"] = recall_score(lab, pred)
+    scores["precision_off"] = precision_score(lab, pred)
+    scores["f1_off"] = f1_score(lab, pred)
+
+    pred = copy(predictions)
+    pred[pred == 2] = 0
+    pred[pred == 1] = 1
+    lab = copy(labels)
+    lab[lab == 2] = 0
+    lab[lab == 1] = 1
+
+    scores["recall_on"] = recall_score(lab, pred)
+    scores["precision_on"] = precision_score(lab, pred)
+    scores["f1_on"] = f1_score(lab, pred)
+
+    pred = copy(predictions)
+    pred[pred > 0] = 1
+    lab = copy(labels)
+    lab[lab > 0] = 1
+
+    scores["recall_all"] = recall_score(lab, pred)
+    scores["precision_all"] = precision_score(lab, pred)
+    scores["f1_all"] = f1_score(lab, pred)
+
+    return scores
 
 
 def evaluate_clips(

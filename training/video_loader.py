@@ -33,23 +33,35 @@ of_path = Path(
 
 
 class video_loader:
-    def __init__(self, of_params: OfParams, aug_options: AugParams):
+    def __init__(
+        self,
+        of_params: OfParams,
+        aug_options: AugParams,
+        augmented_features=None,
+        augmented_samples=None,
+    ):
         self.rec_folder = Path(video_path)
         self._of_params = of_params
         self._of_path = of_path
         self._aug_options = aug_options
-
         self.all_samples = {}
         self.all_features = {}
-        self.all_aug_samples = {}
-        self.all_aug_features = {}
 
-    def collect(self, clip_names, bg_ratio=None, augment=False) -> None:
+        if (augmented_features is None) and (augmented_samples is None):
+            self.all_aug_samples = {}
+            self.all_aug_features = {}
+        else:
+            self.all_aug_samples = augmented_samples
+            self.all_aug_features = augmented_features
+
+    def collect(self, clip_names, bg_ratio=None, augment=False, idx=None) -> None:
         for clip_name in clip_names:
-            print("Loading clip: %s" % clip_name)
-            self._load(clip_name, bg_ratio, augment)
+            print("\nLoading clip: %s" % clip_name)
+            self._load(clip_name, bg_ratio, augment, idx)
 
-    def _load(self, clip_name: str, bg_ratio: int, augment: bool) -> None:
+    def _load(
+        self, clip_name: str, bg_ratio: int, augment: bool, idx: bool = None
+    ) -> None:
 
         # LOAD FEATURES OR COMPUTE THEM
         feature_array, all_timestamps, clip_transitions = self._load_features(
@@ -110,9 +122,9 @@ class video_loader:
             all_gt_labels.append(gt_labels)
             all_timestamps.append(timestamps)
 
-            if augment:
+            if (augment == True) and (idx == 0):
 
-                aug_ratio = 2
+                aug_ratio = 4
                 n_onset_augs = np.floor(len(onset_indices) * aug_ratio).astype(int)
                 n_offset_augs = np.floor(len(offset_indices) * aug_ratio).astype(int)
 
@@ -149,27 +161,78 @@ class video_loader:
 
                 aug_gt_labels_clip = np.full(len(all_indices), 0)
                 aug_gt_labels_clip[0:n_onset_augs] = 1
-                aug_gt_labels_clip[n_offset_augs:] = 2
+                aug_gt_labels_clip[n_onset_augs:] = 2
+
+                assert np.sum(aug_gt_labels_clip == 1) == n_onset_augs
+                assert np.sum(aug_gt_labels_clip == 2) == n_offset_augs
+                assert np.sum(aug_gt_labels_clip == 0) == 0
 
                 aug_gt_labels.append(aug_gt_labels_clip)
-
                 aug_timestamps.append(aug_timestamps_clip)
 
         features = np.vstack(features)
         gt_labels = np.hstack(all_gt_labels)
         timestamps = np.hstack(all_timestamps)
 
-        if augment:
+        if (augment == True) and (idx == 0):
+
             aug_features = np.vstack(aug_features)
             aug_gt_labels = np.hstack(aug_gt_labels)
             aug_timestamps = np.hstack(aug_timestamps)
 
-            # features = np.vstack((features, aug_features))
-            # gt_labels = np.hstack((gt_labels, aug_gt_labels))
-            # timestamps = np.hstack((timestamps, aug_timestamps))
-
             self.all_aug_samples[clip_name] = Samples(aug_timestamps, aug_gt_labels)
             self.all_aug_features[clip_name] = aug_features
+
+        self.all_samples[clip_name] = Samples(timestamps, gt_labels)
+        self.all_features[clip_name] = features
+
+    def _load_legacy(self, clip_name: str, bg_ratio: int) -> None:
+
+        # LOAD FEATURES OR COMPUTE THEM
+        feature_array, all_timestamps, clip_transitions = self._load_features(
+            clip_name, self._of_params
+        )
+
+        n_clips = clip_transitions.shape[0] + 1
+        clip_feature_array = np.split(feature_array, clip_transitions + 1, axis=0)
+        clip_timestamps = np.split(all_timestamps, clip_transitions + 1, axis=0)
+
+        features = []
+        all_gt_labels = []
+        all_timestamps = []
+
+        for iclip in range(0, n_clips):
+            n_frames = len(clip_timestamps[iclip])
+
+            onset_indices, offset_indices, all_indices = self._find_indices(
+                clip_feature_array[iclip],
+                clip_name,
+                clip_timestamps[iclip],
+                n_frames,
+                bg_ratio,
+            )
+
+            gt_labels = np.full(n_frames, 0)
+            if len(offset_indices):
+                gt_labels[offset_indices] = 2
+            if len(onset_indices):
+                gt_labels[onset_indices] = 1
+            gt_labels = gt_labels[all_indices]
+
+            timestamps = clip_timestamps[iclip][all_indices]
+
+            feature_array = extract_grid(clip_feature_array[iclip], self._of_params)
+
+            features.append(
+                concatenate_features(feature_array, self._of_params, all_indices)
+            )
+
+            all_gt_labels.append(gt_labels)
+            all_timestamps.append(timestamps)
+
+        timestamps = np.hstack(all_timestamps)
+        gt_labels = np.hstack(all_gt_labels)
+        features = np.vstack(features)
 
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
@@ -185,7 +248,7 @@ class video_loader:
             clip_transitions = tmp["clip_transitions"]
             timestamps = tmp["timestamps"]
             n_clips = clip_transitions.shape[0] + 1
-            print("\nNumber of clips: %d" % n_clips)
+            print("\rNumber of clips: %d" % n_clips)
 
         except FileNotFoundError:
             print(f"cannot load from {path}")

@@ -164,7 +164,7 @@ def get_augmentation_pars(aug_options):
 
     aug_params["speed"] = np.random.normal(1, std_speed)
     aug_params["translation"] = np.random.normal(0, std_translation, 2)
-    aug_params["scale"] = 1 / np.random.normal(1, std_scale)
+    aug_params["scale"] = np.random.normal(1, std_scale)
     aug_params["linear_distort"] = np.eye(2) + np.random.normal(0, std_linear, (2, 2))
 
     return aug_params
@@ -191,9 +191,9 @@ def interpolate_spacetime(
 
         grid_trans = np.zeros_like(txy_grid)
 
-        sc = aug_params["scale"]
+        sc = 1  # aug_params["scale"]
         transl = aug_params["translation"]
-        lin_dis = aug_params["linear_distort"]
+        lin_dis = np.eye(2, 2)  # aug_params["linear_distort"]
 
         if side == "right":
             # lin_dis = np.array([[0, 1], [-1, 0]]) @ aug_params["linear_distort"]
@@ -211,6 +211,23 @@ def interpolate_spacetime(
         .reshape(grid_size, len(time_points), grid_size)
         .transpose(1, 0, 2)
     )
+
+
+# def extract_grid(feature_array: np.ndarray, of_params: OfParams) -> np.ndarray:
+
+#     from src.features_calculator import create_grids
+#     from scipy.interpolate import griddata
+
+#     p_grid = create_grids((64, 64), 20, full_grid=True)
+#     sub_grid = create_grids((64, 64), of_params.grid_size + 2, full_grid=False)
+
+#     left = feature_array[:, :400, :].transpose(1, 0, 2)
+#     right = feature_array[:, 400:, :].transpose(1, 0, 2)
+
+#     left_interp = griddata(p_grid, left, sub_grid, method="linear").transpose(1, 0, 2)
+#     right_interp = griddata(p_grid, right, sub_grid, method="linear").transpose(1, 0, 2)
+
+#     return np.concatenate((left_interp, right_interp), axis=1)
 
 
 # def concatenate_features(
@@ -241,8 +258,8 @@ def interpolate_spacetime(
 #     n_features = (
 #         of_params.n_layers if of_params.average else of_params.n_layers * n_grids
 #     )
-#     # if features.shape != (len(indices), n_features):
-#     #     raise RuntimeError(
-#     #         f"feature shape should be {(len(indices), n_features)}, but get {features.shape}"
-#     #     )
+#     if features.shape != (len(indices), n_features):
+#         raise RuntimeError(
+#             f"feature shape should be {(len(indices), n_features)}, but get {features.shape}"
+#         )
 #     return features
