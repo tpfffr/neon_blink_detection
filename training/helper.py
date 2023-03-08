@@ -5,7 +5,7 @@ import pprint
 import typing as T
 from dataclasses import dataclass, field
 from pathlib import Path
-
+import numpy as np
 from src.helper import OfParams, PPParams, AugParams
 from src.metrics import ScoresList
 from training.dataset_splitter import DatasetSplitter
@@ -36,9 +36,9 @@ def get_of_params_options():
     layer_interval_options = [7]  # used to be [1, 3, 5, 7]
     average_options = [False]
     img_shape_options = [(64, 64)]
-    grid_size_options = [4]  # used to be [4, 7, 10]
+    grid_size_options = [7]  # used to be [4, 7, 10]
     step_size_options = [7]
-    window_size_options = [11]  # used to be [[7, 11, 15]]
+    window_size_options = [15]  # used to be [[7, 11, 15]]
     stop_steps_options = [3]
 
     options = itertools.product(
@@ -61,8 +61,8 @@ def get_of_params_options():
 def get_augmentation_options():
 
     std_speed = [0.0]
-    std_translation = [0, 0.5, 1, 1.5, 2, 2.5]
-    std_scale = [0.0, 0.1, 0.2, 0.3]
+    std_translation = [0.0]  # list(np.arange(0, 15, 0.25))
+    std_scale = [0.0]  # list(np.arange(0, 0.2, 0.01))
     std_linear = [0.0]
 
     options = itertools.product(
@@ -130,12 +130,6 @@ class Results:
         self.print()
 
     def print(self):
-        logger.info(
-            "Classifier scores:\n"
-            f"Sample-based recall = {self.clf_scores['recall']:.2f}, "
-            f"precision = {self.clf_scores['precision']:.2f}, "
-            f"F1 = {self.clf_scores['f1']:.2f}"
-        )
         logger.info(
             "Full training scores:\n"
             f"Sample-based {self.metrics_sample_train}\n"

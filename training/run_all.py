@@ -41,7 +41,7 @@ def main(n_splits=5):
     dataset_splitter = load_dataset_splitter(n_clips=None, n_splits=n_splits)
 
     use_pretrained_classifier = False
-    use_cluster = True
+    use_cluster = False
     compute_of = False
 
     classifier_params = get_classifier_params()
@@ -87,11 +87,12 @@ def main(n_splits=5):
                 of_save_path = of_path / feature_dir
 
                 # if not of_save_path.exists():
+                print(of_save_path)
                 for clip_name in clip_names:
                     datasets = video_loader(of_params, aug_options)
                     datasets._load_features(clip_name, of_params)
                 # else:
-                #     continue
+                # continue
 
 
 if __name__ == "__main__":

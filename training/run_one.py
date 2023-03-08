@@ -24,7 +24,7 @@ from training.datasets_loader import (
 from src.features_calculator import create_grids
 from training.evaluation import evaluate
 from training.helper import ClassifierParams, Results
-from sklearn.metrics import f1_score, precision_score, recall_score
+from sklearn.metrics import f1_score, precision_score, recall_score, confusion_matrix
 
 logger = logging.getLogger("main")
 from sklearn.model_selection import KFold
@@ -163,7 +163,7 @@ def collect_samples_and_predict(
                 of_params, aug_options, augmented_features, augmented_samples
             )
 
-        augment_data = True
+        augment_data = False
 
         logger.info("Collect subsampled training data")
         datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data, idx=idx)
@@ -227,26 +227,6 @@ def train_classifier(
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
     labels = samples_gt.labels
 
-    # classifier_noaug = Classifier(classifier_params, export_path)
-    # classifier_noaug.on_fit(features, labels)
-
-    # predictions = classifier_noaug.predict(features)
-    # predictions = classify(predictions, pp_params)
-
-    # scores = compute_basic_scores(predictions, labels)
-
-    # logger.info("Classifier scores (w/o augmentation):")
-    # logger.info(
-    #     f"Sample-based recall on = {scores['recall_on']:.2f}, "
-    #     f"precision on = {scores['precision_on']:.2f}, "
-    #     f"F1 on = {scores['f1_on']:.2f}"
-    # )
-    # logger.info(
-    #     f"Sample-based recall off = {scores['recall_off']:.2f}, "
-    #     f"precision off = {scores['precision_off']:.2f}, "
-    #     f"F1 off = {scores['f1_off']:.2f}"
-    # )
-
     if augment_data:
         aug_features = concatenate(datasets.all_aug_features, clip_names)
         aug_samples_gt = concatenate_all_samples(datasets.all_aug_samples, clip_names)
@@ -261,27 +241,24 @@ def train_classifier(
     predictions = classifier.predict(features)
     predictions = classify(predictions, pp_params)
 
-    scores = compute_clf_scores(predictions, labels)
+    clf_scores = compute_clf_scores(predictions, labels)
 
-    logger.info("Classifier scores (with augmentation):")
+    logger.info("Classifier scores:")
     logger.info(
-        f"Sample-based recall on = {scores['recall_on']:.2f}, "
-        f"precision on = {scores['precision_on']:.2f}, "
-        f"F1 on = {scores['f1_on']:.2f}"
+        f"Sample-based recall on = {clf_scores['recall_on']:.2f}, "
+        f"precision on = {clf_scores['precision_on']:.2f}, "
+        f"F1 on = {clf_scores['f1_on']:.2f}"
     )
     logger.info(
-        f"Sample-based recall off = {scores['recall_off']:.2f}, "
-        f"precision off = {scores['precision_off']:.2f}, "
-        f"F1 off = {scores['f1_off']:.2f}"
+        f"Sample-based recall off = {clf_scores['recall_off']:.2f}, "
+        f"precision off = {clf_scores['precision_off']:.2f}, "
+        f"F1 off = {clf_scores['f1_off']:.2f}"
     )
-
-    predictions[predictions > 0] = 1
-    labels[labels > 0] = 1
-
-    clf_scores = {}
-    clf_scores["recall"] = recall_score(labels, predictions)
-    clf_scores["precision"] = precision_score(labels, predictions)
-    clf_scores["f1"] = f1_score(labels, predictions)
+    logger.info(
+        f"Sample-based recall bg = {clf_scores['recall_bg']:.2f}, "
+        f"precision bg = {clf_scores['precision_bg']:.2f}, "
+        f"F1 bg = {clf_scores['f1_bg']:.2f}"
+    )
 
     classifier.save_base_classifier(idx)
 
@@ -290,38 +267,24 @@ def train_classifier(
 
 def compute_clf_scores(predictions, labels):
 
-    pred = copy(predictions)
-    pred[pred == 1] = 0
-    pred[pred == 2] = 1
-    lab = copy(labels)
-    lab[lab == 1] = 0
-    lab[lab == 2] = 1
-
     scores = {}
 
-    scores["recall_off"] = recall_score(lab, pred)
-    scores["precision_off"] = precision_score(lab, pred)
-    scores["f1_off"] = f1_score(lab, pred)
+    recall = recall_score(labels, predictions, average=None)
+    scores.update(
+        {"recall_bg": recall[0], "recall_on": recall[1], "recall_off": recall[2]}
+    )
 
-    pred = copy(predictions)
-    pred[pred == 2] = 0
-    pred[pred == 1] = 1
-    lab = copy(labels)
-    lab[lab == 2] = 0
-    lab[lab == 1] = 1
+    precision = precision_score(labels, predictions, average=None)
+    scores.update(
+        {
+            "precision_bg": precision[0],
+            "precision_on": precision[1],
+            "precision_off": precision[2],
+        }
+    )
 
-    scores["recall_on"] = recall_score(lab, pred)
-    scores["precision_on"] = precision_score(lab, pred)
-    scores["f1_on"] = f1_score(lab, pred)
-
-    pred = copy(predictions)
-    pred[pred > 0] = 1
-    lab = copy(labels)
-    lab[lab > 0] = 1
-
-    scores["recall_all"] = recall_score(lab, pred)
-    scores["precision_all"] = precision_score(lab, pred)
-    scores["f1_all"] = f1_score(lab, pred)
+    f1 = f1_score(labels, predictions, average=None)
+    scores.update({"f1_bg": f1[0], "f1_on": f1[1], "f1_off": f1[2]})
 
     return scores
 

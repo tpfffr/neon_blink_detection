@@ -16,6 +16,8 @@ from random import choices
 from src.features_calculator import (
     calculate_optical_flow,
     new_concatenate_features,
+    concatenate_features,
+    extract_grid,
     get_augmentation_pars,
     create_interpolater,
 )
@@ -57,9 +59,12 @@ class video_loader:
     def collect(self, clip_names, bg_ratio=None, augment=False, idx=None) -> None:
         for clip_name in clip_names:
             print("\nLoading clip: %s" % clip_name)
-            self._load(clip_name, bg_ratio, augment, idx)
+            if augment:
+                self._load_augmented(clip_name, bg_ratio, augment, idx)
+            else:
+                self._load_legacy(clip_name, bg_ratio)
 
-    def _load(
+    def _load_augmented(
         self, clip_name: str, bg_ratio: int, augment: bool, idx: bool = None
     ) -> None:
 
@@ -124,7 +129,7 @@ class video_loader:
 
             if (augment == True) and (idx == 0):
 
-                aug_ratio = 4
+                aug_ratio = 1
                 n_onset_augs = np.floor(len(onset_indices) * aug_ratio).astype(int)
                 n_offset_augs = np.floor(len(offset_indices) * aug_ratio).astype(int)
 
@@ -162,10 +167,6 @@ class video_loader:
                 aug_gt_labels_clip = np.full(len(all_indices), 0)
                 aug_gt_labels_clip[0:n_onset_augs] = 1
                 aug_gt_labels_clip[n_onset_augs:] = 2
-
-                assert np.sum(aug_gt_labels_clip == 1) == n_onset_augs
-                assert np.sum(aug_gt_labels_clip == 2) == n_offset_augs
-                assert np.sum(aug_gt_labels_clip == 0) == 0
 
                 aug_gt_labels.append(aug_gt_labels_clip)
                 aug_timestamps.append(aug_timestamps_clip)
