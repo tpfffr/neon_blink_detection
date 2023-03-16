@@ -32,11 +32,11 @@ class ClassifierParams:
 
 
 def get_of_params_options():
-    n_layers_options = [7]  # used to be [3, 5, 7]
+    n_layers_options = [5]  # used to be [3, 5, 7]
     layer_interval_options = [7]  # used to be [1, 3, 5, 7]
     average_options = [False]
     img_shape_options = [(64, 64)]
-    grid_size_options = [7]  # used to be [4, 7, 10]
+    grid_size_options = [4]  # used to be [4, 7, 10]
     step_size_options = [7]
     window_size_options = [15]  # used to be [[7, 11, 15]]
     stop_steps_options = [3]
@@ -60,9 +60,9 @@ def get_of_params_options():
 
 def get_augmentation_options():
 
-    std_speed = [0.0]
-    std_translation = [0.0]  # list(np.arange(0, 15, 0.25))
-    std_scale = [0.0]  # list(np.arange(0, 0.2, 0.01))
+    std_speed = list(np.arange(0, 0.5, 0.05))
+    std_translation = [0.0]  # list(np.arange(0, 5, 0.5))  # list(np.arange(0, 5, 0.25))
+    std_scale = [0.0]  # list(np.arange(0, 0.2, 0.02))  # list(np.arange(0, 0.2, 0.02))
     std_linear = [0.0]
 
     options = itertools.product(
@@ -232,7 +232,8 @@ def get_experiment_name_new(of_params: OfParams, aug_params: AugParams) -> str:
         f"grid{of_params.grid_size}-"
         f"win{of_params.window_size}-"
         f"trans{aug_params.std_translation}-"
-        f"scale{aug_params.std_scale}"
+        f"scale{aug_params.std_scale}-"
+        f"speed{aug_params.std_speed}"
     )
 
 

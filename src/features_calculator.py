@@ -240,10 +240,10 @@ def concatenate_features(
     if indices is None:
         indices = np.arange(n_frame)
     n_grids = of_params.grid_size * of_params.grid_size * 2
-    # right_shape = (n_frame, n_grids, 2)
-    # assert (
-    #     feature_array.shape == right_shape
-    # ), f"feature shape should be {right_shape}, but get {feature_array.shape}"
+    right_shape = (n_frame, n_grids, 2)
+    assert (
+        feature_array.shape == right_shape
+    ), f"feature shape should be {right_shape}, but get {feature_array.shape}"
 
     feature_array_y = feature_array[:, :, 1]  # take only y
     if of_params.average:
@@ -252,27 +252,14 @@ def concatenate_features(
 
     indices_layers = np.array([[indices + i] for i in layers]).reshape(len(layers), -1)
     indices_layers = np.clip(indices_layers, 0, len(feature_array_y) - 1)
-
-    feature_array_y_left = feature_array_y[:, : of_params.grid_size**2]
-    feature_array_y_right = feature_array_y[:, of_params.grid_size**2 :]
-
-    features_left = np.concatenate(
-        [feature_array_y_left[indices] for indices in indices_layers], axis=1
+    features = np.concatenate(
+        [feature_array_y[indices] for indices in indices_layers], axis=1
     )
-
-    features_right = np.concatenate(
-        [feature_array_y_right[indices] for indices in indices_layers], axis=1
-    )
-
-    features = np.concatenate((features_left, features_right), axis=1)
-
     n_features = (
         of_params.n_layers if of_params.average else of_params.n_layers * n_grids
     )
-
     if features.shape != (len(indices), n_features):
         raise RuntimeError(
             f"feature shape should be {(len(indices), n_features)}, but get {features.shape}"
         )
-
     return features

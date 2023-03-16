@@ -129,7 +129,7 @@ class video_loader:
 
             if (augment == True) and (idx == 0):
 
-                aug_ratio = 1
+                aug_ratio = 3
                 n_onset_augs = np.floor(len(onset_indices) * aug_ratio).astype(int)
                 n_offset_augs = np.floor(len(offset_indices) * aug_ratio).astype(int)
 
