@@ -60,7 +60,7 @@ def get_of_params_options():
 
 def get_augmentation_options():
 
-    std_speed = list(np.arange(0, 0.5, 0.05))
+    std_speed = [0.0]  # list(np.arange(0, 0.5, 0.05))
     std_translation = [0.0]  # list(np.arange(0, 5, 0.5))  # list(np.arange(0, 5, 0.25))
     std_scale = [0.0]  # list(np.arange(0, 0.2, 0.02))  # list(np.arange(0, 0.2, 0.02))
     std_linear = [0.0]

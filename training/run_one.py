@@ -25,6 +25,9 @@ from src.features_calculator import create_grids
 from training.evaluation import evaluate
 from training.helper import ClassifierParams, Results
 from sklearn.metrics import f1_score, precision_score, recall_score, confusion_matrix
+from training.cnn import OpticalFlowCNN, OpticalFlowDataset
+import torch
+from sklearn.model_selection import train_test_split
 
 logger = logging.getLogger("main")
 from sklearn.model_selection import KFold
@@ -163,7 +166,7 @@ def collect_samples_and_predict(
                 of_params, aug_options, augmented_features, augmented_samples
             )
 
-        augment_data = True
+        augment_data = False
 
         logger.info("Collect subsampled training data")
         datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data, idx=idx)
@@ -180,7 +183,7 @@ def collect_samples_and_predict(
         logger.info("augmented features = %d", n_aug_features)
 
         logger.info("Start training")
-        classifier, scores = train_classifier(
+        classifier, scores = train_cnn(
             datasets,
             clip_names_train,
             classifier_params,
@@ -261,6 +264,82 @@ def train_classifier(
     )
 
     classifier.save_base_classifier(idx)
+
+    return classifier, clf_scores
+
+
+def train_cnn(
+    datasets: video_loader,
+    clip_names: T.List[str],
+    classifier_params: ClassifierParams,
+    export_path: Path,
+    idx: int,
+    augment_data: bool,
+    pp_params: PPParams,
+):
+
+    features = concatenate(datasets.all_features, clip_names)
+    samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
+    labels = samples_gt.labels
+
+    if augment_data:
+        aug_features = concatenate(datasets.all_aug_features, clip_names)
+        aug_samples_gt = concatenate_all_samples(datasets.all_aug_samples, clip_names)
+        aug_labels = aug_samples_gt.labels
+
+        features = np.concatenate((features, aug_features), axis=0)
+        labels = np.concatenate((labels, aug_labels), axis=0)
+
+    mean = np.mean(features, axis=(0, 2, 3), keepdims=True)
+    std = np.std(features, axis=(0, 2, 3), keepdims=True)
+
+    features = (features - mean) / std
+
+    X_train, X_val, y_train, y_val = train_test_split(
+        features, labels, stratify=labels, test_size=0.05, random_state=42
+    )
+
+    classifier = OpticalFlowCNN()
+    classifier.cuda()
+
+    X_train = torch.from_numpy(X_train).float().cuda()
+    y_train = torch.from_numpy(y_train).long().cuda()
+
+    X_val = torch.from_numpy(X_val).float().cuda()
+    y_val = torch.from_numpy(y_val).long().cuda()
+
+    classifier.training_func(
+        X_train=X_train,
+        y_train=y_train,
+        X_val=X_val,
+        y_val=y_val,
+        batch_size=32,
+        num_epochs=100,
+    )
+
+    predictions = classifier.predict(X_train)
+    predictions = classify(predictions, pp_params)
+
+    clf_scores = compute_clf_scores(predictions, y_train.cpu().numpy())
+
+    logger.info("Classifier scores:")
+    logger.info(
+        f"Sample-based recall on = {clf_scores['recall_on']:.2f}, "
+        f"precision on = {clf_scores['precision_on']:.2f}, "
+        f"F1 on = {clf_scores['f1_on']:.2f}"
+    )
+    logger.info(
+        f"Sample-based recall off = {clf_scores['recall_off']:.2f}, "
+        f"precision off = {clf_scores['precision_off']:.2f}, "
+        f"F1 off = {clf_scores['f1_off']:.2f}"
+    )
+    logger.info(
+        f"Sample-based recall bg = {clf_scores['recall_bg']:.2f}, "
+        f"precision bg = {clf_scores['precision_bg']:.2f}, "
+        f"F1 bg = {clf_scores['f1_bg']:.2f}"
+    )
+
+    # classifier.save_base_classifier(idx)
 
     return classifier, clf_scores
 
