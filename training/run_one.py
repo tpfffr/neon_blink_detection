@@ -277,11 +277,27 @@ def train_cnn(
     augment_data: bool,
     pp_params: PPParams,
 ):
+    """Train a CNN classifier.
 
+    Args:
+        datasets: The datasets to train on.
+        clip_names: The names of the clips to train on.
+        classifier_params: The parameters for the classifier.
+        export_path: The path to export the classifier to.
+        idx: The index of the current iteration.
+        augment_data: Whether to augment the data.
+        pp_params: The parameters for post-processing.
+
+        Returns:
+            The trained classifier and the scores.
+    """
+
+    # Concatenate all features and labels
     features = concatenate(datasets.all_features, clip_names)
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
     labels = samples_gt.labels
 
+    # Augment data
     if augment_data:
         aug_features = concatenate(datasets.all_aug_features, clip_names)
         aug_samples_gt = concatenate_all_samples(datasets.all_aug_samples, clip_names)
@@ -290,36 +306,33 @@ def train_cnn(
         features = np.concatenate((features, aug_features), axis=0)
         labels = np.concatenate((labels, aug_labels), axis=0)
 
-    mean = np.mean(features, axis=(0, 2, 3), keepdims=True)
-    std = np.std(features, axis=(0, 2, 3), keepdims=True)
-
-    features = (features - mean) / std
-
+    # Split into train and validation set for early stopping
     X_train, X_val, y_train, y_val = train_test_split(
         features, labels, stratify=labels, test_size=0.05, random_state=42
     )
 
-    classifier = OpticalFlowCNN()
-    classifier.cuda()
-
+    # Convert to torch tensors
     X_train = torch.from_numpy(X_train).float().cuda()
     y_train = torch.from_numpy(y_train).long().cuda()
-
     X_val = torch.from_numpy(X_val).float().cuda()
     y_val = torch.from_numpy(y_val).long().cuda()
 
+    # Create classifier
+    classifier = OpticalFlowCNN(export_path)
+    classifier.cuda()
+
+    # Train classifier
     classifier.training_func(
         X_train=X_train,
         y_train=y_train,
         X_val=X_val,
         y_val=y_val,
-        batch_size=32,
+        batch_size=128,
         num_epochs=100,
     )
 
     predictions = classifier.predict(X_train)
     predictions = classify(predictions, pp_params)
-
     clf_scores = compute_clf_scores(predictions, y_train.cpu().numpy())
 
     logger.info("Classifier scores:")
@@ -339,7 +352,8 @@ def train_cnn(
         f"F1 bg = {clf_scores['f1_bg']:.2f}"
     )
 
-    # classifier.save_base_classifier(idx)
+    # Save classifier
+    classifier.save_base_classifier(idx)
 
     return classifier, clf_scores
 

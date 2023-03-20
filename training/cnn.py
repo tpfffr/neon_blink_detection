@@ -7,26 +7,29 @@ from torch.utils.data import DataLoader
 import numpy as np
 import typing as T
 import copy
+from pathlib import Path
 
 
 class OpticalFlowCNN(nn.Module):
-    def __init__(self):
+    def __init__(self, save_path: Path = "."):
         super(OpticalFlowCNN, self).__init__()
 
         self.conv1 = nn.Conv2d(10, 16, kernel_size=3, padding=1)
-        self.bn1 = nn.BatchNorm2d(16)
+        # self.bn1 = nn.BatchNorm2d(16)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
-        self.bn2 = nn.BatchNorm2d(32)
+        # self.bn2 = nn.BatchNorm2d(32)
         self.pool = nn.MaxPool2d(2, 2)
-        self.fc1 = nn.Linear(32, 3)
-        # self.fc2 = nn.Linear(64, 3)
+        self.fc1 = nn.Linear(32, 64)
+        self.fc2 = nn.Linear(64, 3)
+
+        self.save_path = Path(save_path)
 
     def forward(self, x):
-        x = self.pool(F.relu(self.bn1(self.conv1(x))))
-        x = self.pool(F.relu(self.bn2(self.conv2(x))))
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
         x = x.view(-1, x.shape[1] * x.shape[2] * x.shape[3])
         x = F.relu(self.fc1(x))
-        # x = self.fc2(x)
+        x = self.fc2(x)
         return x
 
     def predict(self, X_test):
@@ -55,8 +58,8 @@ class OpticalFlowCNN(nn.Module):
 
         # Loss function and optimizer
         criterion = nn.CrossEntropyLoss()
-        # optimizer = optim.SGD(self.parameters(), lr=lr, momentum=momentum)
-        optimizer = optim.Adam(self.parameters(), lr=lr)
+        optimizer = optim.SGD(self.parameters(), lr=lr, momentum=momentum)
+        # optimizer = optim.Adam(self.parameters(), lr=lr)
 
         optical_flow_data = OpticalFlowDataset(X_train, y_train)
 
@@ -129,6 +132,12 @@ class OpticalFlowCNN(nn.Module):
             clip_tuple: self.predict(features)
             for clip_tuple, features in all_features.items()
         }
+
+    def save_base_classifier(self, idx) -> None:
+        torch.save(self.state_dict(), self.model_path(idx))
+
+    def model_path(self, idx) -> str:
+        return str(self.save_path / f"weights-{idx}.sav")
 
 
 class OpticalFlowDataset(Dataset):
