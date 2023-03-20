@@ -307,6 +307,8 @@ def train_cnn(
         labels = np.concatenate((labels, aug_labels), axis=0)
 
     # Split into train and validation set for early stopping
+    # Stratify to ensure that the classes are balanced in both sets
+    # CHANGE THIS: SHOULD ONLY APPLY TO TRAINING SET (idx == 0)
     X_train, X_val, y_train, y_val = train_test_split(
         features, labels, stratify=labels, test_size=0.05, random_state=42
     )
