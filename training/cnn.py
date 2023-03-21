@@ -46,12 +46,12 @@ class OpticalFlowCNN(nn.Module):
         X_val,
         y_val,
         batch_size=32,
-        num_epochs=15,
+        num_epochs=100,
         lr=0.001,
         momentum=0.9,
     ):
 
-        patience = 4
+        patience = 20
         min_delta = 0.001
         best_val_loss = float("inf")
         counter = 0
@@ -137,7 +137,7 @@ class OpticalFlowCNN(nn.Module):
         torch.save(self.state_dict(), self.model_path(idx))
 
     def model_path(self, idx) -> str:
-        return str(self.save_path / f"weights-{idx}.sav")
+        return str(self.save_path / f"weights-{idx}.pt")
 
 
 class OpticalFlowDataset(Dataset):

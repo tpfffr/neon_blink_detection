@@ -32,6 +32,7 @@ from sklearn.model_selection import train_test_split
 logger = logging.getLogger("main")
 from sklearn.model_selection import KFold
 from copy import copy
+from functions.pipeline import get_classifier_params
 
 
 def main(
@@ -186,7 +187,7 @@ def collect_samples_and_predict(
         classifier, scores = train_cnn(
             datasets,
             clip_names_train,
-            classifier_params,
+            clip_names_val,
             export_path,
             idx,
             augment_data=augment_data,
@@ -271,7 +272,7 @@ def train_classifier(
 def train_cnn(
     datasets: video_loader,
     clip_names: T.List[str],
-    classifier_params: ClassifierParams,
+    clip_names_val: T.List[str],
     export_path: Path,
     idx: int,
     augment_data: bool,
@@ -308,10 +309,16 @@ def train_cnn(
 
     # Split into train and validation set for early stopping
     # Stratify to ensure that the classes are balanced in both sets
-    # CHANGE THIS: SHOULD ONLY APPLY TO TRAINING SET (idx == 0)
-    X_train, X_val, y_train, y_val = train_test_split(
-        features, labels, stratify=labels, test_size=0.05, random_state=42
-    )
+    if idx == 0:
+        X_train, X_val, y_train, y_val = train_test_split(
+            features, labels, stratify=labels, test_size=0.05, random_state=42
+        )
+    else:
+        X_train = features
+        y_train = labels
+        X_val = concatenate(datasets.all_features, clip_names_val)
+        samples_gt = concatenate_all_samples(datasets.all_samples, clip_names_val)
+        y_val = samples_gt.labels
 
     # Convert to torch tensors
     X_train = torch.from_numpy(X_train).float().cuda()
@@ -329,11 +336,25 @@ def train_cnn(
         y_train=y_train,
         X_val=X_val,
         y_val=y_val,
-        batch_size=128,
-        num_epochs=100,
+        batch_size=32,
+        num_epochs=200,
     )
 
     predictions = classifier.predict(X_train)
+
+    # length = 50
+
+    # indices = np.arange(0, X_train.shape[0])
+    # all_indices = np.array(
+    #     [np.arange(index - length, index + length) for index in indices]
+    # )
+    # all_indices = np.clip(all_indices, 0, X_train.shape[0] - 1)
+    # cnn_features = np.array(predictions[all_indices, :].reshape(-1, 2 * length * 3))
+
+    # classifier_params = get_classifier_params()
+    # xgb = Classifier(classifier_params)
+    # predictions = xgb.on_fit(features=cnn_features, labels=y_train.cpu())
+
     predictions = classify(predictions, pp_params)
     clf_scores = compute_clf_scores(predictions, y_train.cpu().numpy())
 

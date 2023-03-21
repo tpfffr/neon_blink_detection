@@ -36,9 +36,9 @@ def get_of_params_options():
     layer_interval_options = [7]  # used to be [1, 3, 5, 7]
     average_options = [False]
     img_shape_options = [(64, 64)]
-    grid_size_options = [4, 7]  # used to be [4, 7, 10]
+    grid_size_options = [4]  # used to be [4, 7, 10]
     step_size_options = [7]
-    window_size_options = [11, 15]  # used to be [[7, 11, 15]]
+    window_size_options = [15]  # used to be [[7, 11, 15]]
     stop_steps_options = [3]
 
     options = itertools.product(
