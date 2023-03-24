@@ -25,6 +25,27 @@ def post_process(
     return blink_events
 
 
+def post_process(
+    timestamps: T.Sequence, proba: np.ndarray, pp_params: PPParams
+) -> T.Tuple[T.List[BlinkEvent], T.List[BlinkEvent]]:
+    proba = smooth_proba(proba, pp_params)
+    pd_labels = classify(proba, pp_params)
+    samples_pd = Samples(timestamps, pd_labels)
+
+    event_array_pd = samples_pd.event_array
+    blink_array_pd_pp = filter_wrong_sequence(
+        event_array_pd, pp_params.max_gap_duration_s
+    )
+    blink_array_pd_pp = filter_short_events(
+        blink_array_pd_pp, pp_params.short_event_min_len_s, label_mapping.blink
+    )
+    blink_events = blink_array_pd_pp.blink_events
+
+    onset_offset_events = get_onset_offset_events(event_array_pd)
+
+    return blink_events, onset_offset_events
+
+
 def smooth_proba(proba: np.ndarray, pp_params: PPParams) -> np.ndarray:
     proba = proba.copy()
     proba_onset = proba[:, label_mapping.onset]
