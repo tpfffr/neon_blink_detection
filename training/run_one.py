@@ -309,16 +309,16 @@ def train_cnn(
 
     # Split into train and validation set for early stopping
     # Stratify to ensure that the classes are balanced in both sets
-    if idx == 0:
-        X_train, X_val, y_train, y_val = train_test_split(
-            features, labels, stratify=labels, test_size=0.05, random_state=42
-        )
-    else:
-        X_train = features
-        y_train = labels
-        X_val = concatenate(datasets.all_features, clip_names_val)
-        samples_gt = concatenate_all_samples(datasets.all_samples, clip_names_val)
-        y_val = samples_gt.labels
+    # if idx == 0:
+    X_train, X_val, y_train, y_val = train_test_split(
+        features, labels, stratify=labels, test_size=0.04, random_state=42
+    )
+    # else:
+    #     X_train = features
+    #     y_train = labels
+    #     X_val = concatenate(datasets.all_features, clip_names_val)
+    #     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names_val)
+    #     y_val = samples_gt.labels
 
     # Convert to torch tensors
     X_train = torch.from_numpy(X_train).float().cuda()
