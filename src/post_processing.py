@@ -25,25 +25,25 @@ def post_process(
     return blink_events
 
 
-def post_process(
-    timestamps: T.Sequence, proba: np.ndarray, pp_params: PPParams
-) -> T.Tuple[T.List[BlinkEvent], T.List[BlinkEvent]]:
-    proba = smooth_proba(proba, pp_params)
-    pd_labels = classify(proba, pp_params)
-    samples_pd = Samples(timestamps, pd_labels)
+# def post_process(
+#     timestamps: T.Sequence, proba: np.ndarray, pp_params: PPParams
+# ) -> T.Tuple[T.List[BlinkEvent], T.List[BlinkEvent]]:
+#     proba = smooth_proba(proba, pp_params)
+#     pd_labels = classify(proba, pp_params)
+#     samples_pd = Samples(timestamps, pd_labels)
 
-    event_array_pd = samples_pd.event_array
-    blink_array_pd_pp = filter_wrong_sequence(
-        event_array_pd, pp_params.max_gap_duration_s
-    )
-    blink_array_pd_pp = filter_short_events(
-        blink_array_pd_pp, pp_params.short_event_min_len_s, label_mapping.blink
-    )
-    blink_events = blink_array_pd_pp.blink_events
+#     event_array_pd = samples_pd.event_array
+#     blink_array_pd_pp = filter_wrong_sequence(
+#         event_array_pd, pp_params.max_gap_duration_s
+#     )
+#     blink_array_pd_pp = filter_short_events(
+#         blink_array_pd_pp, pp_params.short_event_min_len_s, label_mapping.blink
+#     )
+#     blink_events = blink_array_pd_pp.blink_events
 
-    onset_offset_events = get_onset_offset_events(event_array_pd)
+#     onset_offset_events = get_onset_offset_events(event_array_pd)
 
-    return blink_events, onset_offset_events
+#     return blink_events, onset_offset_events
 
 
 def smooth_proba(proba: np.ndarray, pp_params: PPParams) -> np.ndarray:
@@ -79,6 +79,24 @@ def classify(proba: np.ndarray, pp_params: PPParams) -> np.ndarray:
         proba[:, label_mapping.onset] > pp_params.proba_onset_threshold
     ] = label_mapping.onset
     return pd_labels
+
+
+def get_onset_offset_events(array: EventArray) -> EventArray:
+    onset_idx = np.where(array.labels == label_mapping.onset)[0]
+    offset_idx = np.where(array.labels == label_mapping.offset)[0]
+
+    onset_offset_array = EventArray(
+        [array.start_times[0]], [array.end_times[-1]], [label_mapping.bg]
+    )
+
+    for start_time, end_time, label in zip(
+        np.concatenate([array.start_times[onset_idx], array.start_times[offset_idx]]),
+        np.concatenate([array.end_times[onset_idx], array.end_times[offset_idx]]),
+        np.concatenate([array.labels[onset_idx], array.labels[offset_idx]]),
+    ):
+        onset_offset_array.insert_event(start_time, end_time, label)
+
+    return onset_offset_array
 
 
 def filter_wrong_sequence(array: EventArray, max_gap_duration_s=None) -> EventArray:

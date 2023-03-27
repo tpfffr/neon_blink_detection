@@ -49,17 +49,17 @@ class OpticalFlowCNN(nn.Module):
         num_epochs=100,
         lr=0.001,
         momentum=0.9,
+        patience=10,
+        min_delta=0.001,
     ):
 
-        patience = 20
-        min_delta = 0.001
         best_val_loss = float("inf")
         counter = 0
 
         # Loss function and optimizer
         criterion = nn.CrossEntropyLoss()
-        optimizer = optim.SGD(self.parameters(), lr=lr, momentum=momentum)
-        # optimizer = optim.Adam(self.parameters(), lr=lr)
+        # optimizer = optim.SGD(self.parameters(), lr=lr, momentum=momentum)
+        optimizer = optim.Adam(self.parameters(), lr=lr)
 
         optical_flow_data = OpticalFlowDataset(X_train, y_train)
 

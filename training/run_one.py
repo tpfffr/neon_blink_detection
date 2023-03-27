@@ -184,7 +184,7 @@ def collect_samples_and_predict(
         logger.info("augmented features = %d", n_aug_features)
 
         logger.info("Start training")
-        classifier, scores = train_cnn(
+        classifier, xgb_classifier, scores = train_cnn(
             datasets,
             clip_names_train,
             clip_names_val,
@@ -193,6 +193,16 @@ def collect_samples_and_predict(
             augment_data=augment_data,
             pp_params=pp_params,
         )
+
+        # classifier, xgb_classifier, scores = train_classifier(
+        #     datasets,
+        #     clip_names_train,
+        #     classifier_params,
+        #     export_path,
+        #     idx,
+        #     augment_data=augment_data,
+        #     pp_params=pp_params,
+        # )
 
         logger.info("Collect all training data")
         datasets.collect(clip_names_train)
@@ -209,6 +219,16 @@ def collect_samples_and_predict(
         logger.info("Predict training & validation & test data")
 
         predictions = classifier.predict_all_clips(datasets.all_features)
+
+        xgb_predictions = {}
+
+        # for clip_tuple, features in predictions.items():
+
+        #     cnn_features = get_feature_indices(length=50, features=features)
+        #     xgb_predictions[clip_tuple] = xgb_classifier.predict(cnn_features)
+
+        # predictions = xgb_predictions
+
         save_predictions(export_path, idx, predictions)
     else:
         logger.info("Load training & validation data")
@@ -243,6 +263,15 @@ def train_classifier(
     classifier.on_fit(features, labels)
 
     predictions = classifier.predict(features)
+
+    # cnn_features = get_feature_indices(length=50, features=predictions)
+
+    # classifier_params = get_classifier_params()
+    # xgb_classifier = Classifier(classifier_params)
+    # xgb_classifier.on_fit(features=cnn_features, labels=labels)
+    # predictions = xgb_classifier.predict(cnn_features)
+    xgb_classifier = None
+
     predictions = classify(predictions, pp_params)
 
     clf_scores = compute_clf_scores(predictions, labels)
@@ -266,7 +295,7 @@ def train_classifier(
 
     classifier.save_base_classifier(idx)
 
-    return classifier, clf_scores
+    return classifier, xgb_classifier, clf_scores
 
 
 def train_cnn(
@@ -311,7 +340,7 @@ def train_cnn(
     # Stratify to ensure that the classes are balanced in both sets
     # if idx == 0:
     X_train, X_val, y_train, y_val = train_test_split(
-        features, labels, stratify=labels, test_size=0.04, random_state=42
+        features, labels, stratify=labels, test_size=0.075, random_state=42
     )
     # else:
     #     X_train = features
@@ -337,23 +366,17 @@ def train_cnn(
         X_val=X_val,
         y_val=y_val,
         batch_size=32,
-        num_epochs=200,
+        num_epochs=100,
     )
 
     predictions = classifier.predict(X_train)
 
-    # length = 50
+    cnn_features = get_feature_indices(length=50, features=predictions)
 
-    # indices = np.arange(0, X_train.shape[0])
-    # all_indices = np.array(
-    #     [np.arange(index - length, index + length) for index in indices]
-    # )
-    # all_indices = np.clip(all_indices, 0, X_train.shape[0] - 1)
-    # cnn_features = np.array(predictions[all_indices, :].reshape(-1, 2 * length * 3))
-
-    # classifier_params = get_classifier_params()
-    # xgb = Classifier(classifier_params)
-    # predictions = xgb.on_fit(features=cnn_features, labels=y_train.cpu())
+    classifier_params = get_classifier_params()
+    xgb_classifier = Classifier(classifier_params)
+    xgb_classifier.on_fit(features=cnn_features, labels=y_train.cpu())
+    predictions = xgb_classifier.predict(cnn_features)
 
     predictions = classify(predictions, pp_params)
     clf_scores = compute_clf_scores(predictions, y_train.cpu().numpy())
@@ -378,7 +401,19 @@ def train_cnn(
     # Save classifier
     classifier.save_base_classifier(idx)
 
-    return classifier, clf_scores
+    return classifier, xgb_classifier, clf_scores
+
+
+def get_feature_indices(length: int, features: np.ndarray, indices: np.ndarray = None):
+    if indices is None:
+        indices = np.arange(0, features.shape[0])
+
+    all_indices = np.array(
+        [np.arange(index - length, index + length) for index in indices]
+    )
+    all_indices = np.clip(all_indices, 0, length - 1)
+
+    return np.array(features[all_indices, :].reshape(-1, 2 * length * 3))
 
 
 def compute_clf_scores(predictions, labels):
