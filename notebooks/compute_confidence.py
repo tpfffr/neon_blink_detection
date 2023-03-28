@@ -19,6 +19,96 @@ from xgboost import XGBClassifier
 from pathlib import Path
 import joblib
 from utils import resize_images
+import pickle
+from training.dataset_splitter import load_dataset_splitter
+
+
+# def compute_fp_and_tp():
+
+#     true_positive_confidence = []
+#     false_positive_confidence = []
+#     counter = 0
+
+#     dataset_splitter = load_dataset_splitter(n_clips=None, n_splits=5)
+#     for idx, (_, clip_tuples_val) in enumerate(dataset_splitter):
+
+#         if idx == 0:
+#             continue
+
+#         fn = (
+#             "/users/tom/git/neon_blink_detection/export-XGBClassifier-3-100320231148/n_lay5-lay_intv7-grid4-win15-trans0.0-scale0.0/samples-%d.pkl"
+#             % idx
+#         )
+
+#         with open(fn, "rb") as f:
+#             data = pickle.load(f)
+
+#         clf = (
+#             "/users/tom/git/neon_blink_detection/export-XGBClassifier-3-100320231148/n_lay5-lay_intv7-grid4-win15-trans0.0-scale0.0/weights-%d.sav"
+#             % idx
+#         )
+
+#         all_probas = np.load(
+#             "/users/tom/git/neon_blink_detection/export-XGBClassifier-3-100320231148/n_lay5-lay_intv7-grid4-win15-trans0.0-scale0.0/proba-%d.npy"
+#             % idx,
+#             allow_pickle=True,
+#         )
+
+#         for clip_name in clip_tuples_val:
+#             print("Processing clip %s" % (clip_name))
+
+#             try:
+
+#                 counter += 1
+
+#                 pred_blink, gt_blinks, proba = get_blink_events(
+#                     clip_name, clf, all_probas[clip_name]
+#                 )
+#                 smoothed_proba = smooth_proba(all_probas[clip_name], pp_params)
+#                 (
+#                     _,
+#                     true_positives,
+#                     false_negatives,
+#                     false_positives,
+#                 ) = compute_multiple_iou(gt_blinks, pred_blink)
+
+#                 print("Number of false positives: {}".format(len(false_positives)))
+
+#                 for i in range(len(true_positives)):
+#                     start_idx = true_positives[i][1][0]
+#                     end_idx = true_positives[i][1][1]
+
+#                     confidence_blink_tmp, _, _ = get_confidence(
+#                         start_idx, end_idx, smoothed_proba
+#                     )
+#                     true_positive_confidence.append(confidence_blink_tmp)
+
+#                 for i in range(len(false_positives)):
+#                     start_idx = false_positives[i][1][0]
+#                     end_idx = false_positives[i][1][1]
+
+#                     confidence_blink_tmp, _, _ = get_confidence(
+#                         start_idx, end_idx, smoothed_proba
+#                     )
+
+#                     false_positive_confidence.append(confidence_blink_tmp)
+
+#                 recall = len(true_positives) / (
+#                     len(true_positives) + len(false_negatives)
+#                 )
+#                 precision = len(true_positives) / (
+#                     len(true_positives) + len(false_positives)
+#                 )
+#                 f1 = 2 * (precision * recall) / (precision + recall)
+
+#                 print("Recall: {}".format(recall))
+#                 print("Precision: {}".format(precision))
+#                 print("F1: {}".format(f1))
+
+#             except:
+#                 print("Error processing clip %s" % (clip_name))
+
+#             return true_positive_confidence, false_positive_confidence
 
 
 def get_params() -> T.Tuple[OfParams, PPParams]:
@@ -108,7 +198,7 @@ def get_blink_events(clip_name, clf, proba):
 
     gt = [(blink_on_idx[x], blink_off_idx[x]) for x in range(len(blink_on_idx))]
 
-    return pred, gt, proba, left_images, right_images
+    return pred, gt, proba, left_images, right_images, ts
 
 
 # Load each blink event
@@ -215,6 +305,9 @@ of_params.window_size = 15
 true_positive_confidence = []
 false_positive_confidence = []
 
+all_timestamps = {}
+file_counter = 0
+
 dataset_splitter = load_dataset_splitter(n_clips=None, n_splits=5)
 for idx, (_, clip_tuples_val) in enumerate(dataset_splitter):
 
@@ -242,10 +335,13 @@ for idx, (_, clip_tuples_val) in enumerate(dataset_splitter):
 
     for clip_name in clip_tuples_val:
 
+        # count number of files
+        file_counter += 1
+
         try:
             print("Processing clip %s" % (clip_name))
 
-            pred_blink, gt_blinks, proba, li, ri = get_blink_events(
+            pred_blink, gt_blinks, proba, li, ri, ts = get_blink_events(
                 clip_name, clf, all_probas[clip_name]
             )
             smoothed_proba = smooth_proba(all_probas[clip_name], pp_params)
@@ -288,9 +384,17 @@ for idx, (_, clip_tuples_val) in enumerate(dataset_splitter):
             print("Precision: {}".format(precision))
             print("F1: {}".format(f1))
 
+            all_timestamps[clip_name] = ts
+
         except Exception as e:
             print("NOT processing clip %s" % (clip_name))
             print(e)
 
+print("Number of files: {}".format(file_counter))
+
 np.save("true_positive_confidence.npy", np.array(true_positive_confidence))
 np.save("false_positive_confidence.npy", np.array(false_positive_confidence))
+
+# save all timestamps dictionary to file
+with open("all_timestamps.pkl", "wb") as f:
+    pickle.dump(all_timestamps, f)
