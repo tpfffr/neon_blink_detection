@@ -9,5 +9,5 @@ xgboost==1.5.1
 opencv-python>=4.3.0.38
 streamlit>=1.3.0
 
-plml @ git+https://github.com/pupil-labs/plml
-pikit @ git+https://github.com/pupil-labs/pupil-invisible-toolkit
+#plml @ git+https://github.com/pupil-labs/plml
+#pikit @ git+https://github.com/pupil-labs/pupil-invisible-toolkit
