@@ -15,9 +15,9 @@ class OpticalFlowCNN(nn.Module):
         super(OpticalFlowCNN, self).__init__()
 
         self.conv1 = nn.Conv2d(10, 16, kernel_size=3, padding=1)
-        self.bn1 = nn.BatchNorm2d(16)
+        # self.bn1 = nn.BatchNorm2d(16)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
-        self.bn2 = nn.BatchNorm2d(32)
+        # self.bn2 = nn.BatchNorm2d(32)
         self.pool = nn.MaxPool2d(2, 2)
         self.fc1 = nn.Linear(32, 64)
         self.fc2 = nn.Linear(64, 3)
