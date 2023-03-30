@@ -3,7 +3,7 @@ from pathlib import Path
 
 import numpy as np
 
-from functions.video_loader import load_eye_video_cache
+# from functions.video_loader import load_eye_video_cache
 from src.features_calculator import calculate_optical_flow
 from src.helper import OfParams
 from src.utils import preprocess_images

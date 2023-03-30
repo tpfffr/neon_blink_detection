@@ -45,7 +45,7 @@ def submit_one_job(
         if use_pretrained_classifier:
             ram_gb = 0.5
         else:
-            ram_gb = 12
+            ram_gb = 15
             print(f"estimate ram_gb={ram_gb}")
 
         submit_job_to_gridengine(
@@ -55,9 +55,9 @@ def submit_one_job(
             fn_name="main",
             kwargs=kwargs,
             ram_gb=np.ceil(ram_gb),
-            gpus=0,
+            gpus=1,
             job_name=experiment_name,
-            queue_name="cpu.q",
+            queue_name="default.q",
             reproducible=False,
         )
     else:

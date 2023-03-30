@@ -9,6 +9,7 @@ import numpy as np
 from functions.utils import timer
 from training.helper import ClassifierParams
 
+
 logger = logging.getLogger("main")
 
 
@@ -32,6 +33,7 @@ class Classifier:
     def predict_all_clips(
         self, all_features: T.Dict[str, np.ndarray]
     ) -> T.Dict[str, np.ndarray]:
+
         return {
             clip_tuple: self.predict(features)
             for clip_tuple, features in all_features.items()
