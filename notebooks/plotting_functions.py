@@ -305,9 +305,7 @@ def create_subplot(
     ax.set_xlim(start, end)
 
 
-# Load each blink event
-# Load each blink event
-def compute_confidence(start_idx, end_idx, smoothed_proba, type="mean"):
+def compute_confidence(start_idx, end_idx, smoothed_proba, type="mean", prctile=None):
     """Compute confidence for a blink event
 
     Parameters
@@ -339,28 +337,18 @@ def compute_confidence(start_idx, end_idx, smoothed_proba, type="mean"):
         confidence_offset = np.mean(tmp_proba[transition_on_off:, 2])
         confidence_blink = (confidence_onset + confidence_offset) / 2
 
-    elif type == "percentile_20":
+    elif type == "percentile":
 
-        # take the 20% highest values in the onset and offset
-        n = int(transition_on_off * 0.2)
-        confidence_onset = np.mean(np.sort(tmp_proba[:transition_on_off, 1])[-n:])
-        confidence_offset = np.mean(np.sort(tmp_proba[transition_on_off:, 2])[-n:])
-        confidence_blink = (confidence_onset + confidence_offset) / 2
+        confidence_onset = np.sort(tmp_proba[:transition_on_off, 1])
+        confidence_onset = np.mean(
+            confidence_onset[int(len(confidence_onset) * (1 - prctile)) :]
+        )
 
-    elif type == "percentile_50":
+        confidence_offset = np.sort(tmp_proba[transition_on_off:, 2])
+        confidence_offset = np.mean(
+            confidence_offset[int(len(confidence_offset) * (1 - prctile)) :]
+        )
 
-        # take the 50% highest values in the onset and offset
-        n = int(transition_on_off * 0.5)
-        confidence_onset = np.mean(np.sort(tmp_proba[:transition_on_off, 1])[-n:])
-        confidence_offset = np.mean(np.sort(tmp_proba[transition_on_off:, 2])[-n:])
-        confidence_blink = (confidence_onset + confidence_offset) / 2
-
-    elif type == "percentile_10":
-
-        # take the 50% highest values in the onset and offset
-        n = int(transition_on_off * 0.1)
-        confidence_onset = np.mean(np.sort(tmp_proba[:transition_on_off, 1])[-n:])
-        confidence_offset = np.mean(np.sort(tmp_proba[transition_on_off:, 2])[-n:])
         confidence_blink = (confidence_onset + confidence_offset) / 2
 
     return confidence_blink, confidence_onset, confidence_offset
@@ -400,7 +388,7 @@ from features_calculator import (
 )
 
 
-def get_blink_events(clip_name, clf, proba=None, ts=None):
+def get_blink_events(clip_name, clf=None, proba=None, ts=None):
     """Load a recording and return the timestamps, images and blink events
 
     Parameters

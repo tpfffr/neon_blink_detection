@@ -256,7 +256,7 @@ class MatchedEventArray:
         self._remove_duplicates(ind_match)
 
         # get inverse mapping (which maps indices from predicted to ground truth array)
-        ind_match_inverse = np.ones(len(self.array_pd), dtype=np.int) * (-1)
+        ind_match_inverse = np.ones(len(self.array_pd), dtype=np.int64) * (-1)
         for i_gt, i_pd in enumerate(ind_match):
             if i_pd >= 0:
                 ind_match_inverse[i_pd] = i_gt

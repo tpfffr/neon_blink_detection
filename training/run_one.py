@@ -184,25 +184,26 @@ def collect_samples_and_predict(
         logger.info("augmented features = %d", n_aug_features)
 
         logger.info("Start training")
-        classifier, xgb_classifier, scores = train_cnn(
+        # classifier, xgb_classifier, scores = train_cnn(
+        #     datasets,
+        #     clip_names_train,
+        #     clip_names_val,
+        #     export_path,
+        #     idx,
+        #     augment_data=augment_data,
+        #     pp_params=pp_params,
+        #     of_params=of_params,
+        # )
+
+        classifier, xgb_classifier, scores = train_classifier(
             datasets,
             clip_names_train,
-            clip_names_val,
+            classifier_params,
             export_path,
             idx,
             augment_data=augment_data,
             pp_params=pp_params,
         )
-
-        # classifier, xgb_classifier, scores = train_classifier(
-        #     datasets,
-        #     clip_names_train,
-        #     classifier_params,
-        #     export_path,
-        #     idx,
-        #     augment_data=augment_data,
-        #     pp_params=pp_params,
-        # )
 
         logger.info("Collect all training data")
         datasets.collect(clip_names_train)
@@ -220,7 +221,10 @@ def collect_samples_and_predict(
 
         predictions = classifier.predict_all_clips(datasets.all_features)
 
-        xgb_predictions = {}
+        # if second classifier is used, predict with xgb classifier
+        # --------------------------------------------
+        # if second_classifier:
+        # xgb_predictions = {}
 
         # for clip_tuple, features in predictions.items():
 
@@ -228,6 +232,7 @@ def collect_samples_and_predict(
         #     xgb_predictions[clip_tuple] = xgb_classifier.predict(cnn_features)
 
         # predictions = xgb_predictions
+        # --------------------------------------------
 
         save_predictions(export_path, idx, predictions)
     else:
@@ -306,6 +311,7 @@ def train_cnn(
     idx: int,
     augment_data: bool,
     pp_params: PPParams,
+    of_params: OfParams,
 ):
     """Train a CNN classifier.
 
@@ -324,17 +330,30 @@ def train_cnn(
 
     # Concatenate all features and labels
     features = concatenate(datasets.all_features, clip_names)
+
+    # reshape features for CNN
+    n_layers = of_params.n_layers
+    grid_size = of_params.grid_size
+
+    features_l = features[:, : (features.shape[1] // 2)]
+    features_r = features[:, (features.shape[1] // 2) :]
+
+    features_l = features_l.reshape(-1, n_layers, grid_size, grid_size)
+    features_r = features_r.reshape(-1, n_layers, grid_size, grid_size)
+
+    features = np.concatenate([features_l, features_r], axis=1)
+
     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names)
     labels = samples_gt.labels
 
-    # Augment data
-    if augment_data:
-        aug_features = concatenate(datasets.all_aug_features, clip_names)
-        aug_samples_gt = concatenate_all_samples(datasets.all_aug_samples, clip_names)
-        aug_labels = aug_samples_gt.labels
+    # # Augment data
+    # if augment_data:
+    #     aug_features = concatenate(datasets.all_aug_features, clip_names)
+    #     aug_samples_gt = concatenate_all_samples(datasets.all_aug_samples, clip_names)
+    #     aug_labels = aug_samples_gt.labels
 
-        features = np.concatenate((features, aug_features), axis=0)
-        labels = np.concatenate((labels, aug_labels), axis=0)
+    #     features = np.concatenate((features, aug_features), axis=0)
+    #     labels = np.concatenate((labels, aug_labels), axis=0)
 
     # Split into train and validation set for early stopping
     # Stratify to ensure that the classes are balanced in both sets
@@ -356,7 +375,7 @@ def train_cnn(
     y_val = torch.from_numpy(y_val).long().cuda()
 
     # Create classifier
-    classifier = OpticalFlowCNN(export_path)
+    classifier = OpticalFlowCNN(export_path, of_params)
     classifier.cuda()
 
     # Train classifier
@@ -370,6 +389,25 @@ def train_cnn(
     )
 
     predictions = classifier.predict(X_train)
+    predictions_discrete = classify(predictions, pp_params)
+    clf_scores = compute_clf_scores(predictions_discrete, y_train.cpu().numpy())
+
+    logger.info("Classifier scores (RAW):")
+    logger.info(
+        f"Sample-based recall on = {clf_scores['recall_on']:.2f}, "
+        f"precision on = {clf_scores['precision_on']:.2f}, "
+        f"F1 on = {clf_scores['f1_on']:.2f}"
+    )
+    logger.info(
+        f"Sample-based recall off = {clf_scores['recall_off']:.2f}, "
+        f"precision off = {clf_scores['precision_off']:.2f}, "
+        f"F1 off = {clf_scores['f1_off']:.2f}"
+    )
+    logger.info(
+        f"Sample-based recall bg = {clf_scores['recall_bg']:.2f}, "
+        f"precision bg = {clf_scores['precision_bg']:.2f}, "
+        f"F1 bg = {clf_scores['f1_bg']:.2f}"
+    )
 
     cnn_features = get_feature_indices(length=50, features=predictions)
 
@@ -381,7 +419,7 @@ def train_cnn(
     predictions = classify(predictions, pp_params)
     clf_scores = compute_clf_scores(predictions, y_train.cpu().numpy())
 
-    logger.info("Classifier scores:")
+    logger.info("Classifier scores (AFTER SECOND CLASSIFIER):")
     logger.info(
         f"Sample-based recall on = {clf_scores['recall_on']:.2f}, "
         f"precision on = {clf_scores['precision_on']:.2f}, "
@@ -411,7 +449,7 @@ def get_feature_indices(length: int, features: np.ndarray, indices: np.ndarray =
     all_indices = np.array(
         [np.arange(index - length, index + length) for index in indices]
     )
-    all_indices = np.clip(all_indices, 0, length - 1)
+    all_indices = np.clip(all_indices, 0, max(indices) - 1)
 
     return np.array(features[all_indices, :].reshape(-1, 2 * length * 3))
 

@@ -235,17 +235,6 @@ class video_loader:
         gt_labels = np.hstack(all_gt_labels)
         features = np.vstack(features)
 
-        n_layers = self._of_params.n_layers
-        grid_size = self._of_params.grid_size
-
-        features_l = features[:, : (features.shape[1] // 2)]
-        features_r = features[:, (features.shape[1] // 2) :]
-
-        features_l = features_l.reshape(-1, n_layers, grid_size, grid_size)
-        features_r = features_r.reshape(-1, n_layers, grid_size, grid_size)
-
-        features = np.concatenate([features_l, features_r], axis=1)
-
         self.all_samples[clip_name] = Samples(timestamps, gt_labels)
         self.all_features[clip_name] = features
 

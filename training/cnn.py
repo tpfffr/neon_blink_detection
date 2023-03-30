@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 class OpticalFlowCNN(nn.Module):
-    def __init__(self, save_path: Path = "."):
+    def __init__(self, save_path: Path = ".", of_params=None):
         super(OpticalFlowCNN, self).__init__()
 
         self.conv1 = nn.Conv2d(10, 16, kernel_size=3, padding=1)
@@ -20,9 +20,10 @@ class OpticalFlowCNN(nn.Module):
         # self.bn2 = nn.BatchNorm2d(32)
         self.pool = nn.MaxPool2d(2, 2)
         self.fc1 = nn.Linear(32, 64)
-        self.fc2 = nn.Linear(64, 3)
+        # self.fc2 = nn.Linear(64, 3)
 
         self.save_path = Path(save_path)
+        self.of_params = of_params
 
     def forward(self, x):
         x = self.pool(F.relu(self.conv1(x)))
@@ -127,6 +128,21 @@ class OpticalFlowCNN(nn.Module):
     ) -> T.Dict[str, np.ndarray]:
 
         self.cpu()
+        self.eval()
+
+        # reshape features
+        n_layers = self.of_params.n_layers
+        grid_size = self.of_params.grid_size
+
+        for key in all_features.keys():
+
+            features_l = all_features[key][:, : (all_features[key].shape[1] // 2)]
+            features_r = all_features[key][:, (all_features[key].shape[1] // 2) :]
+
+            features_l = features_l.reshape(-1, n_layers, grid_size, grid_size)
+            features_r = features_r.reshape(-1, n_layers, grid_size, grid_size)
+
+            all_features[key] = np.concatenate((features_l, features_r), axis=1)
 
         return {
             clip_tuple: self.predict(features)
