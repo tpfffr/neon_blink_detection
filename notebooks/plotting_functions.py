@@ -29,6 +29,7 @@ from IPython.display import HTML
 import torch
 from training.cnn import OpticalFlowCNN, OpticalFlowDataset
 
+aug_params = AugParams()
 
 of_params = OfParams()
 
@@ -107,6 +108,23 @@ def compute_multiple_iou(ground_truth_events, predicted_events, iou_threshold=0.
     false_positives = [(i, predicted_events[i]) for i in predicted_indices]
 
     return iou_results, true_positives, false_negatives, false_positives
+
+
+def compute_optical_flow(clip_name):
+    rec = video_loader(of_params, aug_params)
+    ts, images_left, images_right = rec._get_frames_pyav(
+        clip_name, convert_to_gray=True
+    )
+
+    grid = create_grids(of_params.img_shape, of_params.grid_size + 2, full_grid=False)
+    images_left, images_right = resize_images(
+        images_left, images_right, of_params.img_shape
+    )
+    feature_array, _ = calculate_optical_flow(
+        of_params, images_left, images_right, grids=grid
+    )
+
+    return feature_array, ts
 
 
 def load_imgs_and_features(clip_name):
@@ -457,6 +475,18 @@ def get_blink_events(clip_name, clf=None, proba=None, ts=None):
     blink_ts = blink_df[blink_df["label"] == "offset"]["end_ts"]
     blink_off_idx = np.where(np.isin(ts, blink_ts))[0]
 
+    # for i in range(len(blink_df)):
+    #     # check if an onset is followed by an offset. if not, print index
+    #     if blink_df.iloc[i]["label"] == "onset":
+    #         if blink_df.iloc[i + 1]["label"] != "offset":
+    #             print(i)
+
+    # for i in range(len(blink_df)):
+    #     # check if an onset is followed by an offset. if not, print index
+    #     if blink_df.iloc[i]["label"] == "offset":
+    #         if blink_df.iloc[i + 1]["label"] != "onset":
+    # print(i)
+
     predicted_blink_on = np.array(
         [
             np.where(np.isin(ts, blink_events[x].start_time))[0][0]
@@ -475,6 +505,9 @@ def get_blink_events(clip_name, clf=None, proba=None, ts=None):
         (predicted_blink_on[x], predicted_blink_off[x])
         for x in range(len(predicted_blink_on))
     ]
+
+    if len(blink_on_idx) != len(blink_off_idx):
+        raise ValueError("Blink onset and offset do not have the same length")
 
     gt = [(blink_on_idx[x], blink_off_idx[x]) for x in range(len(blink_on_idx))]
 

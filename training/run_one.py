@@ -184,26 +184,26 @@ def collect_samples_and_predict(
         logger.info("augmented features = %d", n_aug_features)
 
         logger.info("Start training")
-        # classifier, xgb_classifier, scores = train_cnn(
-        #     datasets,
-        #     clip_names_train,
-        #     clip_names_val,
-        #     export_path,
-        #     idx,
-        #     augment_data=augment_data,
-        #     pp_params=pp_params,
-        #     of_params=of_params,
-        # )
-
-        classifier, xgb_classifier, scores = train_classifier(
+        classifier, xgb_classifier, scores = train_cnn(
             datasets,
             clip_names_train,
-            classifier_params,
+            clip_names_val,
             export_path,
             idx,
             augment_data=augment_data,
             pp_params=pp_params,
+            of_params=of_params,
         )
+
+        # classifier, xgb_classifier, scores = train_classifier(
+        #     datasets,
+        #     clip_names_train,
+        #     classifier_params,
+        #     export_path,
+        #     idx,
+        #     augment_data=augment_data,
+        #     pp_params=pp_params,
+        # )
 
         logger.info("Collect all training data")
         datasets.collect(clip_names_train)
