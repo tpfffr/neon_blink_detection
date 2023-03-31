@@ -44,10 +44,10 @@ def main(n_splits=5):
     use_cluster = False
     compute_of = False
 
-    classifier_params = get_classifier_params()
     of_params, pp_params, _ = get_params()
     of_params_options = get_of_params_options()
     aug_params_options = get_augmentation_options()
+    classifier_params = get_classifier_params(type="CNN", use_second_classifier=True)
 
     training_dir = get_training_dir(classifier_params.name, use_pretrained_classifier)
     export_dir = get_export_dir(classifier_params.name, use_pretrained_classifier)

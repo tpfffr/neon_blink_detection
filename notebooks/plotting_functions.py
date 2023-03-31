@@ -348,7 +348,7 @@ def compute_confidence(start_idx, end_idx, smoothed_proba, type="mean", prctile=
     """
 
     tmp_proba = smoothed_proba[start_idx:end_idx, :]
-    transition_on_off = np.where(tmp_proba[:, 2] >= tmp_proba[:, 1])[0][0]
+    transition_on_off = (np.where(tmp_proba[1:, 2] >= tmp_proba[1:, 1])[0][0]) + 1
 
     if type == "mean":
         confidence_onset = np.mean(tmp_proba[:transition_on_off, 1])

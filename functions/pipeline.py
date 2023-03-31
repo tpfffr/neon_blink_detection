@@ -3,8 +3,6 @@ from pathlib import Path
 
 import numpy as np
 
-# from blink_labelling.preprocessing import load_processed_blink_indices
-# from pikit import Recording
 from src.event_array import EventArray, Samples
 from src.features_calculator import calculate_optical_flow, new_concatenate_features
 from src.helper import OfParams, PPParams
@@ -19,46 +17,36 @@ from src.utils import preprocess_images
 from training.evaluation import get_event_based_metrics
 from training.helper import ClassifierParams, get_experiment_name_new, get_export_dir
 from xgboost import XGBClassifier
+from training.cnn import OpticalFlowCNN
 
 from functions.classifiers import Classifier
 from functions.features_loader import load_features
 
-# from functions.video_loader import decode_frames, load_eye_video_cache, load_timestamps
 
+def get_classifier_params(
+    type="XGB", max_depth=3, of_params=None, use_second_classifier=False
+) -> ClassifierParams:
+    if type == "XGB":
+        classifier_params = ClassifierParams(
+            f"XGBClassifier-{max_depth}",
+            XGBClassifier,
+            {
+                "max_depth": max_depth,
+                "use_label_encoder": False,
+                "eval_metric": "mlogloss",
+                "tree_method": "approx",
+            },
+            use_second_classifier=use_second_classifier,
+        )
+    elif type == "CNN":
+        classifier_params = ClassifierParams(
+            f"OpticalFlowCNN",
+            OpticalFlowCNN,
+            {"of_params": of_params},
+            use_second_classifier=use_second_classifier,
+        )
 
-def get_classifier_params(max_depth=3) -> ClassifierParams:
-    classifier_params = ClassifierParams(
-        f"XGBClassifier-{max_depth}",
-        XGBClassifier,
-        {
-            "max_depth": max_depth,
-            "use_label_encoder": False,
-            "eval_metric": "mlogloss",
-            "tree_method": "approx",
-        },
-    )
     return classifier_params
-
-
-# def load_data(
-#     recording_name: str, of_params: OfParams, use_cache=True, min_s=None, max_s=None
-# ):
-#     if use_cache:
-#         timestamps = load_timestamps(recording_name)
-#         left_images, right_images = load_eye_video_cache(recording_name)
-#         left_images, right_images = preprocess_images(
-#             left_images, right_images, of_params.img_shape
-#         )
-#         feature_array = load_features(recording_name, of_params)
-#     else:
-#         recording_dir = Path("/users/Ching/datasets/blink_detection/staging")
-#         recording = Recording(recording_dir / recording_name)
-#         timestamps, left_images, right_images = decode_frames(recording, min_s, max_s)
-#         left_images, right_images = preprocess_images(
-#             left_images, right_images, of_params.img_shape
-#         )
-#         feature_array = calculate_optical_flow(of_params, left_images, right_images)
-#     return timestamps, left_images, right_images, feature_array
 
 
 def post_process_debug(timestamps: T.Sequence, proba: np.ndarray, pp_params: PPParams):

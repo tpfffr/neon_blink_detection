@@ -1,0 +1,47 @@
+2023/03/31 14:55:41 [INFO]	Classifier: ClassifierParams(name='OpticalFlowCNN', algorithm=<class 'training.cnn.OpticalFlowCNN'>, kwargs={'of_params': None}, use_second_classifier=False)
+2023/03/31 14:55:41 [INFO]	OfParams(n_layers=5, layer_interval=7, average=False, img_shape=(64, 64), grid_size=4, step_size=7, window_size=11, stop_steps=3)
+2023/03/31 14:55:41 [INFO]	Post processing parameters: max_gap_duration_s=0.03, short_event_min_len_s=0.10, smooth_window=11, proba_onset_threshold=0.25, proba_offset_threshold=0.25
+2023/03/31 14:55:41 [INFO]	
+=== 5-fold cross validation - 0 ===
+2023/03/31 14:55:41 [INFO]	Collect subsampled training data
+2023/03/31 14:55:50 [INFO]	augmented features = 0
+2023/03/31 14:55:50 [INFO]	Start training
+2023/03/31 14:58:29 [INFO]	Classifier scores:
+2023/03/31 14:58:29 [INFO]	Sample-based recall on = 0.98, precision on = 0.92, F1 on = 0.95
+2023/03/31 14:58:29 [INFO]	Sample-based recall off = 0.97, precision off = 0.93, F1 off = 0.95
+2023/03/31 14:58:29 [INFO]	Sample-based recall bg = 0.98, precision bg = 1.00, F1 bg = 0.99
+2023/03/31 14:58:29 [INFO]	Collect all training data
+2023/03/31 14:58:38 [INFO]	Collect validation data
+2023/03/31 14:58:47 [INFO]	Collect test data
+2023/03/31 14:59:27 [INFO]	Predict training & validation & test data
+2023/03/31 14:59:29 [INFO]	Evaluate full training data
+2023/03/31 14:59:29 [INFO]	Evaluate validation data
+2023/03/31 14:59:29 [INFO]	Evaluate test data
+2023/03/31 14:59:30 [INFO]	
+=== 5-fold cross validation - 1 ===
+2023/03/31 14:59:30 [INFO]	Collect subsampled training data
+2023/03/31 14:59:37 [INFO]	augmented features = 0
+2023/03/31 14:59:37 [INFO]	Start training
+2023/03/31 15:01:48 [INFO]	Classifier scores:
+2023/03/31 15:01:48 [INFO]	Sample-based recall on = 1.00, precision on = 0.87, F1 on = 0.93
+2023/03/31 15:01:48 [INFO]	Sample-based recall off = 0.96, precision off = 0.92, F1 off = 0.94
+2023/03/31 15:01:48 [INFO]	Sample-based recall bg = 0.97, precision bg = 1.00, F1 bg = 0.98
+2023/03/31 15:01:48 [INFO]	Collect all training data
+2023/03/31 15:01:55 [INFO]	Collect validation data
+2023/03/31 15:01:57 [INFO]	Collect test data
+2023/03/31 15:02:37 [INFO]	Predict training & validation & test data
+2023/03/31 15:02:39 [INFO]	Evaluate full training data
+2023/03/31 15:02:39 [INFO]	Evaluate validation data
+2023/03/31 15:02:39 [INFO]	Evaluate test data
+2023/03/31 15:02:40 [INFO]	
+=== 5-fold cross validation - 2 ===
+2023/03/31 15:02:40 [INFO]	Collect subsampled training data
+2023/03/31 15:02:47 [INFO]	augmented features = 0
+2023/03/31 15:02:47 [INFO]	Start training
+2023/03/31 15:06:00 [INFO]	Classifier scores:
+2023/03/31 15:06:00 [INFO]	Sample-based recall on = 1.00, precision on = 0.91, F1 on = 0.95
+2023/03/31 15:06:00 [INFO]	Sample-based recall off = 0.96, precision off = 0.97, F1 off = 0.96
+2023/03/31 15:06:00 [INFO]	Sample-based recall bg = 0.99, precision bg = 1.00, F1 bg = 0.99
+2023/03/31 15:06:00 [INFO]	Collect all training data
+2023/03/31 15:06:07 [INFO]	Collect validation data
+2023/03/31 15:06:09 [INFO]	Collect test data

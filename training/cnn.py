@@ -11,13 +11,19 @@ from pathlib import Path
 
 
 class OpticalFlowCNN(nn.Module):
-    def __init__(self, save_path: Path = ".", of_params=None):
+    def __init__(self, save_path: Path = ".", of_params=None, random_state=42):
+        """Initialize the CNN model.
+
+        Parameters:
+        ----------
+            save_path (Path, optional): Path to save the model. Defaults to ".".
+            of_params (T.Optional[T.Dict[str, T.Any]], optional): Optical flow parameters. Defaults to None.
+        """
+
         super(OpticalFlowCNN, self).__init__()
 
         self.conv1 = nn.Conv2d(10, 16, kernel_size=3, padding=1)
-        # self.bn1 = nn.BatchNorm2d(16)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
-        # self.bn2 = nn.BatchNorm2d(32)
         self.pool = nn.MaxPool2d(2, 2)
         self.fc1 = nn.Linear(32, 64)
         self.fc2 = nn.Linear(64, 3)
@@ -26,6 +32,17 @@ class OpticalFlowCNN(nn.Module):
         self.of_params = of_params
 
     def forward(self, x):
+        """Forward pass of the CNN model.
+
+        Parameters:
+        ----------
+            x (torch.Tensor): Input data.
+
+        Returns:
+        -------
+            torch.Tensor: Output data.
+        """
+
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
         x = x.view(-1, x.shape[1] * x.shape[2] * x.shape[3])
@@ -34,13 +51,21 @@ class OpticalFlowCNN(nn.Module):
         return x
 
     def predict(self, X_test):
+        """Predict the labels of the test data.
 
+        Parameters:
+        ----------
+            X_test (np.ndarray): Test data.
+
+        Returns:
+        -------
+            np.ndarray: Predicted labels.
+        """
+        self.eval()
         test_dataset = OpticalFlowDataset(X_test)
-        prob = F.softmax(self(test_dataset.X), dim=1).cpu().detach().numpy()
-        # _, pred = torch.max(self(test_dataset.X), 1)
-        return prob
+        return F.softmax(self(test_dataset.X), dim=1).cpu().detach().numpy()
 
-    def training_func(
+    def train_model(
         self,
         X_train,
         y_train,
@@ -53,6 +78,25 @@ class OpticalFlowCNN(nn.Module):
         patience=10,
         min_delta=0.001,
     ):
+        """Train the CNN model.
+
+        Parameters:
+        ----------
+            X_train (np.ndarray): Training data.
+            y_train (np.ndarray): Training labels.
+            X_val (np.ndarray): Validation data.
+            y_val (np.ndarray): Validation labels.
+            batch_size (int, optional): Batch size. Defaults to 32.
+            num_epochs (int, optional): Number of epochs. Defaults to 100.
+            lr (float, optional): Learning rate. Defaults to 0.001.
+            momentum (float, optional): Momentum. Defaults to 0.9.
+            patience (int, optional): Patience for early stopping. Defaults to 10.
+            min_delta (float, optional): Minimum delta for early stopping. Defaults to 0.001.
+
+        Returns:
+        -------
+            None
+        """
 
         best_val_loss = float("inf")
         counter = 0
@@ -126,6 +170,18 @@ class OpticalFlowCNN(nn.Module):
     def predict_all_clips(
         self, all_features: T.Dict[str, np.ndarray]
     ) -> T.Dict[str, np.ndarray]:
+        """Predict the labels of all clips.
+
+        Parameters:
+        ----------
+            all_features (T.Dict[str, np.ndarray]): Dictionary with all features.
+                The key is the clip tuple and the value is the features.
+
+        Returns:
+        -------
+            T.Dict[str, np.ndarray]: Dictionary with all predictions.
+                The key is the clip tuple and the value is the predictions.
+        """
 
         self.cpu()
         self.eval()
@@ -150,6 +206,16 @@ class OpticalFlowCNN(nn.Module):
         }
 
     def save_base_classifier(self, idx) -> None:
+        """Save the base classifier.
+
+        Parameters:
+        ----------
+            idx (int): Index of the base classifier.
+
+        Returns:
+        -------
+            None
+        """
         torch.save(self.state_dict(), self.model_path(idx))
 
     def model_path(self, idx) -> str:

@@ -14,7 +14,11 @@ logger = logging.getLogger("main")
 
 
 class Classifier:
-    def __init__(self, classifier_params: ClassifierParams, save_path: Path = "."):
+    def __init__(
+        self,
+        classifier_params: ClassifierParams,
+        save_path: Path = ".",
+    ):
         self.classifier_params = classifier_params
         self.clf = classifier_params.algorithm(
             random_state=42, **classifier_params.kwargs
@@ -44,6 +48,12 @@ class Classifier:
 
     def save_base_classifier(self, idx) -> None:
         joblib.dump(self.clf, self.model_path(idx))
+
+    def save_second_level_classifier(self, idx) -> None:
+        joblib.dump(self.clf, self.second_level_model_path(idx))
+
+    def second_level_model_path(self, idx) -> str:
+        return str(self.save_path / f"second_level_weights-{idx}.sav")
 
     def model_path(self, idx) -> str:
         return str(self.save_path / f"weights-{idx}.sav")

@@ -1,0 +1,10 @@
+2023/03/31 15:06:48 [INFO]	Classifier: ClassifierParams(name='OpticalFlowCNN', algorithm=<class 'training.cnn.OpticalFlowCNN'>, kwargs={'of_params': None}, use_second_classifier=True)
+2023/03/31 15:06:48 [INFO]	OfParams(n_layers=5, layer_interval=7, average=False, img_shape=(64, 64), grid_size=4, step_size=7, window_size=11, stop_steps=3)
+2023/03/31 15:06:48 [INFO]	Post processing parameters: max_gap_duration_s=0.03, short_event_min_len_s=0.10, smooth_window=11, proba_onset_threshold=0.25, proba_offset_threshold=0.25
+2023/03/31 15:06:48 [INFO]	
+=== 5-fold cross validation - 0 ===
+2023/03/31 15:06:48 [INFO]	Collect subsampled training data
+2023/03/31 15:06:57 [INFO]	augmented features = 0
+2023/03/31 15:06:57 [INFO]	Start training
+2023/03/31 15:10:08 [DEBUG]	features shape=(49177, 300)
+2023/03/31 15:10:48 [DEBUG]	on_fit took 40.1 s

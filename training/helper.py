@@ -26,6 +26,7 @@ class ClassifierParams:
     name: str
     algorithm: T.Any
     kwargs: dict = field(default_factory=dict)
+    use_second_classifier: bool = False
 
     def __str__(self):
         return f"Classifier: {repr(self)}"
