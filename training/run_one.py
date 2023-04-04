@@ -97,7 +97,7 @@ def main(
 
         logger.info("Evaluate full training data")
         metrics_sample, metrics_ml, metrics_pp, n_samples = evaluate_clips(
-            clip_names_train, all_samples, predictions, pp_params
+            clip_names_train, all_samples, predictions, pp_params, classifier_params
         )
         metrics_sample_train.append(metrics_sample, n_samples)
         metrics_ml_train.append(metrics_ml, n_samples)
@@ -105,7 +105,7 @@ def main(
 
         logger.info("Evaluate validation data")
         metrics_sample, metrics_ml, metrics_pp, n_samples = evaluate_clips(
-            clip_names_val, all_samples, predictions, pp_params
+            clip_names_val, all_samples, predictions, pp_params, classifier_params
         )
         metrics_sample_val.append(metrics_sample, n_samples)
         metrics_ml_val.append(metrics_ml, n_samples)
@@ -113,7 +113,7 @@ def main(
 
         logger.info("Evaluate test data")
         metrics_sample, metrics_ml, metrics_pp, n_samples = evaluate_clips(
-            clip_names_test, all_samples, predictions, pp_params
+            clip_names_test, all_samples, predictions, pp_params, classifier_params
         )
         metrics_sample_test.append(metrics_sample, n_samples)
         metrics_ml_test.append(metrics_ml, n_samples)
@@ -167,7 +167,7 @@ def collect_samples_and_predict(
                 of_params, aug_options, augmented_features, augmented_samples
             )
 
-        augment_data = False
+        augment_data = True
 
         logger.info("Collect subsampled training data")
         datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data, idx=idx)
@@ -182,12 +182,12 @@ def collect_samples_and_predict(
             n_aug_features = 0
 
         logger.info("augmented features = %d", n_aug_features)
-
         logger.info("Start training")
 
         classifier, xgb_classifier, scores = train_classifier(
             datasets,
             clip_names_train,
+            clip_names_val,
             classifier_params,
             export_path,
             idx,
@@ -234,6 +234,7 @@ def collect_samples_and_predict(
 def train_classifier(
     datasets: video_loader,
     clip_names: T.List[str],
+    clip_names_val,
     classifier_params: ClassifierParams,
     export_path: Path,
     idx: int,
@@ -271,16 +272,9 @@ def train_classifier(
 
         features = np.concatenate([features_l, features_r], axis=1)
 
-        # if idx == 0:
         features, X_val, labels, y_val = train_test_split(
-            features, labels, stratify=labels, test_size=0.075, random_state=42
+            features, labels, stratify=labels, test_size=0.05, random_state=42
         )
-        # else:
-        #     X_train = features
-        #     y_train = labels
-        #     X_val = concatenate(datasets.all_features, clip_names_val)
-        #     samples_gt = concatenate_all_samples(datasets.all_samples, clip_names_val)
-        #     y_val = samples_gt.labels
 
         # Convert to torch tensors
         features = torch.from_numpy(features).float().cuda()
@@ -310,7 +304,7 @@ def train_classifier(
 
         second_level_features = get_feature_indices(length=50, features=predictions)
         classifier_params = get_classifier_params()
-        second_classifier = Classifier(classifier_params)
+        second_classifier = Classifier(classifier_params, export_path)
         second_classifier.on_fit(features=second_level_features, labels=labels)
         predictions = second_classifier.predict(second_level_features)
         second_classifier.save_second_level_classifier(idx)
@@ -384,12 +378,13 @@ def evaluate_clips(
     all_samples: T.Dict[str, Samples],
     predictions: T.Dict[str, np.ndarray],
     pp_params: PPParams,
+    classifier_parms: ClassifierParams,
 ) -> T.Tuple[Scores, Scores, Scores, int]:
     samples_gt = concatenate_all_samples(all_samples, clip_names)
     proba = concatenate(predictions, clip_names)
 
     blink_array_pd_pp, samples_pd = post_process_debug(
-        samples_gt.timestamps, proba, pp_params
+        samples_gt.timestamps, proba, pp_params, classifier_parms
     )
     metrics_sample, metrics_ml, metrics_pp = evaluate(
         samples_gt, samples_pd, blink_array_pd_pp

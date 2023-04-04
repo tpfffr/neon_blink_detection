@@ -49,8 +49,15 @@ def get_classifier_params(
     return classifier_params
 
 
-def post_process_debug(timestamps: T.Sequence, proba: np.ndarray, pp_params: PPParams):
-    proba = smooth_proba(proba, pp_params)
+def post_process_debug(
+    timestamps: T.Sequence,
+    proba: np.ndarray,
+    pp_params: PPParams,
+    classifier_parms: ClassifierParams,
+):
+    if not classifier_parms.use_second_classifier:
+        proba = smooth_proba(proba, pp_params)
+
     pd_labels = classify(proba, pp_params)
     samples_pd = Samples(timestamps, pd_labels)
 
