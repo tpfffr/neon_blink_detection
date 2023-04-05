@@ -72,10 +72,10 @@ def post_process_debug(
 
 
 def predict_and_evaluate(
-    recording_name, timestamps, feature_array, of_params, pp_params
+    recording_name, timestamps, feature_array, of_params, pp_params, classifier_params
 ):
     proba = predict(timestamps, feature_array, of_params)
-    blink_array, _ = post_process_debug(timestamps, proba, pp_params)
+    blink_array, _ = post_process_debug(timestamps, proba, pp_params, classifier_params)
     blink_array_gt = get_blink_array_gt(recording_name, timestamps)
     scores = get_event_based_metrics(blink_array_gt, blink_array)
 

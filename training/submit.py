@@ -55,9 +55,9 @@ def submit_one_job(
             fn_name="main",
             kwargs=kwargs,
             ram_gb=np.ceil(ram_gb),
-            gpus=1,
+            gpus=0,
             job_name=experiment_name,
-            queue_name="default.q",
+            queue_name="cpu.q",
             reproducible=False,
         )
     else:

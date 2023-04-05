@@ -39,7 +39,7 @@ def get_of_params_options():
     img_shape_options = [(64, 64)]
     grid_size_options = [4]  # used to be [4, 7, 10]
     step_size_options = [7]
-    window_size_options = [11]  # used to be [[7, 11, 15]]
+    window_size_options = [15]  # used to be [[7, 11, 15]]
     stop_steps_options = [3]
 
     options = itertools.product(
@@ -62,8 +62,8 @@ def get_of_params_options():
 def get_augmentation_options():
 
     std_speed = [0.0]  # list(np.arange(0, 0.5, 0.05))
-    std_translation = [0.0]  # list(np.arange(0, 5, 0.5))  # list(np.arange(0, 5, 0.25))
-    std_scale = [0.0]  # list(np.arange(0, 0.2, 0.02))  # list(np.arange(0, 0.2, 0.02))
+    std_translation = list(np.arange(0, 5, 0.5))  # list(np.arange(0, 5, 0.25))
+    std_scale = [0.0]  # list(np.arange(0, 0.1, 0.02))
     std_linear = [0.0]
 
     options = itertools.product(
