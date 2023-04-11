@@ -404,9 +404,10 @@ from features_calculator import (
     concatenate_features,
     create_grids,
 )
+from functions.pipeline import post_process_debug
 
 
-def get_blink_events(clip_name, clf=None, proba=None, ts=None):
+def get_blink_events(clip_name, clf=None, proba=None, ts=None, classifier_params=None):
     """Load a recording and return the timestamps, images and blink events
 
     Parameters
@@ -468,7 +469,8 @@ def get_blink_events(clip_name, clf=None, proba=None, ts=None):
         ts = ts[clip_name]
 
     blink_df = rec._load_gt_labels(clip_name)
-    blink_events = post_process(ts, proba, pp_params)
+    blink_events, _ = post_process_debug(ts, proba, pp_params, classifier_params)
+    blink_events = blink_events.blink_events
 
     blink_ts = blink_df[blink_df["label"] == "onset"]["start_ts"]
     blink_on_idx = np.where(np.isin(ts, blink_ts))[0]
@@ -512,3 +514,138 @@ def get_blink_events(clip_name, clf=None, proba=None, ts=None):
     gt = [(blink_on_idx[x], blink_off_idx[x]) for x in range(len(blink_on_idx))]
 
     return pred, gt, proba, left_images, right_images
+
+
+def get_iou_matrix(gt, pd) -> np.ndarray:
+    """Constructs a matrix which contains the IoU scores of each event in the
+    ground truth array with each event in the predicted array.
+    The matrix shape is (N_events_gt, N_events_pd)"""
+
+    overlap = get_overlap_matrix(gt, pd)
+    union = get_union_matrix(gt, pd)
+    return overlap / union
+
+
+def get_overlap_matrix(gt, pd) -> np.ndarray:
+    """Constructs a matrix containing the overlap of each event in the ground truth
+    array with each event in the predicted array in seconds.
+    The matrix shape is (N_events_gt, N_events_pd)"""
+
+    start_of_overlap = np.maximum(
+        gt[:, 0][:, np.newaxis],
+        pd[:, 0][np.newaxis, :],
+    )
+    end_of_overlap = np.minimum(
+        gt[:, 1][:, np.newaxis],
+        pd[:, 1][np.newaxis, :],
+    )
+    overlap = end_of_overlap - start_of_overlap
+    overlap[overlap <= 0] = 0
+    return overlap
+
+
+def get_union_matrix(gt, pd) -> np.ndarray:
+    """Constructs a matrix containing the maximum minus minimum time of each event
+    in the ground truth array with each event in the predicted array in seconds.
+    The matrix shape is (N_events_gt, N_events_pd)"""
+
+    max_end_times = np.maximum(
+        gt[:, 1][:, np.newaxis],
+        pd[:, 1][np.newaxis, :],
+    )
+    min_start_times = np.minimum(
+        gt[:, 0][:, np.newaxis],
+        pd[:, 0][np.newaxis, :],
+    )
+    union = max_end_times - min_start_times
+    return union
+
+
+def set_matches(iou_matrix, pd, iou_thr=0.2) -> None:
+    """Performs the event matching.
+    Match each gt array with the first pred array which has enough IoU"""
+
+    # threshold IoU
+    over_thr = iou_matrix * (iou_matrix > iou_thr)
+    over_thr[over_thr == 0] = -1
+
+    # indicates whether any event could be matched
+    found_match = np.any(over_thr > 0, axis=1)
+    # if there is a match, indicates the index of the match
+    ind_match = np.nanargmax(over_thr, axis=1)
+    # indicates match index, or (-1) if not match is found
+    ind_match[~found_match] = -1
+
+    # match only the first event, if multiple events can be matched
+    equal_previous = ind_match[1:] == ind_match[:-1]
+    equal_previous = np.insert(equal_previous, 0, False)
+    # match only the first event, if multiple events can be matched
+    ind_match[equal_previous] = -1
+
+    # there might be some duplicates remaining, because sometimes several
+    # non-subsequent events are matched to the same. Delete those too, only
+    # accept the first occurrence of a match.
+    ind_match = remove_duplicates(ind_match)
+
+    # get inverse mapping (which maps indices from predicted to ground truth array)
+    ind_match_inverse = np.ones(len(pd), dtype=np.int64) * (-1)
+    for i_gt, i_pd in enumerate(ind_match):
+        if i_pd >= 0:
+            ind_match_inverse[i_pd] = i_gt
+
+    # indices of matched predicted events for each gt event
+    return ind_match, ind_match_inverse
+
+
+def remove_duplicates(array) -> None:
+    """Finds all duplicates in an array and replace all but the first ocurrence
+    with -1.
+    """
+    unique, index, count = np.unique(
+        array, axis=0, return_index=True, return_counts=True
+    )
+    for i, u in enumerate(unique):
+
+        if u == -1:
+            continue
+
+        if count[i] > 1:
+            find_others = np.nonzero(array == u)[0]
+            find_others = find_others[1:]
+            array[find_others] = -1
+
+    return array
+
+
+def build_eval_pairs(self) -> np.ndarray:
+    """Builds an (N,2) array which maps ground truth labels onto predicted labels.
+    -1 will be used if the events where not mapped.
+    This array serves as the basis for the confusion matrix used for scoring.
+    """
+
+    # build evaluation array for all gt events
+    # (containing all correct and incorrect pairs)
+    match_labels = np.full(self.array_gt.labels.shape, -1)
+    found_match = np.where(self.ind_match >= 0)[0]
+    match_labels[found_match] = self.array_pd.labels[self.ind_match[found_match]]
+
+    matched_pairs = np.stack((self.array_gt.labels, match_labels), axis=1)
+
+    # add unmatched predicted events to the evaluation array
+    unmatched_pd = np.where(self.ind_match_inverse == -1)[0]
+    unmatched_pd_labels = self.array_pd.labels[unmatched_pd]
+
+    unmatched_pairs = np.stack(
+        (np.full(unmatched_pd_labels.shape, -1), unmatched_pd_labels), axis=1
+    )
+    eval_pairs = np.vstack((matched_pairs, unmatched_pairs))
+    return eval_pairs
+
+
+# def get_scores(self) -> Scores:
+#     eval_pairs = self._build_eval_pairs()
+#     y_true, y_pred = eval_pairs.T
+#     scores = calculate_basic_scores(y_true, y_pred, self.label_on, self.label_bg)
+#     scores.replace(**self.get_RTO_RTD_scores())
+#     scores.replace(**self.get_average_IOU_score())
+#     return scores

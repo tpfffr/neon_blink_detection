@@ -222,7 +222,13 @@ def extract_grid(feature_array: np.ndarray, of_params: OfParams) -> np.ndarray:
     sub_grid = create_grids((64, 64), of_params.grid_size + 2, full_grid=False)
 
     left = feature_array[:, :400, :].transpose(1, 0, 2)
+    # subtract mean from left
+    left_mean = np.mean(left, axis=0)
+    left = left - left_mean
     right = feature_array[:, 400:, :].transpose(1, 0, 2)
+    # subtract mean from right
+    right_mean = np.mean(right, axis=0)
+    right = right - right_mean
 
     left_interp = griddata(p_grid, left, sub_grid, method="linear").transpose(1, 0, 2)
     right_interp = griddata(p_grid, right, sub_grid, method="linear").transpose(1, 0, 2)

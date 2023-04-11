@@ -167,7 +167,7 @@ def collect_samples_and_predict(
                 of_params, aug_options, augmented_features, augmented_samples
             )
 
-        augment_data = True
+        augment_data = False
 
         logger.info("Collect subsampled training data")
         datasets.collect(clip_names_train, bg_ratio=1, augment=augment_data, idx=idx)
