@@ -5,13 +5,13 @@ from dataclasses import dataclass
 class OfParams:
     """Parameters for optical flow calculation"""
 
-    n_layers: int = 1
-    layer_interval: int = 5
+    n_layers: int = 5
+    layer_interval: int = 7
     average: bool = False
     img_shape: tuple = (64, 64)
-    grid_size: int = 10
-    step_size: int = 5
-    window_size: int = 11
+    grid_size: int = 4
+    step_size: int = 7
+    window_size: int = 15
     stop_steps: int = 3
     subtract_mean: bool = False
 

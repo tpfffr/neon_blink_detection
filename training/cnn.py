@@ -120,11 +120,15 @@ class OpticalFlowCNN(nn.Module):
 
         best_model_state = None
 
+        val_loss_list = []
+        train_loss = []
+
         for epoch in range(num_epochs):
             print(f"Epoch {epoch+1}/{num_epochs}")
 
             self.train()
 
+            train_running_loss = 0.0
             for i, (inputs, labels) in enumerate(train_loader, 0):
                 print(
                     f"Training progress: {int((i+1)/len(train_loader)*100)}%",
@@ -135,6 +139,9 @@ class OpticalFlowCNN(nn.Module):
                 loss = criterion(outputs, labels)
                 loss.backward()
                 optimizer.step()
+                train_running_loss += loss.item()
+
+            train_loss.append(train_running_loss / len(train_loader))
 
             # Validation loop
             self.eval()
@@ -150,12 +157,12 @@ class OpticalFlowCNN(nn.Module):
                     val_loss = criterion(outputs, labels)
                     val_running_loss += val_loss.item()
 
-            val_loss = val_running_loss / len(val_loader)
+            val_loss_list.append(val_running_loss / len(val_loader))
 
-            print(f"Validation loss: {val_loss}")
+            print(f"Validation loss: {val_loss_list[-1]}")
 
-            if val_loss < best_val_loss - min_delta:
-                best_val_loss = val_loss
+            if val_loss_list[-1] < best_val_loss - min_delta:
+                best_val_loss = val_loss_list[-1]
                 counter = 0
                 best_model_state = copy.deepcopy(self.state_dict())
             else:
@@ -165,6 +172,8 @@ class OpticalFlowCNN(nn.Module):
                 print(f"Early stopping after {epoch+1} epochs")
                 break
 
+        self.train_loss = train_loss
+        self.val_loss = val_loss_list
         self.load_state_dict(best_model_state)
 
     def predict_all_clips(
@@ -217,6 +226,8 @@ class OpticalFlowCNN(nn.Module):
             None
         """
         torch.save(self.state_dict(), self.model_path(idx))
+        np.save(self.save_path / f"train_loss-{idx}.npy", self.train_loss)
+        np.save(self.save_path / f"val_loss-{idx}.npy", self.val_loss)
 
     def model_path(self, idx) -> str:
         return str(self.save_path / f"weights-{idx}.pt")
