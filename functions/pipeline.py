@@ -15,7 +15,7 @@ from src.post_processing import (
 )
 from src.utils import preprocess_images
 from training.evaluation import get_event_based_metrics
-from training.helper import ClassifierParams, get_experiment_name_new, get_export_dir
+from training.helper import ClassifierParams, get_experiment_name, get_export_dir
 from xgboost import XGBClassifier
 from training.cnn import OpticalFlowCNN
 

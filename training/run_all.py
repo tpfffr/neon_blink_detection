@@ -11,11 +11,10 @@ from functions.pipeline import get_classifier_params
 from src.neon_blink_detector import get_params
 from training.dataset_splitter import load_dataset_splitter
 from training.helper import (
-    get_experiment_name_new,
-    get_feature_dir_name_new,
+    get_experiment_name,
+    get_feature_dir_name,
     get_export_dir,
     get_of_params_options,
-    # get_test_recording_ids,
     get_training_dir,
     get_augmentation_options,
 )
@@ -53,7 +52,7 @@ def main(n_splits=5):
     export_dir = get_export_dir(classifier_params.name, use_pretrained_classifier)
     for of_params in of_params_options:
         for aug_options in aug_params_options:
-            experiment_name = get_experiment_name_new(of_params, aug_options)
+            experiment_name = get_experiment_name(of_params)
             save_path = training_dir / experiment_name
             export_path = export_dir / experiment_name
 
@@ -82,7 +81,7 @@ def main(n_splits=5):
                     "/users/tom/experiments/neon_blink_detection/datasets/train_data/optical_flow/"
                 )
 
-                feature_dir = get_feature_dir_name_new(of_params)
+                feature_dir = get_feature_dir_name(of_params)
 
                 of_save_path = of_path / feature_dir
 

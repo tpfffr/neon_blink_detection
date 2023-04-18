@@ -82,7 +82,7 @@ def get_augmentation_options():
 
 def get_export_dir(classifier_name=None, use_pretrained_classifier=False):
     classifier_name = classifier_name or classifier_name_default
-    export_dir = root_dir / f"export-{classifier_name}"
+    export_dir = root_dir / "output" / f"export-{classifier_name}"
 
     if use_pretrained_classifier == False:
         while export_dir.is_dir():
@@ -94,7 +94,7 @@ def get_export_dir(classifier_name=None, use_pretrained_classifier=False):
 
 def get_training_dir(classifier_name=None, use_pretrained_classifier=False):
     classifier_name = classifier_name or classifier_name_default
-    training_dir = root_dir / f"training-{classifier_name}"
+    training_dir = root_dir / "output" / f"training-{classifier_name}"
 
     if use_pretrained_classifier == False:
         while training_dir.is_dir():
@@ -216,16 +216,7 @@ def get_experiment_name(of_params: OfParams) -> str:
     )
 
 
-def get_feature_dir_name(of_params: OfParams) -> str:
-    return (
-        f"grid{of_params.grid_size}-"
-        f"step{of_params.step_size}-"
-        f"win{of_params.window_size}-"
-        f"steps{of_params.stop_steps}"
-    )
-
-
-def get_experiment_name_new(of_params: OfParams, aug_params: AugParams) -> str:
+def get_experiment_name_aug(of_params: OfParams, aug_params: AugParams) -> str:
     return (
         # "subtract-"
         f"n_lay{of_params.n_layers}-"
@@ -238,7 +229,7 @@ def get_experiment_name_new(of_params: OfParams, aug_params: AugParams) -> str:
     )
 
 
-def get_feature_dir_name_new(of_params: OfParams) -> str:
+def get_feature_dir_name(of_params: OfParams) -> str:
     return (
         # f"grid{of_params.grid_size}-"
         f"step{of_params.step_size}-"

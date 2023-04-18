@@ -23,10 +23,10 @@ from src.features_calculator import (
 )
 from src.utils import resize_images
 from functions.utils import random_sample
-from training.helper import get_feature_dir_name_new
+from training.helper import get_feature_dir_name
 from src.event_array import Samples
 from src.helper import OfParams, PPParams, AugParams
-from training.helper import get_experiment_name_new
+from training.helper import get_experiment_name
 
 video_path = Path("/users/tom/experiments/neon_blink_detection/datasets/train_data")
 of_path = Path(
@@ -240,7 +240,7 @@ class video_loader:
 
     def _load_features(self, clip_name, of_params):
 
-        dir_name = get_feature_dir_name_new(of_params)
+        dir_name = get_feature_dir_name(of_params)
         path = self._of_path / dir_name / f"{clip_name}.npz"
 
         try:

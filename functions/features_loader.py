@@ -7,7 +7,7 @@ import numpy as np
 from src.features_calculator import calculate_optical_flow
 from src.helper import OfParams
 from src.utils import preprocess_images
-from training.helper import get_feature_dir_name_new
+from training.helper import get_feature_dir_name
 
 # OF_dir = Path("/users/Ching/experiments/blink_detection/optical_flow")
 OF_dir = Path("/users/tom/experiments/blink_detection/optical_flow")
