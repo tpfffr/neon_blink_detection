@@ -1,8 +1,8 @@
-import cv2
-from itertools import chain
 from more_itertools import windowed
 from dataclasses import dataclass
+from itertools import chain
 import numpy as np
+import cv2
 
 
 @dataclass(unsafe_hash=True, order=True)
