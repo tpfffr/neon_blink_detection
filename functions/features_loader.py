@@ -19,7 +19,7 @@ def load_features(clip_tuple: str, of_params: OfParams) -> np.ndarray:
     global feature_arrays
 
     if clip_tuple not in feature_arrays.keys():
-        dir_name = get_feature_dir_name_new(of_params)
+        dir_name = get_feature_dir_name(of_params)
         try:
             feature_array = load_feature_from_file(clip_tuple, dir_name)
         except FileNotFoundError:

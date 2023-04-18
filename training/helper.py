@@ -41,6 +41,7 @@ def get_of_params_options():
     step_size_options = [7]
     window_size_options = [15]  # used to be [[7, 11, 15]]
     stop_steps_options = [3]
+    subtract_mean_options = [True]
 
     options = itertools.product(
         n_layers_options,
@@ -51,6 +52,7 @@ def get_of_params_options():
         step_size_options,
         window_size_options,
         stop_steps_options,
+        subtract_mean_options,
     )
     options = list(options)
     of_params_options = sorted(set(OfParams(*option) for option in options))
@@ -82,24 +84,30 @@ def get_augmentation_options():
 
 def get_export_dir(classifier_name=None, use_pretrained_classifier=False):
     classifier_name = classifier_name or classifier_name_default
+    dt = datetime.now().strftime("%d %m %Y %H %M").replace(" ", "")
     export_dir = root_dir / "output" / f"export-{classifier_name}"
+    export_dir = Path(str(export_dir) + "-%s" % dt)
 
     if use_pretrained_classifier == False:
+        counter = 0
         while export_dir.is_dir():
-            dt = datetime.now().strftime("%d %m %Y %H %M").replace(" ", "")
-            export_dir = Path(str(export_dir) + "-%s" % dt)
+            counter += 1
+            export_dir = Path(str(export_dir) + "-%d" % counter)
 
     return export_dir
 
 
 def get_training_dir(classifier_name=None, use_pretrained_classifier=False):
     classifier_name = classifier_name or classifier_name_default
+    dt = datetime.now().strftime("%d %m %Y %H %M").replace(" ", "")
     training_dir = root_dir / "output" / f"training-{classifier_name}"
+    training_dir = Path(str(training_dir) + "-%s" % dt)
 
     if use_pretrained_classifier == False:
+        counter = 0
         while training_dir.is_dir():
-            dt = datetime.now().strftime("%d %m %Y %H %M").replace(" ", "")
-            training_dir = Path(str(training_dir) + "-%s" % dt)
+            counter += 1
+            training_dir = Path(str(training_dir) + "-%d" % counter)
 
     return training_dir
 
@@ -209,24 +217,26 @@ def is_trained(experiment_name: str, n_splits: int = 5, export_dir=None):
 
 def get_experiment_name(of_params: OfParams) -> str:
     return (
-        f"n_layers={of_params.n_layers}-"
-        f"layer_interval={of_params.layer_interval}-"
-        f"average={of_params.average}-"
-        f"step_size={of_params.step_size}"
-    )
-
-
-def get_experiment_name_aug(of_params: OfParams, aug_params: AugParams) -> str:
-    return (
         # "subtract-"
         f"n_lay{of_params.n_layers}-"
         f"lay_intv{of_params.layer_interval}-"
         f"grid{of_params.grid_size}-"
         f"win{of_params.window_size}-"
-        f"trans{aug_params.std_translation}-"
-        f"scale{aug_params.std_scale}-"
-        f"speed{aug_params.std_speed}"
+        f"step{of_params.step_size}-"
+        f"subtract_mean{of_params.subtract_mean}"
     )
+
+
+# def get_experiment_name_aug(of_params: OfParams, aug_params: AugParams) -> str:
+#     return (
+#         # "subtract-"
+#         f"n_lay{of_params.n_layers}-"
+#         f"lay_intv{of_params.layer_interval}-"
+#         f"grid{of_params.grid_size}-"
+#         f"win{of_params.window_size}-"
+#         f"step{of_params.step_size}-"
+#         f"steps{of_params.subtract_mean}"
+#     )
 
 
 def get_feature_dir_name(of_params: OfParams) -> str:

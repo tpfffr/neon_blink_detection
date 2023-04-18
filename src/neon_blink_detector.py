@@ -39,7 +39,7 @@ def detect_blinks(
 def get_params() -> T.Tuple[OfParams, PPParams]:
     """Get optical flow parameters and post processing parameters."""
 
-    of_params = OfParams(5, 7, False, (64, 64), 4, 7, 15, 3)
+    of_params = OfParams(5, 7, False, (64, 64), 4, 7, 15, 3, True)
     pp_params = PPParams(
         max_gap_duration_s=0.03,
         short_event_min_len_s=0.1,

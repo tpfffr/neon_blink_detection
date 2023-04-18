@@ -13,6 +13,7 @@ class OfParams:
     step_size: int = 5
     window_size: int = 11
     stop_steps: int = 3
+    subtract_mean: bool = False
 
     def __post_init__(self):
         assert self.n_layers >= 1
@@ -24,6 +25,8 @@ class OfParams:
         assert self.stop_steps >= 1
 
         self.average = bool(self.average)
+        self.subtract_mean = bool(self.subtract_mean)
+
         if self.n_layers == 1:
             self.layer_interval = 0
 
