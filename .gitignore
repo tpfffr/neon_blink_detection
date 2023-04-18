@@ -3,6 +3,6 @@ __pycache__
 .venv
 .idea
 .vscode
-dataset*
+*.pkl
 output/
 *.npz
