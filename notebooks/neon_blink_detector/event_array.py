@@ -34,7 +34,6 @@ class EventArray:
     def from_samples(cls, timestamps, sample_labels, mapping=None):
         """Creates an instance from a time-series of labelled samples."""
         assert len(timestamps) == len(sample_labels)
-        # assert is_sorted(timestamps)
 
         timestamps = np.asarray(timestamps)
         sample_labels = np.asarray(sample_labels)
@@ -122,6 +121,8 @@ class EventArray:
 
 
 def filter_wrong_sequence(array: EventArray, max_gap_duration_s=None) -> EventArray:
+    """Filters out blink events with wrong sequence of labels and with  gaps between onset and offset longer than 'max_gap_duration_s'."""
+
     none_idx = np.where(array.labels == 0)[0]
     onset_idx = np.where(array.labels == 1)[0]
     offset_idx = np.where(array.labels == 2)[0]
@@ -150,7 +151,7 @@ def filter_wrong_sequence(array: EventArray, max_gap_duration_s=None) -> EventAr
 def filter_short_events(
     array: EventArray, min_len_s: float, select_label
 ) -> EventArray:
-    """Remove short blinks from the sequence."""
+    """Remove blinks shorter than 'min_len_s' from the sequence."""
 
     filtered_array = array.copy()
     mask_on = filtered_array.labels == select_label

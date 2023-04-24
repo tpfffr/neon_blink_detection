@@ -37,7 +37,7 @@ clip_names_test = [
 
 
 use_pretrained_classifier = False
-use_cluster = True
+use_cluster = False
 compute_of = False
 
 
